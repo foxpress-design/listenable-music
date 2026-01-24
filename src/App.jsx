@@ -17,7 +17,7 @@ function App() {
       <section className="hero">
         {/* Uncomment when james-campbell.jpg is added to public/ folder
         <div className="hero-photo">
-          <img src="/listenable-music/james-campbell.jpg" alt="James Campbell (AIA)" />
+          <img src="/james-campbell.jpg" alt="James Campbell (AIA)" />
         </div>
         */}
         <h1 className="hero-title">
