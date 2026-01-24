@@ -15,11 +15,14 @@ function App() {
       </header>
 
       <section className="hero">
+        <div className="hero-photo">
+          <img src="/listenable-music/james-campbell.jpg" alt="James Campbell (AIA)" />
+        </div>
         <h1 className="hero-title">
           <span className="glitch">James Campbell</span>
         </h1>
         <p className="hero-subtitle">aka AIA</p>
-        <p className="hero-years">1970 - 2024</p>
+        <p className="hero-years">June 17, 1977 - July 1, 2025</p>
       </section>
 
       {/* Sequencer visual element */}
@@ -127,7 +130,7 @@ function App() {
           <h2 className="section-title">Connect</h2>
           <div className="links">
             <a
-              href="https://soundcloud.com/search?q=AIA%20minimal%20techno"
+              href="https://soundcloud.com/listenablemusic"
               className="link-button"
               target="_blank"
               rel="noopener noreferrer"
@@ -135,20 +138,12 @@ function App() {
               → SoundCloud
             </a>
             <a
-              href="https://www.discogs.com/search/?q=AIA&type=artist"
+              href="https://bandcamp.com/jamesambient"
               className="link-button"
               target="_blank"
               rel="noopener noreferrer"
             >
-              → Discogs
-            </a>
-            <a
-              href="https://www.residentadvisor.net/"
-              className="link-button"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              → Resident Advisor
+              → Bandcamp
             </a>
           </div>
         </section>
@@ -162,7 +157,7 @@ function App() {
       </div>
 
       <footer className="footer">
-        <p>In memory of James Campbell (AIA) • 1970 - 2024</p>
+        <p>In memory of James Campbell (AIA) • June 17, 1977 - July 1, 2025</p>
         <p>Forever in the rhythm</p>
       </footer>
     </div>
