@@ -15,9 +15,11 @@ function App() {
       </header>
 
       <section className="hero">
+        {/* Uncomment when james-campbell.jpg is added to public/ folder
         <div className="hero-photo">
           <img src="/listenable-music/james-campbell.jpg" alt="James Campbell (AIA)" />
         </div>
+        */}
         <h1 className="hero-title">
           <span className="glitch">James Campbell</span>
         </h1>
