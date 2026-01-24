@@ -77,42 +77,6 @@ function App() {
         </section>
 
         <section className="section">
-          <h2 className="section-title">Musical Influences</h2>
-          <div className="section-content">
-            <p>
-              James's love for minimal experimental techno encompassed the pioneers and innovators
-              who shaped the genre:
-            </p>
-            <div className="grid">
-              <div className="card">
-                <div className="card-title">Rhythm & Sound</div>
-                <div className="card-meta">Dub Techno Masters</div>
-              </div>
-              <div className="card">
-                <div className="card-title">Basic Channel</div>
-                <div className="card-meta">Berlin Minimalism</div>
-              </div>
-              <div className="card">
-                <div className="card-title">Plastikman</div>
-                <div className="card-meta">Acid Minimalism</div>
-              </div>
-              <div className="card">
-                <div className="card-title">Robert Hood</div>
-                <div className="card-meta">Detroit Minimal</div>
-              </div>
-              <div className="card">
-                <div className="card-title">Chain Reaction</div>
-                <div className="card-meta">Experimental Dub</div>
-              </div>
-              <div className="card">
-                <div className="card-title">Surgeon</div>
-                <div className="card-meta">Industrial Techno</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section">
           <h2 className="section-title">Legacy</h2>
           <div className="section-content">
             <p>
