@@ -1,0 +1,148 @@
+:root {
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.6;
+  font-weight: 300;
+
+  --black: #000000;
+  --dark-gray: #0a0a0a;
+  --medium-gray: #1a1a1a;
+  --light-gray: #2a2a2a;
+  --text-primary: #e0e0e0;
+  --text-secondary: #999999;
+  --accent: #00ff88;
+  --accent-dim: #00aa55;
+  --grid-color: rgba(255, 255, 255, 0.03);
+
+  color-scheme: dark;
+  color: var(--text-primary);
+  background-color: var(--black);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    var(--black);
+  background-size: 50px 50px;
+  background-position: 0 0, 0 0;
+  animation: gridPulse 20s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+  0%, 100% { background-size: 50px 50px; }
+  50% { background-size: 52px 52px; }
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+a {
+  font-weight: 400;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+a:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+}
+
+p {
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+code {
+  font-family: 'JetBrains Mono', monospace;
+  background-color: var(--medium-gray);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--black);
+}
+
+/* Glitch effect utility */
+.glitch {
+  position: relative;
+  animation: glitch 5s infinite;
+}
+
+@keyframes glitch {
+  0%, 90%, 100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+  91% {
+    transform: translate(-2px, 2px);
+    opacity: 0.8;
+  }
+  92% {
+    transform: translate(2px, -2px);
+    opacity: 1;
+  }
+  93% {
+    transform: translate(-1px, 1px);
+    opacity: 0.9;
+  }
+}
+
+/* Scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Subtle fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
