@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import SubscriberList from './SubscriberList'
+import Analytics from './Analytics.jsx'
 
 const TABS = ['Subscribers', 'Email', 'Submissions', 'Analytics']
 
@@ -9,6 +10,9 @@ export default function AdminLayout({ auth, onLogout }) {
   function renderContent() {
     if (activeTab === 'Subscribers') {
       return <SubscriberList token={auth.token} />
+    }
+    if (activeTab === 'Analytics') {
+      return <Analytics token={auth.token} />
     }
     return <p className="admin-placeholder">This section will be implemented next.</p>
   }
