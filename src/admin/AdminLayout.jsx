@@ -2,6 +2,7 @@ import { useState } from 'react'
 import SubscriberList from './SubscriberList'
 import Analytics from './Analytics.jsx'
 import EmailComposer from './EmailComposer'
+import SubmissionReview from './SubmissionReview'
 
 const TABS = ['Subscribers', 'Email', 'Submissions', 'Analytics']
 
@@ -17,6 +18,9 @@ export default function AdminLayout({ auth, onLogout }) {
     }
     if (activeTab === 'Email') {
       return <EmailComposer token={auth.token} />
+    }
+    if (activeTab === 'Submissions') {
+      return <SubmissionReview token={auth.token} />
     }
     return <p className="admin-placeholder">This section will be implemented next.</p>
   }
