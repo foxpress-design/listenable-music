@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Original lossless music source files
+mp3s/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -23,12 +26,13 @@ dist-ssr
 *.sln
 *.sw?
 
-# Large media files (hosted externally)
+# Large media files (lossless originals hosted externally)
 public/mixes/
 public/original/
-public/*.jpeg
-public/*.jpg
-public/*.png
 public/*.wav
-public/*.mp3
 public/*.flac
+
+# Allow specific media in public
+!public/img/
+!public/music/
+!public/AIA-DJing-Harvest-2007.jpeg
