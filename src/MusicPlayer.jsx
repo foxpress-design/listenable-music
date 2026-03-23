@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import './MusicPlayer.css'
-import { albums } from './tracks'
+import { albums, allTracks } from './tracks'
 
 function formatTime(seconds) {
   if (!seconds || isNaN(seconds)) return '0:00'
@@ -11,9 +11,9 @@ function formatTime(seconds) {
   return `${m}:${String(s).padStart(2, '0')}`
 }
 
-export default function MusicPlayer({ player }) {
-  const [expandedAlbum, setExpandedAlbum] = useState(0)
-  const progressRef = { current: null }
+export function HeaderPlayer({ player }) {
+  const [showDropdown, setShowDropdown] = useState(false)
+  const progressRef = useRef(null)
 
   const {
     currentTrack, isPlaying, currentTime, duration,
@@ -27,6 +27,149 @@ export default function MusicPlayer({ player }) {
     const pct = (e.clientX - rect.left) / rect.width
     seekTo(pct)
   }
+
+  return (
+    <div className="hp">
+      {/* Desktop: full controls */}
+      <div className="hp-desktop">
+        <div className="hp-left">
+          <div className="hp-buttons">
+            <button className="hp-btn" onClick={playPrev} title="Previous">&lt;&lt;</button>
+            <button
+              className={`hp-btn hp-btn-play ${isPlaying ? 'playing' : ''}`}
+              onClick={() => {
+                if (currentTrack) togglePlay()
+                else playTrack(allTracks[0])
+              }}
+              title={isPlaying ? 'Pause' : 'Play'}
+            >
+              {isPlaying ? '||' : '>'}
+            </button>
+            <button className="hp-btn" onClick={playNext} title="Next">&gt;&gt;</button>
+          </div>
+
+          <div
+            className="hp-track-selector"
+            onMouseEnter={() => setShowDropdown(true)}
+            onMouseLeave={() => setShowDropdown(false)}
+          >
+            <span className="hp-track-name">
+              {currentTrack ? currentTrack.title : 'Select a track'}
+            </span>
+            {loading && <span className="hp-loading">...</span>}
+            {error && <span className="hp-error">!</span>}
+
+            {showDropdown && (
+              <div className="hp-dropdown">
+                {albums.map(album => (
+                  <div key={album.title}>
+                    <div className="hp-dropdown-cat">{album.title}</div>
+                    {album.tracks.map((track, idx) => (
+                      <button
+                        key={idx}
+                        className={`hp-dropdown-item ${currentTrack?.src === track.src ? 'active' : ''}`}
+                        onClick={() => {
+                          playTrack(track)
+                          setShowDropdown(false)
+                        }}
+                      >
+                        <span className="hp-dropdown-item-title">{track.title}</span>
+                        <span className="hp-dropdown-item-dur">{track.duration}</span>
+                      </button>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="hp-center">
+          <div className="hp-progress" ref={progressRef} onClick={handleProgressClick}>
+            <div
+              className="hp-progress-fill"
+              style={{ width: duration ? `${(currentTime / duration) * 100}%` : '0%' }}
+            />
+          </div>
+        </div>
+
+        <div className="hp-right">
+          <span className="hp-time">{formatTime(currentTime)}</span>
+          <span className="hp-time-sep">/</span>
+          <span className="hp-time">{formatTime(duration)}</span>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value={volume}
+            onChange={(e) => setVolume(parseFloat(e.target.value))}
+            className="hp-volume"
+          />
+        </div>
+      </div>
+
+      {/* Mobile: minimal controls */}
+      <div className="hp-mobile">
+        <button
+          className={`hp-btn hp-btn-play ${isPlaying ? 'playing' : ''}`}
+          onClick={() => {
+            if (currentTrack) togglePlay()
+            else playTrack(allTracks[0])
+          }}
+        >
+          {isPlaying ? '||' : '>'}
+        </button>
+        <div
+          className="hp-mobile-info"
+          onClick={() => setShowDropdown(!showDropdown)}
+        >
+          <span className="hp-track-name">
+            {currentTrack ? currentTrack.title : 'Select a track'}
+          </span>
+          <div className="hp-progress hp-progress-mini" onClick={(e) => { e.stopPropagation(); handleProgressClick(e) }}>
+            <div
+              className="hp-progress-fill"
+              style={{ width: duration ? `${(currentTime / duration) * 100}%` : '0%' }}
+            />
+          </div>
+        </div>
+        <div className="hp-mobile-btns">
+          <button className="hp-btn" onClick={playPrev}>&lt;&lt;</button>
+          <button className="hp-btn" onClick={playNext}>&gt;&gt;</button>
+        </div>
+
+        {showDropdown && (
+          <div className="hp-dropdown hp-dropdown-mobile">
+            {albums.map(album => (
+              <div key={album.title}>
+                <div className="hp-dropdown-cat">{album.title}</div>
+                {album.tracks.map((track, idx) => (
+                  <button
+                    key={idx}
+                    className={`hp-dropdown-item ${currentTrack?.src === track.src ? 'active' : ''}`}
+                    onClick={() => {
+                      playTrack(track)
+                      setShowDropdown(false)
+                    }}
+                  >
+                    <span className="hp-dropdown-item-title">{track.title}</span>
+                    <span className="hp-dropdown-item-dur">{track.duration}</span>
+                  </button>
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default function MusicPlayer({ player }) {
+  const [expandedAlbum, setExpandedAlbum] = useState(0)
+
+  const { currentTrack, isPlaying, playTrack, togglePlay } = player
 
   return (
     <div className="music-player">
@@ -51,12 +194,8 @@ export default function MusicPlayer({ player }) {
                       key={trackIdx}
                       className={`player-track ${isActive ? 'active' : ''}`}
                       onClick={() => {
-                        if (isActive) {
-                          togglePlay()
-                        } else {
-                          playTrack(track)
-                          setExpandedAlbum(albumIdx)
-                        }
+                        if (isActive) togglePlay()
+                        else playTrack(track)
                       }}
                     >
                       <span className="player-track-num">
@@ -81,54 +220,6 @@ export default function MusicPlayer({ player }) {
           </div>
         ))}
       </div>
-
-      {currentTrack && (
-        <div className="player-controls">
-          <div className="player-now-playing">
-            <span className="player-now-title">{currentTrack.title}</span>
-            {loading && <span className="player-loading">loading...</span>}
-            {error && <span className="player-error">{error}</span>}
-          </div>
-
-          <div className="player-progress" ref={el => progressRef.current = el} onClick={handleProgressClick}>
-            <div
-              className="player-progress-fill"
-              style={{ width: duration ? `${(currentTime / duration) * 100}%` : '0%' }}
-            />
-          </div>
-
-          <div className="player-bar">
-            <span className="player-time">{formatTime(currentTime)}</span>
-
-            <div className="player-buttons">
-              <button className="player-btn" onClick={playPrev} title="Previous">
-                &lt;&lt;
-              </button>
-              <button className="player-btn player-btn-play" onClick={togglePlay} title={isPlaying ? 'Pause' : 'Play'}>
-                {isPlaying ? '||' : '>'}
-              </button>
-              <button className="player-btn" onClick={playNext} title="Next">
-                &gt;&gt;
-              </button>
-            </div>
-
-            <span className="player-time">{formatTime(duration)}</span>
-          </div>
-
-          <div className="player-volume">
-            <span className="player-volume-label">vol</span>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={volume}
-              onChange={(e) => setVolume(parseFloat(e.target.value))}
-              className="player-volume-slider"
-            />
-          </div>
-        </div>
-      )}
     </div>
   )
 }

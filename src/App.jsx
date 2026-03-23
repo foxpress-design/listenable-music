@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import MusicPlayer from './MusicPlayer'
+import MusicPlayer, { HeaderPlayer } from './MusicPlayer'
 import useAudioPlayer from './useAudioPlayer'
-import { albums, allTracks } from './tracks'
 
 function App() {
   const [mounted, setMounted] = useState(false)
-  const [showTrackList, setShowTrackList] = useState(false)
   const player = useAudioPlayer()
 
   useEffect(() => {
@@ -19,51 +17,10 @@ function App() {
 
       <header className="header">
         <div className="header-content">
-          <div className="logo">Listenable Music</div>
-          <div
-            className="global-player"
-            onMouseEnter={() => setShowTrackList(true)}
-            onMouseLeave={() => setShowTrackList(false)}
-          >
-            <div className="current-track-name">
-              {player.currentTrack ? player.currentTrack.title : 'Select a track'}
-            </div>
-            <button
-              className={`play-button ${player.isPlaying ? 'playing' : ''}`}
-              onClick={() => {
-                if (player.currentTrack) {
-                  player.togglePlay()
-                } else {
-                  player.playTrack(allTracks[0])
-                }
-              }}
-              aria-label={player.isPlaying ? 'Pause' : 'Play'}
-            />
-            {showTrackList && (
-              <div className="track-list-dropdown">
-                {albums.map(album => (
-                  <div key={album.title}>
-                    <div className="track-list-category-header">{album.title}</div>
-                    {album.tracks.map((track, idx) => (
-                      <div
-                        key={idx}
-                        className={`track-list-item ${player.currentTrack?.src === track.src ? 'active' : ''}`}
-                        onClick={() => {
-                          player.playTrack(track)
-                          setShowTrackList(false)
-                        }}
-                      >
-                        <div className="track-list-item-title">{track.title}</div>
-                        <div className="track-list-item-meta">
-                          {track.year || ''}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            )}
+          <div className="header-top">
+            <div className="logo">Listenable Music</div>
           </div>
+          <HeaderPlayer player={player} />
         </div>
       </header>
 

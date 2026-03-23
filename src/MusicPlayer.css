@@ -1,9 +1,259 @@
-/* Music Player */
+/* ========== Header Player (hp-*) ========== */
+
+.hp-mobile { display: none; }
+
+.hp-desktop {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hp-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.hp-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.hp-btn {
+  background: none;
+  border: 1px solid var(--light-gray);
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.hp-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.hp-btn-play {
+  border-color: var(--accent);
+  color: var(--accent);
+  padding: 0.2rem 0.5rem;
+}
+
+.hp-btn-play.playing {
+  background: var(--accent);
+  color: var(--black);
+}
+
+.hp-btn-play:hover {
+  background: var(--accent);
+  color: var(--black);
+}
+
+/* Track selector with dropdown */
+.hp-track-selector {
+  position: relative;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.hp-track-name {
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  max-width: 200px;
+}
+
+.hp-loading {
+  color: var(--accent);
+  font-size: 0.7rem;
+  animation: hpBlink 1s infinite;
+}
+
+.hp-error {
+  color: #ff4444;
+  font-size: 0.7rem;
+}
+
+@keyframes hpBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Dropdown */
+.hp-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding-top: 0.25rem;
+  min-width: 350px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: var(--dark-gray);
+  border: 1px solid var(--light-gray);
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hp-dropdown-cat {
+  padding: 0.4rem 0.75rem;
+  background: var(--black);
+  color: var(--accent);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--accent);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.hp-dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--light-gray);
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.hp-dropdown-item:hover,
+.hp-dropdown-item.active {
+  background: var(--medium-gray);
+  color: var(--accent);
+}
+
+.hp-dropdown-item-dur {
+  opacity: 0.4;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+/* Progress bar */
+.hp-center {
+  flex: 1;
+  min-width: 0;
+}
+
+.hp-progress {
+  width: 100%;
+  height: 4px;
+  background: var(--light-gray);
+  cursor: pointer;
+}
+
+.hp-progress:hover {
+  height: 6px;
+}
+
+.hp-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.1s linear;
+}
+
+/* Right side: time + volume */
+.hp-right {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.hp-time {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  font-family: 'JetBrains Mono', monospace;
+  min-width: 2.5rem;
+}
+
+.hp-time-sep {
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  opacity: 0.3;
+}
+
+.hp-volume {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 50px;
+  height: 3px;
+  background: var(--light-gray);
+  outline: none;
+  cursor: pointer;
+  margin-left: 0.3rem;
+}
+
+.hp-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+.hp-volume::-moz-range-thumb {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+}
+
+/* ========== Mobile Header Player ========== */
+
+.hp-progress-mini {
+  height: 2px;
+  margin-top: 0.25rem;
+}
+
+.hp-progress-mini:hover {
+  height: 4px;
+}
+
+.hp-mobile-info {
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.hp-mobile-btns {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.hp-dropdown-mobile {
+  position: fixed;
+  top: auto;
+  left: 0;
+  right: 0;
+  min-width: 100%;
+  max-height: 50vh;
+}
+
+/* ========== Tracklist (in Music section) ========== */
+
 .music-player {
   width: 100%;
 }
 
-/* Album sections */
 .player-album {
   margin-bottom: 2px;
 }
@@ -53,7 +303,6 @@
   font-weight: 300;
 }
 
-/* Track list */
 .player-tracklist {
   border: 1px solid var(--accent);
   border-top: none;
@@ -164,176 +413,18 @@
   letter-spacing: -1px;
 }
 
-/* Player controls */
-.player-controls {
-  background: var(--dark-gray);
-  border: 1px solid var(--accent);
-  padding: 0.75rem 1rem;
-  margin-top: 2px;
-}
+/* ========== Responsive ========== */
 
-.player-now-playing {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.25rem;
-}
-
-.player-now-title {
-  font-size: 0.8rem;
-  color: var(--accent);
-  font-weight: 700;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.player-loading {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-  opacity: 0.6;
-  animation: blink 1s infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 0.2; }
-}
-
-/* Progress bar */
-.player-progress {
-  width: 100%;
-  height: 4px;
-  background: var(--light-gray);
-  cursor: pointer;
-  margin-bottom: 0.5rem;
-  position: relative;
-}
-
-.player-progress:hover {
-  height: 6px;
-}
-
-.player-progress-fill {
-  height: 100%;
-  background: var(--accent);
-  transition: width 0.1s linear;
-}
-
-/* Control bar */
-.player-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.player-time {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-  opacity: 0.6;
-  min-width: 4rem;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.player-time:last-child {
-  text-align: right;
-}
-
-.player-buttons {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.player-btn {
-  background: none;
-  border: 1px solid var(--light-gray);
-  color: var(--text-primary);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  padding: 0.3rem 0.6rem;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.player-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.player-btn-play {
-  font-size: 0.85rem;
-  padding: 0.3rem 0.8rem;
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.player-btn-play:hover {
-  background: var(--accent);
-  color: var(--black);
-}
-
-/* Volume */
-.player-volume {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.25rem;
-}
-
-.player-volume-label {
-  font-size: 0.65rem;
-  color: var(--text-secondary);
-  opacity: 0.5;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.player-volume-slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 80px;
-  height: 3px;
-  background: var(--light-gray);
-  outline: none;
-  cursor: pointer;
-}
-
-.player-volume-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 10px;
-  height: 10px;
-  background: var(--accent);
-  cursor: pointer;
-}
-
-.player-volume-slider::-moz-range-thumb {
-  width: 10px;
-  height: 10px;
-  background: var(--accent);
-  border: none;
-  cursor: pointer;
-}
-
-/* Error display */
-.player-error {
-  font-size: 0.7rem;
-  color: #ff4444;
-  opacity: 0.8;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
-  .player-controls {
-    padding: 0.5rem 1rem;
+  .hp-desktop { display: none; }
+  .hp-mobile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
   }
 
   .player-track-year {
-    display: none;
-  }
-
-  .player-volume {
     display: none;
   }
 }
