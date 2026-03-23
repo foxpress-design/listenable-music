@@ -2,7 +2,14 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.9.4)
+## What's New (v0.9.5)
+
+- Add client-side routing with react-router-dom
+- Extract home page content into src/pages/Home.jsx (self-contained with all state and hooks)
+- Add src/pages/Admin.jsx placeholder at /admin route
+- App.jsx is now a minimal BrowserRouter shell
+
+## v0.9.4
 
 - Add Subscribe Form component to Share section with email input validation
 - Subscribe form sends POST to /api/subscribe endpoint (backend implementation TBD)
