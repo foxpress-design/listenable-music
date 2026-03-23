@@ -5,6 +5,7 @@ import usePlayCounts from '../usePlayCounts'
 import AiaLogo from '../AiaLogo'
 import SubscribeForm from '../components/SubscribeForm'
 import SubmissionForm from '../components/SubmissionForm'
+import BandcampPlayer from '../components/BandcampPlayer'
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
@@ -116,6 +117,19 @@ export default function Home() {
           </div>
           <div className="player-container">
             <MusicPlayer player={player} counts={counts} />
+          </div>
+        </section>
+
+        <section className="section">
+          <h2 className="section-title">James's Collection</h2>
+          <div className="section-content">
+            <p>
+              Music that inspired James. Browse his Bandcamp collection of favourite albums
+              and artists from the minimal and experimental techno scene.
+            </p>
+          </div>
+          <div className="player-container">
+            <BandcampPlayer />
           </div>
         </section>
 

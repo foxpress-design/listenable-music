@@ -643,6 +643,86 @@
   font-size: 0.75rem;
 }
 
+/* Bandcamp Player */
+.bc-loading {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.bc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.bc-item {
+  background: var(--medium-gray);
+  border: 1px solid var(--light-gray);
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  overflow: hidden;
+}
+
+.bc-item:hover {
+  border-color: var(--accent);
+}
+
+.bc-item.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.15);
+}
+
+.bc-art {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.bc-info {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.bc-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bc-artist {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bc-embed {
+  margin-top: 1rem;
+  border: 1px solid var(--light-gray);
+}
+
+.bc-embed iframe {
+  border: 0;
+  width: 100%;
+  height: 400px;
+}
+
+.bc-fallback {
+  margin-top: 1rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .header {
