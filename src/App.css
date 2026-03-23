@@ -456,6 +456,30 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .header {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .header-content {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .header-content .logo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .header-content .logo .logo-version {
+    margin-left: auto;
+  }
+
+  .header-content .hp {
+    width: 100%;
+  }
+
   .hero {
     padding: 4rem 1rem;
   }
@@ -470,12 +494,8 @@
   }
 
   .hero-photo img {
-    width: clamp(250px, 80vw, 400px);
-  }
-
-  .hero-photo img {
-    width: 220px;
-    height: 220px;
+    width: clamp(220px, 60vw, 400px);
+    height: auto;
   }
 
   .main {

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './MusicPlayer.css'
 import { albums, allTracks } from './tracks'
 import { downloadTrack, downloadAlbum } from './downloads'
@@ -16,6 +16,24 @@ function formatTime(seconds) {
 export function HeaderPlayer({ player }) {
   const [showDropdown, setShowDropdown] = useState(false)
   const progressRef = useRef(null)
+  const mobileDropdownRef = useRef(null)
+
+  useEffect(() => {
+    if (!showDropdown) return
+    const handleOutsideClick = (e) => {
+      if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(e.target)) {
+        setShowDropdown(false)
+      }
+    }
+    // Use requestAnimationFrame so the listener isn't triggered by the same click that opened the dropdown
+    const raf = requestAnimationFrame(() => {
+      document.addEventListener('click', handleOutsideClick)
+    })
+    return () => {
+      cancelAnimationFrame(raf)
+      document.removeEventListener('click', handleOutsideClick)
+    }
+  }, [showDropdown])
 
   const {
     currentTrack, isPlaying, currentTime, duration,
@@ -126,14 +144,14 @@ export function HeaderPlayer({ player }) {
           className="hp-mobile-info"
           onClick={() => setShowDropdown(!showDropdown)}
         >
-          <span className="hp-track-name">
-            {currentTrack ? currentTrack.title : 'Select a track'}
-          </span>
-          <div className="hp-progress hp-progress-mini" onClick={(e) => { e.stopPropagation(); handleProgressClick(e) }}>
-            <div
-              className="hp-progress-fill"
-              style={{ width: duration ? `${(currentTime / duration) * 100}%` : '0%' }}
-            />
+          <div className="hp-mobile-top">
+            <span className="hp-track-name">
+              {currentTrack ? currentTrack.title : 'Select a track'}
+            </span>
+            <span className="hp-mobile-time">
+              {isPlaying && <span className="player-eq hp-mobile-eq"><span /><span /><span /></span>}
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </span>
           </div>
         </div>
         <div className="hp-mobile-btns">
@@ -142,27 +160,36 @@ export function HeaderPlayer({ player }) {
         </div>
 
         {showDropdown && (
-          <div className="hp-dropdown hp-dropdown-mobile">
-            {albums.map(album => (
-              <div key={album.title}>
-                <div className="hp-dropdown-cat">{album.title}</div>
-                {album.tracks.map((track, idx) => (
-                  <button
-                    key={idx}
-                    className={`hp-dropdown-item ${currentTrack?.src === track.src ? 'active' : ''}`}
-                    onClick={() => {
-                      playTrack(track)
-                      setShowDropdown(false)
-                    }}
-                  >
-                    <span className="hp-dropdown-item-title">{track.title}</span>
-                    <span className="hp-dropdown-item-dur">{track.duration}</span>
-                  </button>
-                ))}
-              </div>
-            ))}
+          <div className="hp-dropdown hp-dropdown-mobile" ref={mobileDropdownRef}>
+            <div className="hp-dropdown-close" onClick={() => setShowDropdown(false)}>close</div>
+              {albums.map(album => (
+                <div key={album.title}>
+                  <div className="hp-dropdown-cat">{album.title}</div>
+                  {album.tracks.map((track, idx) => (
+                    <button
+                      key={idx}
+                      className={`hp-dropdown-item ${currentTrack?.src === track.src ? 'active' : ''}`}
+                      onClick={() => {
+                        playTrack(track)
+                        setShowDropdown(false)
+                      }}
+                    >
+                      <span className="hp-dropdown-item-title">{track.title}</span>
+                      <span className="hp-dropdown-item-dur">{track.duration}</span>
+                    </button>
+                  ))}
+                </div>
+              ))}
           </div>
         )}
+      </div>
+
+      {/* Mobile: full-width progress bar at bottom of header */}
+      <div className="hp-mobile-progress" ref={progressRef} onClick={handleProgressClick}>
+        <div
+          className="hp-progress-fill"
+          style={{ width: duration ? `${(currentTime / duration) * 100}%` : '0%' }}
+        />
       </div>
     </div>
   )
