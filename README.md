@@ -2,7 +2,11 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.5.0)
+## What's New (v0.5.1)
+
+- Logo and player controls on one line in the header
+
+## v0.5.0
 
 - Full music player moved to sticky header (prev/play/next, track selector dropdown, progress bar, time/volume inline)
 - Mobile: minified player with play/pause, track name, progress bar, and tap-to-open track list

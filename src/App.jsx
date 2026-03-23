@@ -17,9 +17,7 @@ function App() {
 
       <header className="header">
         <div className="header-content">
-          <div className="header-top">
-            <div className="logo">Listenable Music</div>
-          </div>
+          <div className="logo">Listenable Music</div>
           <HeaderPlayer player={player} />
         </div>
       </header>
