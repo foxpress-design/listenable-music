@@ -303,6 +303,13 @@
   font-weight: 300;
 }
 
+.player-album-plays {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+  opacity: 0.5;
+}
+
 .player-album-dl {
   font-size: 0.65rem;
   color: var(--accent);
@@ -381,6 +388,15 @@
   font-size: 0.7rem;
   opacity: 0.4;
   flex-shrink: 0;
+}
+
+.player-track-plays {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  opacity: 0.4;
+  flex-shrink: 0;
+  min-width: 3.5rem;
+  text-align: right;
 }
 
 .player-track-duration {

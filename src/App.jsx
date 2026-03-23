@@ -2,14 +2,22 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import MusicPlayer, { HeaderPlayer } from './MusicPlayer'
 import useAudioPlayer from './useAudioPlayer'
+import usePlayCounts from './usePlayCounts'
 
 function App() {
   const [mounted, setMounted] = useState(false)
   const player = useAudioPlayer()
+  const { counts, recordPlay } = usePlayCounts()
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    if (player.currentTrack) {
+      recordPlay(player.currentTrack.src)
+    }
+  }, [player.currentTrack, recordPlay])
 
   return (
     <div className="app">
@@ -17,7 +25,7 @@ function App() {
 
       <header className="header">
         <div className="header-content">
-          <div className="logo">Listenable Music</div>
+          <div className="logo">Listenable Music <span className="logo-version">v0.7.0</span></div>
           <HeaderPlayer player={player} />
         </div>
       </header>
@@ -103,7 +111,7 @@ function App() {
             </p>
           </div>
           <div className="player-container">
-            <MusicPlayer player={player} />
+            <MusicPlayer player={player} counts={counts} />
           </div>
         </section>
 

@@ -2,7 +2,14 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.6.1)
+## What's New (v0.7.0)
+
+- Play count tracking via Cloudflare Worker + KV storage
+- Per-track and per-album aggregate play counts displayed in the music player
+- Version label in site header
+- Counts increment on each track play and update in real time
+
+## v0.6.1
 
 - Fix CI deploy: switch GitHub Actions workflow from npm to pnpm
 - Remove stale package-lock.json (pnpm-lock.yaml is the source of truth)

@@ -168,7 +168,13 @@ export function HeaderPlayer({ player }) {
   )
 }
 
-export default function MusicPlayer({ player }) {
+function formatCount(n) {
+  if (!n) return '0'
+  if (n >= 1000) return `${(n / 1000).toFixed(1)}k`
+  return String(n)
+}
+
+export default function MusicPlayer({ player, counts = {} }) {
   const [expandedAlbum, setExpandedAlbum] = useState(0)
   const [downloading, setDownloading] = useState(null) // 'albumIdx-trackIdx' or 'album-albumIdx'
   const [zipProgress, setZipProgress] = useState(null) // { current, total }
@@ -216,6 +222,9 @@ export default function MusicPlayer({ player }) {
             >
               <span className="player-album-toggle">{expandedAlbum === albumIdx ? '-' : '+'}</span>
               <span className="player-album-title">{album.title}</span>
+              <span className="player-album-plays">
+                {formatCount(album.tracks.reduce((sum, t) => sum + (counts[t.src] || 0), 0))} plays
+              </span>
               <span className="player-album-count">{album.tracks.length} tracks</span>
               <span
                 className={`player-album-dl ${downloading === `album-${albumIdx}` ? 'downloading' : ''}`}
@@ -256,6 +265,7 @@ export default function MusicPlayer({ player }) {
                       </span>
                       <span className="player-track-title">{track.title}</span>
                       {track.year && <span className="player-track-year">{track.year}</span>}
+                      <span className="player-track-plays">{formatCount(counts[track.src])} plays</span>
                       <span className="player-track-duration">{track.duration}</span>
                       <span
                         className={`player-track-dl ${downloading === dlKey ? 'downloading' : ''}`}

@@ -33,6 +33,12 @@
   flex-shrink: 0;
 }
 
+.logo-version {
+  opacity: 0.5;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+}
+
 .hp {
   flex: 1;
   min-width: 0;
