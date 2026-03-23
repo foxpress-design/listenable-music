@@ -2,7 +2,15 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.9.5)
+## What's New (v0.9.6)
+
+- Add admin dashboard shell with magic link auth flow (AdminLogin, AdminLayout, admin.css)
+- Admin page reads ?token= param on load and verifies via POST /api/auth/verify
+- Session token stored in localStorage, shows login form if unauthenticated
+- AdminLayout provides tab navigation for Subscribers, Email, Submissions, Analytics sections
+- Styled with site dark theme (pure black, JetBrains Mono, neon green accent)
+
+## v0.9.5
 
 - Add client-side routing with react-router-dom
 - Extract home page content into src/pages/Home.jsx (self-contained with all state and hooks)

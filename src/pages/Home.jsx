@@ -27,7 +27,7 @@ export default function Home() {
 
       <header className="header">
         <div className="header-content">
-          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <span className="logo-version">v0.9.5</span></div>
+          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <span className="logo-version">v0.9.6</span></div>
           <HeaderPlayer player={player} />
         </div>
       </header>
