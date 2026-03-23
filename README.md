@@ -2,7 +2,13 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.3.0)
+## What's New (v0.4.0)
+
+- All tracks hosted in-repo for reliable same-origin playback
+- DJ mixes re-encoded to VBR to fit under Git's 100MB file limit
+- Short tracks at 320kbps, Shiftless at original 192kbps
+
+## v0.3.0
 
 - Move all tracks to GitHub Releases, removing 186MB of MP3s from the repo
 - All 27 tracks now served from release assets
