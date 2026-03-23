@@ -2,7 +2,12 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.9.1)
+## What's New (v0.9.2)
+
+- Initial D1 database schema: subscribers, admin sessions, submissions, analytics, play counts, email logs
+- Migration: 0001_initial.sql with 8 core tables for platform expansion
+
+## v0.9.1
 
 - OG share card for social media previews (1200x630)
 - Open Graph and Twitter Card meta tags
