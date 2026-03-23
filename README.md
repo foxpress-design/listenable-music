@@ -2,7 +2,12 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.2.0)
+## What's New (v0.2.1)
+
+- Fix audio playback by removing crossOrigin attribute that blocked GitHub Release CDN
+- Fix header dropdown hover gap so it stays open when moving mouse to it
+
+## v0.2.0
 
 - Fix audio playback (repo made public so GitHub Release URLs work)
 - Restore header quick player with track dropdown

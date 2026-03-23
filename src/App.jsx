@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className="app">
-      <audio ref={player.audioRef} preload="none" crossOrigin="anonymous" />
+      <audio ref={player.audioRef} preload="none" />
 
       <header className="header">
         <div className="header-content">

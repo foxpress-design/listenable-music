@@ -123,7 +123,7 @@
   position: absolute;
   top: 100%;
   right: 0;
-  margin-top: 1rem;
+  padding-top: 0.5rem;
   background: var(--dark-gray);
   border: 1px solid var(--light-gray);
   min-width: 400px;
