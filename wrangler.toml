@@ -1,7 +1,6 @@
 name = "listenable-music"
 compatibility_date = "2024-12-01"
 pages_build_output_dir = "dist"
-account_id = "da6ad62318a510735da0c69c5c5a9a30"
 
 [[d1_databases]]
 binding = "DB"

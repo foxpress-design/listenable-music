@@ -1,8 +1,0 @@
-name = "play-counter"
-main = "src/index.js"
-compatibility_date = "2024-12-01"
-account_id = "da6ad62318a510735da0c69c5c5a9a30"
-
-[[kv_namespaces]]
-binding = "PLAY_COUNTS"
-id = "6eb307af1b9f47c09cec3b66b7daede6"

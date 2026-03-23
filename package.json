@@ -1,11 +1,12 @@
 {
   "name": "listenable-music",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && rm -rf dist/music",
+    "deploy": "pnpm run build && npx wrangler pages deploy dist --project-name=listenable-music --commit-dirty=true",
     "lint": "eslint .",
     "preview": "vite preview"
   },

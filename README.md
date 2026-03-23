@@ -2,7 +2,14 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v1.0.0) - Platform Launch
+## What's New (v1.0.1)
+
+- Music files served from R2 with range request support for audio seeking
+- Removed old standalone play-counter worker (migrated to Pages Functions)
+- Added deploy script: `pnpm deploy`
+- Build now excludes music files from dist (served via R2)
+
+## v1.0.0 - Platform Launch
 
 - **Cloudflare Pages migration**: D1 database, R2 storage, Pages Functions API
 - **Email subscriptions**: Subscribe form with Resend welcome emails and unsubscribe compliance
