@@ -1,6 +1,8 @@
 import { useState, useRef } from 'react'
 import './MusicPlayer.css'
 import { albums, allTracks } from './tracks'
+import { downloadTrack, downloadAlbum } from './downloads'
+import { trackDownload, trackAlbumDownload } from './analytics'
 
 function formatTime(seconds) {
   if (!seconds || isNaN(seconds)) return '0:00'
@@ -168,8 +170,40 @@ export function HeaderPlayer({ player }) {
 
 export default function MusicPlayer({ player }) {
   const [expandedAlbum, setExpandedAlbum] = useState(0)
+  const [downloading, setDownloading] = useState(null) // 'albumIdx-trackIdx' or 'album-albumIdx'
+  const [zipProgress, setZipProgress] = useState(null) // { current, total }
 
   const { currentTrack, isPlaying, playTrack, togglePlay } = player
+
+  const handleTrackDownload = async (e, track, album) => {
+    e.stopPropagation()
+    const key = `${track.src}`
+    setDownloading(key)
+    trackDownload(track, album.title)
+    try {
+      await downloadTrack(track)
+    } catch (err) {
+      console.error('Download failed:', err)
+    }
+    setDownloading(null)
+  }
+
+  const handleAlbumDownload = async (e, album, albumIdx) => {
+    e.stopPropagation()
+    const key = `album-${albumIdx}`
+    setDownloading(key)
+    setZipProgress({ current: 0, total: album.tracks.length })
+    trackAlbumDownload(album.title, album.tracks.length)
+    try {
+      await downloadAlbum(album, (current, total, zipping) => {
+        setZipProgress({ current, total, zipping })
+      })
+    } catch (err) {
+      console.error('Album download failed:', err)
+    }
+    setDownloading(null)
+    setZipProgress(null)
+  }
 
   return (
     <div className="music-player">
@@ -183,12 +217,23 @@ export default function MusicPlayer({ player }) {
               <span className="player-album-toggle">{expandedAlbum === albumIdx ? '-' : '+'}</span>
               <span className="player-album-title">{album.title}</span>
               <span className="player-album-count">{album.tracks.length} tracks</span>
+              <span
+                className={`player-album-dl ${downloading === `album-${albumIdx}` ? 'downloading' : ''}`}
+                onClick={(e) => handleAlbumDownload(e, album, albumIdx)}
+                title={`Download ${album.title}`}
+              >
+                {downloading === `album-${albumIdx}`
+                  ? (zipProgress?.zipping ? 'zipping...' : `${zipProgress?.current}/${zipProgress?.total}`)
+                  : 'download all'
+                }
+              </span>
             </button>
 
             {expandedAlbum === albumIdx && (
               <div className="player-tracklist">
                 {album.tracks.map((track, trackIdx) => {
                   const isActive = currentTrack?.src === track.src
+                  const dlKey = track.src
                   return (
                     <button
                       key={trackIdx}
@@ -212,6 +257,13 @@ export default function MusicPlayer({ player }) {
                       <span className="player-track-title">{track.title}</span>
                       {track.year && <span className="player-track-year">{track.year}</span>}
                       <span className="player-track-duration">{track.duration}</span>
+                      <span
+                        className={`player-track-dl ${downloading === dlKey ? 'downloading' : ''}`}
+                        onClick={(e) => handleTrackDownload(e, track, album)}
+                        title={`Download ${track.title}`}
+                      >
+                        {downloading === dlKey ? '...' : 'dl'}
+                      </span>
                     </button>
                   )
                 })}

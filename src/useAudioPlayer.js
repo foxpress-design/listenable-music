@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { allTracks } from './tracks'
+import { trackPlay } from './analytics'
 
 export default function useAudioPlayer() {
   const audioRef = useRef(null)
@@ -23,6 +24,7 @@ export default function useAudioPlayer() {
     setCurrentTime(0)
     setDuration(0)
     pendingPlayRef.current = true
+    trackPlay(track, track.albumTitle || '')
     const audio = audioRef.current
     if (audio) {
       audio.pause()

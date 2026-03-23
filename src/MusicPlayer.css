@@ -303,6 +303,25 @@
   font-weight: 300;
 }
 
+.player-album-dl {
+  font-size: 0.65rem;
+  color: var(--accent);
+  opacity: 0.5;
+  font-weight: 300;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  flex-shrink: 0;
+}
+
+.player-album-dl:hover {
+  opacity: 1;
+}
+
+.player-album-dl.downloading {
+  opacity: 1;
+  animation: hpBlink 1s infinite;
+}
+
 .player-tracklist {
   border: 1px solid var(--accent);
   border-top: none;
@@ -411,6 +430,25 @@
   font-size: 0.65rem;
   color: var(--accent);
   letter-spacing: -1px;
+}
+
+.player-track-dl {
+  font-size: 0.65rem;
+  color: var(--accent);
+  opacity: 0.3;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  padding: 0.2rem 0.3rem;
+}
+
+.player-track-dl:hover {
+  opacity: 1;
+}
+
+.player-track-dl.downloading {
+  opacity: 1;
+  animation: hpBlink 1s infinite;
 }
 
 /* ========== Responsive ========== */

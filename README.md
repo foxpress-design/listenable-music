@@ -2,7 +2,14 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.5.1)
+## What's New (v0.6.0)
+
+- GA4 analytics with custom events for track plays, track downloads, album downloads
+- Per-track download button ("dl") in tracklist
+- Per-album "download all" button that zips tracks client-side with JSZip
+- Download progress indicator in album header
+
+## v0.5.1
 
 - Logo and player controls on one line in the header
 
