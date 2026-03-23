@@ -1,0 +1,165 @@
+<h2>AIA Logo: Shorter + Flush Base</h2>
+<p class="subtitle">Wider proportions, legs clipped flat at the baseline (no serifs). Two overlap amounts.</p>
+
+<style>
+  .logo-showcase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 160px;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    padding: 32px;
+  }
+  .size-row {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+  .size-label {
+    font-size: 10px;
+    color: #444;
+    font-family: monospace;
+    text-align: center;
+  }
+  .size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+</style>
+
+<div class="cards">
+
+  <!-- A: Moderate criss-cross, shorter -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <!-- viewBox 58x48, peaks at 20 and 38, half-width 18, cross at y~26 -->
+        <svg width="240" height="160" viewBox="0 0 58 48">
+          <defs>
+            <clipPath id="clipA"><rect x="0" y="0" width="58" height="46"/></clipPath>
+          </defs>
+          <g clip-path="url(#clipA)">
+            <!-- Left ∧ -->
+            <polyline points="2,48 20,5 38,48" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="butt" stroke-linejoin="miter"/>
+            <!-- Right ∧ -->
+            <polyline points="20,48 38,5 56,48" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="butt" stroke-linejoin="miter"/>
+          </g>
+          <!-- Dot -->
+          <circle cx="29" cy="5" r="2.2" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <svg width="64" height="53" viewBox="0 0 58 48">
+            <defs><clipPath id="clipA64"><rect x="0" y="0" width="58" height="46"/></clipPath></defs>
+            <g clip-path="url(#clipA64)">
+              <polyline points="2,48 20,5 38,48" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+              <polyline points="20,48 38,5 56,48" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+            </g>
+            <circle cx="29" cy="5" r="2.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">64px</span>
+        </div>
+        <div class="size-item">
+          <svg width="32" height="26" viewBox="0 0 58 48">
+            <defs><clipPath id="clipA32"><rect x="0" y="0" width="58" height="46"/></clipPath></defs>
+            <g clip-path="url(#clipA32)">
+              <polyline points="2,48 20,5 38,48" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="butt" stroke-linejoin="miter"/>
+              <polyline points="20,48 38,5 56,48" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="butt" stroke-linejoin="miter"/>
+            </g>
+            <circle cx="29" cy="5" r="3.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="13" viewBox="0 0 58 48">
+            <defs><clipPath id="clipA16"><rect x="0" y="0" width="58" height="46"/></clipPath></defs>
+            <g clip-path="url(#clipA16)">
+              <polyline points="2,48 20,5 38,48" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="butt" stroke-linejoin="miter"/>
+              <polyline points="20,48 38,5 56,48" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="butt" stroke-linejoin="miter"/>
+            </g>
+            <circle cx="29" cy="5" r="3.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Center Cross</h3>
+      <p>Inner legs cross at the middle. Balanced X. Peaks 18px apart with the dot centered between them. Wider aspect ratio reads better at small sizes.</p>
+    </div>
+  </div>
+
+  <!-- B: Tighter criss-cross -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <!-- viewBox 52x48, peaks at 18 and 34, half-width 18, cross at y~22 (high) -->
+        <svg width="220" height="160" viewBox="0 0 52 48">
+          <defs>
+            <clipPath id="clipB"><rect x="0" y="0" width="52" height="46"/></clipPath>
+          </defs>
+          <g clip-path="url(#clipB)">
+            <!-- Left ∧ -->
+            <polyline points="0,48 18,5 36,48" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="butt" stroke-linejoin="miter"/>
+            <!-- Right ∧ -->
+            <polyline points="16,48 34,5 52,48" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="butt" stroke-linejoin="miter"/>
+          </g>
+          <!-- Dot -->
+          <circle cx="26" cy="5" r="2.2" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <svg width="64" height="59" viewBox="0 0 52 48">
+            <defs><clipPath id="clipB64"><rect x="0" y="0" width="52" height="46"/></clipPath></defs>
+            <g clip-path="url(#clipB64)">
+              <polyline points="0,48 18,5 36,48" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+              <polyline points="16,48 34,5 52,48" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="butt" stroke-linejoin="miter"/>
+            </g>
+            <circle cx="26" cy="5" r="2.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">64px</span>
+        </div>
+        <div class="size-item">
+          <svg width="32" height="30" viewBox="0 0 52 48">
+            <defs><clipPath id="clipB32"><rect x="0" y="0" width="52" height="46"/></clipPath></defs>
+            <g clip-path="url(#clipB32)">
+              <polyline points="0,48 18,5 36,48" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="butt" stroke-linejoin="miter"/>
+              <polyline points="16,48 34,5 52,48" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="butt" stroke-linejoin="miter"/>
+            </g>
+            <circle cx="26" cy="5" r="3.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="15" viewBox="0 0 52 48">
+            <defs><clipPath id="clipB16"><rect x="0" y="0" width="52" height="46"/></clipPath></defs>
+            <g clip-path="url(#clipB16)">
+              <polyline points="0,48 18,5 36,48" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="butt" stroke-linejoin="miter"/>
+              <polyline points="16,48 34,5 52,48" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="butt" stroke-linejoin="miter"/>
+            </g>
+            <circle cx="26" cy="5" r="5" fill="#fff"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: High Cross</h3>
+      <p>Inner legs cross in the upper third. Tighter peaks, more interlocked. The X is more prominent and the mark feels denser.</p>
+    </div>
+  </div>
+
+</div>

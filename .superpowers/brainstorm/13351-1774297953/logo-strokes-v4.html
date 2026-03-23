@@ -1,0 +1,181 @@
+<h2>AIA Logo: Overlapping Chevrons</h2>
+<p class="subtitle">Inner legs cross in all three. Varying how much they overlap. Click your pick.</p>
+
+<style>
+  .logo-showcase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 180px;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    padding: 24px;
+  }
+  .size-row {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+  .size-label {
+    font-size: 10px;
+    color: #444;
+    font-family: monospace;
+    text-align: center;
+  }
+  .size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+</style>
+
+<div class="cards">
+
+  <!-- A: Light overlap - peaks 50px apart in 100-wide box, each chevron spans 50px wide -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <svg width="220" height="160" viewBox="0 0 100 75">
+          <!-- Left chevron: peak 25, base 0-50 -->
+          <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Right chevron: peak 75, base 50-100 -->
+          <polyline points="50,70 75,5 100,70" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Dot between peaks -->
+          <circle cx="50" cy="5" r="2.5" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <svg width="64" height="48" viewBox="0 0 100 75">
+            <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="50,70 75,5 100,70" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="50" cy="5" r="3" fill="#fff"/>
+          </svg>
+          <span class="size-label">64px</span>
+        </div>
+        <div class="size-item">
+          <svg width="32" height="24" viewBox="0 0 100 75">
+            <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="50,70 75,5 100,70" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="50" cy="5" r="4" fill="#fff"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="12" viewBox="0 0 100 75">
+            <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="50,70 75,5 100,70" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="50" cy="5" r="5.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Light Overlap</h3>
+      <p>Inner legs share a single line down the center. The chevrons touch but barely cross. Clean X at the midpoint.</p>
+    </div>
+  </div>
+
+  <!-- B: Moderate overlap - peaks 40px apart, each chevron 50px wide, so 10px of overlap per side -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <svg width="200" height="160" viewBox="0 0 90 75">
+          <!-- Left chevron: peak 22, base 0-44 -->
+          <polyline points="0,70 22,5 44,70" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Right chevron: peak 68, base 46-90 -->
+          <polyline points="46,70 68,5 90,70" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Dot between peaks -->
+          <circle cx="45" cy="5" r="2.5" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <svg width="64" height="53" viewBox="0 0 90 75">
+            <polyline points="0,70 22,5 44,70" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="46,70 68,5 90,70" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="45" cy="5" r="3" fill="#fff"/>
+          </svg>
+          <span class="size-label">64px</span>
+        </div>
+        <div class="size-item">
+          <svg width="32" height="27" viewBox="0 0 90 75">
+            <polyline points="0,70 22,5 44,70" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="46,70 68,5 90,70" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="45" cy="5" r="4" fill="#fff"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="13" viewBox="0 0 90 75">
+            <polyline points="0,70 22,5 44,70" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="46,70 68,5 90,70" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="45" cy="5" r="5.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: Moderate Overlap</h3>
+      <p>Peaks 46px apart. Inner legs clearly cross each other, creating a visible X shape in the middle third. The dot sits between two close peaks.</p>
+    </div>
+  </div>
+
+  <!-- C: Heavy overlap - peaks 30px apart, inner legs cross high up -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <svg width="180" height="160" viewBox="0 0 80 75">
+          <!-- Left chevron: peak 20, base 0-40 -->
+          <polyline points="0,70 20,5 40,70" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Right chevron: peak 60, base 40-80 -->
+          <polyline points="40,70 60,5 80,70" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Dot between peaks -->
+          <circle cx="40" cy="5" r="2.5" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <svg width="64" height="60" viewBox="0 0 80 75">
+            <polyline points="0,70 20,5 40,70" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="40,70 60,5 80,70" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="40" cy="5" r="3" fill="#fff"/>
+          </svg>
+          <span class="size-label">64px</span>
+        </div>
+        <div class="size-item">
+          <svg width="32" height="30" viewBox="0 0 80 75">
+            <polyline points="0,70 20,5 40,70" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="40,70 60,5 80,70" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="40" cy="5" r="4" fill="#fff"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="15" viewBox="0 0 80 75">
+            <polyline points="0,70 20,5 40,70" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="40,70 60,5 80,70" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="40" cy="5" r="5.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C: Heavy Overlap</h3>
+      <p>Peaks 40px apart. The inner legs cross high and prominently. The whole middle section is an interlocked X. Very compact, dense monogram.</p>
+    </div>
+  </div>
+
+</div>

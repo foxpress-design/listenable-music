@@ -1,0 +1,181 @@
+<h2>AIA Logo: Criss-Cross Inner Legs</h2>
+<p class="subtitle">The right leg of the left ∧ and the left leg of the right ∧ cross over each other, forming an X. Three different amounts of overlap.</p>
+
+<style>
+  .logo-showcase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    padding: 32px;
+  }
+  .size-row {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+  .size-label {
+    font-size: 10px;
+    color: #444;
+    font-family: monospace;
+    text-align: center;
+  }
+  .size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+</style>
+
+<div class="cards">
+
+  <!-- A: Light criss-cross. Peaks at 25 and 65, each chevron half-width 25. Cross point low (~y=57). -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <svg width="220" height="170" viewBox="0 0 90 75">
+          <!-- Left ∧: peak (25,5), outer leg to (0,70), inner leg to (50,70) -->
+          <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Right ∧: peak (65,5), inner leg to (40,70), outer leg to (90,70) -->
+          <polyline points="40,70 65,5 90,70" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Dot between peaks -->
+          <circle cx="45" cy="5" r="2.5" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <svg width="64" height="53" viewBox="0 0 90 75">
+            <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="40,70 65,5 90,70" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="45" cy="5" r="3" fill="#fff"/>
+          </svg>
+          <span class="size-label">64px</span>
+        </div>
+        <div class="size-item">
+          <svg width="32" height="27" viewBox="0 0 90 75">
+            <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="40,70 65,5 90,70" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="45" cy="5" r="4" fill="#fff"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="13" viewBox="0 0 90 75">
+            <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="40,70 65,5 90,70" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="45" cy="5" r="5.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Low X</h3>
+      <p>Inner legs cross near the bottom. The X forms in the lower third. Peaks are well separated with the dot clearly between them.</p>
+    </div>
+  </div>
+
+  <!-- B: Moderate criss-cross. Peaks at 25 and 55, cross point at mid-height (~y=44). -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <svg width="200" height="170" viewBox="0 0 80 75">
+          <!-- Left ∧: peak (25,5), outer leg to (0,70), inner leg to (50,70) -->
+          <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Right ∧: peak (55,5), inner leg to (30,70), outer leg to (80,70) -->
+          <polyline points="30,70 55,5 80,70" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Dot between peaks -->
+          <circle cx="40" cy="5" r="2.5" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <svg width="64" height="60" viewBox="0 0 80 75">
+            <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="30,70 55,5 80,70" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="40" cy="5" r="3" fill="#fff"/>
+          </svg>
+          <span class="size-label">64px</span>
+        </div>
+        <div class="size-item">
+          <svg width="32" height="30" viewBox="0 0 80 75">
+            <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="30,70 55,5 80,70" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="40" cy="5" r="4" fill="#fff"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="15" viewBox="0 0 80 75">
+            <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="30,70 55,5 80,70" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="40" cy="5" r="5.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: Mid X</h3>
+      <p>Inner legs cross at mid-height. Prominent X in the center of the mark. Peaks closer together, dot is snug between them.</p>
+    </div>
+  </div>
+
+  <!-- C: High criss-cross. Peaks at 25 and 45, cross point high up (~y=31). -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <svg width="180" height="170" viewBox="0 0 70 75">
+          <!-- Left ∧: peak (25,5), outer leg to (0,70), inner leg to (50,70) -->
+          <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Right ∧: peak (45,5), inner leg to (20,70), outer leg to (70,70) -->
+          <polyline points="20,70 45,5 70,70" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Dot between peaks -->
+          <circle cx="35" cy="5" r="2.5" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <svg width="64" height="69" viewBox="0 0 70 75">
+            <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="20,70 45,5 70,70" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="35" cy="5" r="3" fill="#fff"/>
+          </svg>
+          <span class="size-label">64px</span>
+        </div>
+        <div class="size-item">
+          <svg width="32" height="34" viewBox="0 0 70 75">
+            <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="20,70 45,5 70,70" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="35" cy="5" r="4" fill="#fff"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="17" viewBox="0 0 70 75">
+            <polyline points="0,70 25,5 50,70" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="20,70 45,5 70,70" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="35" cy="5" r="5.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C: High X</h3>
+      <p>Inner legs cross in the upper third. The X dominates the mark. Peaks very close together, almost touching the dot. Tight, interlocked feel.</p>
+    </div>
+  </div>
+
+</div>

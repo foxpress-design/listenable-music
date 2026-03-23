@@ -4,6 +4,7 @@ import MusicPlayer, { HeaderPlayer } from './MusicPlayer'
 import useAudioPlayer from './useAudioPlayer'
 import usePlayCounts from './usePlayCounts'
 import AiaLogo from './AiaLogo'
+import SubscribeForm from './components/SubscribeForm'
 
 function App() {
   const [mounted, setMounted] = useState(false)
@@ -27,7 +28,7 @@ function App() {
 
       <header className="header">
         <div className="header-content">
-          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <span className="logo-version">v0.9.1</span></div>
+          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <span className="logo-version">v0.9.4</span></div>
           <HeaderPlayer player={player} />
         </div>
       </header>
@@ -170,6 +171,8 @@ function App() {
               Help keep James's music alive. Share this tribute with anyone who
               would appreciate his work.
             </p>
+            <p className="subscribe-label">Get notified about new content:</p>
+            <SubscribeForm />
             <div className="links">
               <button
                 className="link-button"

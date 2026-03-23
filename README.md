@@ -2,7 +2,14 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.9.3)
+## What's New (v0.9.4)
+
+- Add Subscribe Form component to Share section with email input validation
+- Subscribe form sends POST to /api/subscribe endpoint (backend implementation TBD)
+- Styled with accent green button and monospace font, matches site design
+- Shows success/error messages with visual feedback
+
+## v0.9.3
 
 - Migrate to Cloudflare Pages: wrangler.toml with D1 and R2 bindings
 - Pages Functions: SPA catch-all, CORS middleware, play and counts API endpoints

@@ -1,0 +1,172 @@
+<h2>AIA Logo: Tighter Spacing</h2>
+<p class="subtitle">Three distinctly different spacings. Thinner strokes at small sizes for clarity. Click your pick.</p>
+
+<style>
+  .logo-showcase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 180px;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    padding: 24px;
+  }
+  .size-row {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+  .size-row .size-label {
+    font-size: 10px;
+    color: #444;
+    font-family: monospace;
+    text-align: center;
+  }
+  .size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+</style>
+
+<div class="cards">
+
+  <!-- A: Moderate - peaks 40px apart in 0-100 viewBox -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <svg width="240" height="160" viewBox="0 0 120 80">
+          <polyline points="5,75 30,5 55,75" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+          <polyline points="65,75 90,5 115,75" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+          <circle cx="60" cy="5" r="2.8" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <svg width="64" height="43" viewBox="0 0 120 80">
+            <polyline points="5,75 30,5 55,75" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="65,75 90,5 115,75" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="60" cy="5" r="3.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">64px</span>
+        </div>
+        <div class="size-item">
+          <svg width="32" height="21" viewBox="0 0 120 80">
+            <polyline points="5,75 30,5 55,75" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="65,75 90,5 115,75" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="60" cy="5" r="4.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="11" viewBox="0 0 120 80">
+            <polyline points="5,75 30,5 55,75" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="65,75 90,5 115,75" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="60" cy="5" r="5.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Moderate Gap</h3>
+      <p>Peaks 60px apart. Clear separation between crests. The dot reads distinctly as the "I" between the two A's. Inner legs don't cross.</p>
+    </div>
+  </div>
+
+  <!-- B: Tight - peaks 20px apart, inner legs cross -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <svg width="200" height="160" viewBox="0 0 100 80">
+          <polyline points="5,75 25,5 45,75" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+          <polyline points="55,75 75,5 95,75" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+          <circle cx="50" cy="5" r="2.8" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <svg width="64" height="51" viewBox="0 0 100 80">
+            <polyline points="5,75 25,5 45,75" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="55,75 75,5 95,75" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="50" cy="5" r="3.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">64px</span>
+        </div>
+        <div class="size-item">
+          <svg width="32" height="26" viewBox="0 0 100 80">
+            <polyline points="5,75 25,5 45,75" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="55,75 75,5 95,75" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="50" cy="5" r="4.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="13" viewBox="0 0 100 80">
+            <polyline points="5,75 25,5 45,75" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="55,75 75,5 95,75" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="50" cy="5" r="5.5" fill="#fff"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: Tight</h3>
+      <p>Peaks 50px apart. Inner legs share the same zone, creating an overlap in the lower half. The dot sits snugly between the crests. Reads as a cohesive monogram.</p>
+    </div>
+  </div>
+
+  <!-- C: Very Tight - peaks close, heavy overlap -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <svg width="170" height="160" viewBox="0 0 85 80">
+          <polyline points="5,75 22,5 39,75" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+          <polyline points="46,75 63,5 80,75" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"/>
+          <circle cx="42.5" cy="5" r="2.5" fill="#fff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <div class="size-item">
+          <svg width="64" height="60" viewBox="0 0 85 80">
+            <polyline points="5,75 22,5 39,75" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="46,75 63,5 80,75" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="42.5" cy="5" r="3" fill="#fff"/>
+          </svg>
+          <span class="size-label">64px</span>
+        </div>
+        <div class="size-item">
+          <svg width="32" height="30" viewBox="0 0 85 80">
+            <polyline points="5,75 22,5 39,75" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="46,75 63,5 80,75" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="42.5" cy="5" r="4" fill="#fff"/>
+          </svg>
+          <span class="size-label">32px</span>
+        </div>
+        <div class="size-item">
+          <svg width="16" height="15" viewBox="0 0 85 80">
+            <polyline points="5,75 22,5 39,75" fill="none" stroke="#fff" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <polyline points="46,75 63,5 80,75" fill="none" stroke="#fff" stroke-width="6.5" stroke-linecap="square" stroke-linejoin="miter"/>
+            <circle cx="42.5" cy="5" r="5" fill="#fff"/>
+          </svg>
+          <span class="size-label">16px</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C: Very Tight</h3>
+      <p>Peaks only 41px apart. The inner legs nearly merge into a single shared stroke. Compact, dense, almost like a single glyph. The dot is pinched tightly between the crests.</p>
+    </div>
+  </div>
+
+</div>

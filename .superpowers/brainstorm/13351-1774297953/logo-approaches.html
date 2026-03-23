@@ -1,0 +1,125 @@
+<h2>AIA Logo: 3 Approaches</h2>
+<p class="subtitle">Two overlapping chevrons (∧∧) with center dot. Moderate overlap creating a diamond intersection. Click to select your favorite.</p>
+
+<style>
+  .logo-showcase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    padding: 32px;
+  }
+  .logo-showcase svg {
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.05));
+  }
+  .size-row {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+  .size-row span {
+    font-size: 11px;
+    color: #555;
+    font-family: monospace;
+  }
+</style>
+
+<div class="cards">
+
+  <!-- APPROACH A: Clean Strokes -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <svg width="200" height="140" viewBox="0 0 200 140">
+          <!-- Left chevron (A) -->
+          <polyline points="30,120 70,20 110,120" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Right chevron (A) -->
+          <polyline points="90,120 130,20 170,120" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Center dot (I) -->
+          <circle cx="100" cy="20" r="5" fill="#ffffff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <svg width="48" height="34" viewBox="0 0 200 140"><polyline points="30,120 70,20 110,120" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><polyline points="90,120 130,20 170,120" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="100" cy="20" r="8" fill="#fff"/></svg>
+        <span>48px</span>
+        <svg width="24" height="17" viewBox="0 0 200 140"><polyline points="30,120 70,20 110,120" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter"/><polyline points="90,120 130,20 170,120" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="100" cy="20" r="12" fill="#fff"/></svg>
+        <span>24px</span>
+        <svg width="16" height="11" viewBox="0 0 200 140"><polyline points="30,120 70,20 110,120" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="square" stroke-linejoin="miter"/><polyline points="90,120 130,20 170,120" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="100" cy="20" r="14" fill="#fff"/></svg>
+        <span>16px</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Clean Strokes</h3>
+      <p>Open polyline strokes, no fill. The chevrons overlap at their inner legs, and the dot sits at crest height between the two peaks. Minimal and precise, like a waveform or circuit trace.</p>
+    </div>
+  </div>
+
+  <!-- APPROACH B: Filled Geometric -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <svg width="200" height="140" viewBox="0 0 200 140">
+          <!-- Left chevron (A) - filled triangle with cutout -->
+          <polygon points="70,18 30,120 44,120 70,42 96,120 110,120" fill="#ffffff"/>
+          <!-- Right chevron (A) - filled triangle with cutout -->
+          <polygon points="130,18 90,120 104,120 130,42 156,120 170,120" fill="#ffffff"/>
+          <!-- Center dot (I) -->
+          <circle cx="100" cy="16" r="6" fill="#ffffff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <svg width="48" height="34" viewBox="0 0 200 140"><polygon points="70,18 30,120 44,120 70,42 96,120 110,120" fill="#fff"/><polygon points="130,18 90,120 104,120 130,42 156,120 170,120" fill="#fff"/><circle cx="100" cy="16" r="8" fill="#fff"/></svg>
+        <span>48px</span>
+        <svg width="24" height="17" viewBox="0 0 200 140"><polygon points="70,18 30,120 44,120 70,42 96,120 110,120" fill="#fff"/><polygon points="130,18 90,120 104,120 130,42 156,120 170,120" fill="#fff"/><circle cx="100" cy="16" r="10" fill="#fff"/></svg>
+        <span>24px</span>
+        <svg width="16" height="11" viewBox="0 0 200 140"><polygon points="70,18 30,120 44,120 70,42 96,120 110,120" fill="#fff"/><polygon points="130,18 90,120 104,120 130,42 156,120 170,120" fill="#fff"/><circle cx="100" cy="16" r="12" fill="#fff"/></svg>
+        <span>16px</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: Filled Geometric</h3>
+      <p>Solid filled letter-forms, like architectural A's without crossbars. The overlap zone creates a denser visual where the inner strokes merge. Bolder, heavier presence. Reads well as a brand stamp.</p>
+    </div>
+  </div>
+
+  <!-- APPROACH C: Diamond Intersection -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="logo-showcase">
+        <svg width="200" height="140" viewBox="0 0 200 140">
+          <!-- Left chevron stroke -->
+          <polyline points="30,120 70,20 110,120" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Right chevron stroke -->
+          <polyline points="90,120 130,20 170,120" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter"/>
+          <!-- Diamond highlight at intersection -->
+          <polygon points="100,44 108,70 100,96 92,70" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.6"/>
+          <!-- Center dot (I) -->
+          <circle cx="100" cy="20" r="4.5" fill="#ffffff"/>
+        </svg>
+      </div>
+      <div class="size-row">
+        <svg width="48" height="34" viewBox="0 0 200 140"><polyline points="30,120 70,20 110,120" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"/><polyline points="90,120 130,20 170,120" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"/><polygon points="100,44 108,70 100,96 92,70" fill="none" stroke="#fff" stroke-width="4" opacity="0.6"/><circle cx="100" cy="20" r="7" fill="#fff"/></svg>
+        <span>48px</span>
+        <svg width="24" height="17" viewBox="0 0 200 140"><polyline points="30,120 70,20 110,120" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/><polyline points="90,120 130,20 170,120" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter"/><polygon points="100,44 108,70 100,96 92,70" fill="none" stroke="#fff" stroke-width="6" opacity="0.6"/><circle cx="100" cy="20" r="10" fill="#fff"/></svg>
+        <span>24px</span>
+        <svg width="16" height="11" viewBox="0 0 200 140"><polyline points="30,120 70,20 110,120" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="square" stroke-linejoin="miter"/><polyline points="90,120 130,20 170,120" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="100" cy="20" r="12" fill="#fff"/></svg>
+        <span>16px</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C: Diamond Intersection</h3>
+      <p>Stroke-based like A, but the overlap zone is highlighted with a subtle diamond outline where the inner legs cross. Adds a focal point and a sense of depth. The diamond could pulse or glow in animated contexts.</p>
+    </div>
+  </div>
+
+</div>
