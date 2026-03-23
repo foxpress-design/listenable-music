@@ -17,7 +17,7 @@ export default function MusicPlayer({ player }) {
 
   const {
     currentTrack, isPlaying, currentTime, duration,
-    volume, loading, playTrack, togglePlay, playNext,
+    volume, loading, error, playTrack, togglePlay, playNext,
     playPrev, seekTo, setVolume,
   } = player
 
@@ -87,6 +87,7 @@ export default function MusicPlayer({ player }) {
           <div className="player-now-playing">
             <span className="player-now-title">{currentTrack.title}</span>
             {loading && <span className="player-loading">loading...</span>}
+            {error && <span className="player-error">{error}</span>}
           </div>
 
           <div className="player-progress" ref={el => progressRef.current = el} onClick={handleProgressClick}>

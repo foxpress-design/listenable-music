@@ -9,6 +9,8 @@ export default function useAudioPlayer() {
   const [duration, setDuration] = useState(0)
   const [volume, setVolume] = useState(0.8)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const pendingPlayRef = useRef(false)
 
   const currentFlatIdx = currentTrack
     ? allTracks.findIndex(t => t.src === currentTrack.src)
@@ -17,18 +19,15 @@ export default function useAudioPlayer() {
   const playTrack = useCallback((track) => {
     setCurrentTrack(track)
     setLoading(true)
+    setError(null)
     setCurrentTime(0)
     setDuration(0)
+    pendingPlayRef.current = true
     const audio = audioRef.current
     if (audio) {
+      audio.pause()
       audio.src = track.src
       audio.load()
-      const playPromise = audio.play()
-      if (playPromise) {
-        playPromise.catch(() => {
-          setLoading(false)
-        })
-      }
     }
   }, [])
 
@@ -65,6 +64,12 @@ export default function useAudioPlayer() {
     audio.currentTime = fraction * duration
   }, [duration])
 
+  // Attach event listeners once, use refs for changing values
+  const currentFlatIdxRef = useRef(currentFlatIdx)
+  currentFlatIdxRef.current = currentFlatIdx
+  const playTrackRef = useRef(playTrack)
+  playTrackRef.current = playTrack
+
   useEffect(() => {
     const audio = audioRef.current
     if (!audio) return
@@ -77,13 +82,29 @@ export default function useAudioPlayer() {
         setDuration(audio.duration)
       }
     }
-    const onCanPlay = () => setLoading(false)
+    const onCanPlay = () => {
+      setLoading(false)
+      if (pendingPlayRef.current) {
+        pendingPlayRef.current = false
+        audio.play().catch((err) => {
+          console.error('Play failed:', err)
+          setError(err.message)
+        })
+      }
+    }
     const onPlaying = () => setLoading(false)
-    const onError = () => setLoading(false)
+    const onError = () => {
+      setLoading(false)
+      const err = audio.error
+      const msg = err ? `Error ${err.code}: ${err.message}` : 'Audio error'
+      console.error('Audio error:', msg)
+      setError(msg)
+    }
     const onEnded = () => {
-      if (currentFlatIdx >= 0) {
-        const next = allTracks[(currentFlatIdx + 1) % allTracks.length]
-        playTrack(next)
+      const idx = currentFlatIdxRef.current
+      if (idx >= 0) {
+        const next = allTracks[(idx + 1) % allTracks.length]
+        playTrackRef.current(next)
       }
     }
 
@@ -106,7 +127,7 @@ export default function useAudioPlayer() {
       audio.removeEventListener('error', onError)
       audio.removeEventListener('ended', onEnded)
     }
-  }, [currentFlatIdx, playTrack])
+  }, [])
 
   useEffect(() => {
     if (audioRef.current) audioRef.current.volume = volume
@@ -120,6 +141,7 @@ export default function useAudioPlayer() {
     duration,
     volume,
     loading,
+    error,
     currentFlatIdx,
     playTrack,
     togglePlay,

@@ -2,7 +2,14 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.2.1)
+## What's New (v0.2.2)
+
+- Fix audio playback: defer play() until canplay event fires instead of racing the browser
+- Fix event listener gap during re-renders by attaching listeners once with stable refs
+- Player controls now inline below tracklist instead of fixed overlay blocking songs
+- Show audio errors in UI for debugging
+
+## v0.2.1
 
 - Fix audio playback by removing crossOrigin attribute that blocked GitHub Release CDN
 - Fix header dropdown hover gap so it stays open when moving mouse to it

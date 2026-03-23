@@ -164,17 +164,12 @@
   letter-spacing: -1px;
 }
 
-/* Player controls (sticky bottom) */
+/* Player controls */
 .player-controls {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
   background: var(--dark-gray);
-  border-top: 1px solid var(--accent);
-  padding: 0.5rem 1.5rem 0.75rem;
-  z-index: 100;
-  backdrop-filter: blur(10px);
+  border: 1px solid var(--accent);
+  padding: 0.75rem 1rem;
+  margin-top: 2px;
 }
 
 .player-now-playing {
@@ -321,9 +316,11 @@
   cursor: pointer;
 }
 
-/* Bottom padding for content when player is showing */
-body:has(.player-controls) .app {
-  padding-bottom: 120px;
+/* Error display */
+.player-error {
+  font-size: 0.7rem;
+  color: #ff4444;
+  opacity: 0.8;
 }
 
 /* Responsive */
