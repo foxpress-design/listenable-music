@@ -7,6 +7,7 @@ import AiaLogo from './AiaLogo'
 
 function App() {
   const [mounted, setMounted] = useState(false)
+  const [copied, setCopied] = useState(false)
   const player = useAudioPlayer()
   const { counts, recordPlay } = usePlayCounts()
 
@@ -26,7 +27,7 @@ function App() {
 
       <header className="header">
         <div className="header-content">
-          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <span className="logo-version">v0.9.0</span></div>
+          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <span className="logo-version">v0.9.1</span></div>
           <HeaderPlayer player={player} />
         </div>
       </header>
@@ -157,6 +158,36 @@ function App() {
                 rel="noopener noreferrer"
               >
                 → Bandcamp
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section className="section">
+          <h2 className="section-title">Share</h2>
+          <div className="section-content">
+            <p>
+              Help keep James's music alive. Share this tribute with anyone who
+              would appreciate his work.
+            </p>
+            <div className="links">
+              <button
+                className="link-button"
+                onClick={() => {
+                  navigator.clipboard.writeText('https://listenablemusic.ca')
+                  setCopied(true)
+                  setTimeout(() => setCopied(false), 2000)
+                }}
+              >
+                {copied ? '✓ Copied' : '→ Copy Link'}
+              </button>
+              <a
+                href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Flistenablemusic.ca"
+                className="link-button"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                → Share on Facebook
               </a>
             </div>
           </div>

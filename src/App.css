@@ -252,6 +252,7 @@
   transition: all 0.3s ease;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.9rem;
+  cursor: pointer;
 }
 
 .link-button:hover {

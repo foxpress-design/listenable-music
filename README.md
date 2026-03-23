@@ -2,7 +2,14 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.9.0)
+## What's New (v0.9.1)
+
+- OG share card for social media previews (1200x630)
+- Open Graph and Twitter Card meta tags
+- "Share" section with copy link and Facebook share buttons
+- Platform expansion plan for subscriptions, admin, community submissions, Bandcamp integration
+
+## v0.9.0
 
 - Mobile: player on its own line below the logo
 - Mobile: collapsible track selector dropdown with close button and tap-outside dismiss
