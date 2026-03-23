@@ -178,7 +178,6 @@
 
 /* Music Player Container */
 .player-container {
-  padding-left: 2rem;
   margin-top: 1.5rem;
 }
 
@@ -395,7 +394,6 @@
 }
 
 .music-player {
-  padding-left: 2rem;
 }
 
 .playlist {
@@ -494,10 +492,6 @@
   }
 
   .links {
-    padding-left: 1rem;
-  }
-
-  .player-container {
     padding-left: 1rem;
   }
 

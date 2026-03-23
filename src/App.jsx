@@ -26,7 +26,7 @@ function App() {
 
       <header className="header">
         <div className="header-content">
-          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <span className="logo-version">v0.8.0</span></div>
+          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <span className="logo-version">v0.8.1</span></div>
           <HeaderPlayer player={player} />
         </div>
       </header>

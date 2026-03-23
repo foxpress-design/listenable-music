@@ -42,3 +42,39 @@
 
 ### Open Items
 - None
+
+## 2026-03-23: AIA logo design and integration (v0.7.1 -> v0.8.0)
+
+### Summary
+- Brainstormed and designed the AIA logo using the visual companion (browser-based mockup tool)
+- Logo concept: two overlapping chevrons (∧∧) with a center dot, reading as A·I·A
+- Iterated through 7 rounds of mockups to nail: overlap amount (criss-crossing inner legs), proportions (shorter/wider), flat horizontal baseline (clip-path), and dot sizing at small scales
+- Final design: clean stroke chevrons, center cross at mid-height, flush flat base, geometric/monochrome
+- Integrated logo in three places: favicon, header nav (inline with "Listenable Music"), hero section (above James's name)
+- Created reusable AiaLogo React component with configurable size and color
+- Enlarged the artist photo in The Artist section (300px to full-width, max 700px)
+- Expanded music player to full section width (removed padding-left constraints)
+
+### Key Decisions
+- Logo style: clean strokes (not filled geometric or diamond intersection variants)
+- Overlap: moderate criss-cross with inner legs crossing at center height
+- Flat baseline via SVG clip-path (not serif feet)
+- Logo color uses var(--accent) to match site theme
+- Favicon is the raw white-on-transparent SVG
+
+### Files Modified
+- `public/aia-logo.svg` - new logo SVG file
+- `src/AiaLogo.jsx` - new reusable React component
+- `src/App.jsx` - logo in header and hero, version bump to v0.8.0
+- `src/App.css` - logo styling, larger artist photo, full-width music player
+- `index.html` - favicon changed from vite.svg to aia-logo.svg
+- `package.json` - version 0.8.0
+- `README.md` - changelog for v0.8.0
+
+### Current State
+- Commit 24bf67c pushed to origin
+- Music player width fix is uncommitted
+- Branch: `claude/james-campbell-tribute-site-Gwdbs`
+
+### Open Items
+- Commit the music player full-width change
