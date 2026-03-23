@@ -2,7 +2,11 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.7.0)
+## What's New (v0.7.1)
+
+- Add session history for development continuity
+
+## v0.7.0
 
 - Play count tracking via Cloudflare Worker + KV storage
 - Per-track and per-album aggregate play counts displayed in the music player
