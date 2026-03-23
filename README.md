@@ -2,7 +2,13 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.1.0)
+## What's New (v0.2.0)
+
+- Fix audio playback (repo made public so GitHub Release URLs work)
+- Restore header quick player with track dropdown
+- Shared audio state between header player and tracklist
+
+## v0.1.0
 
 - Add music player with full playback controls (play/pause, next/prev, seek, volume)
 - Convert FLAC and WAV source files to 320kbps MP3

@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import MusicPlayer from './MusicPlayer'
+import useAudioPlayer from './useAudioPlayer'
+import { albums, allTracks } from './tracks'
 
 function App() {
   const [mounted, setMounted] = useState(false)
+  const [showTrackList, setShowTrackList] = useState(false)
+  const player = useAudioPlayer()
 
   useEffect(() => {
     setMounted(true)
@@ -11,9 +15,55 @@ function App() {
 
   return (
     <div className="app">
+      <audio ref={player.audioRef} preload="none" crossOrigin="anonymous" />
+
       <header className="header">
         <div className="header-content">
           <div className="logo">Listenable Music</div>
+          <div
+            className="global-player"
+            onMouseEnter={() => setShowTrackList(true)}
+            onMouseLeave={() => setShowTrackList(false)}
+          >
+            <div className="current-track-name">
+              {player.currentTrack ? player.currentTrack.title : 'Select a track'}
+            </div>
+            <button
+              className={`play-button ${player.isPlaying ? 'playing' : ''}`}
+              onClick={() => {
+                if (player.currentTrack) {
+                  player.togglePlay()
+                } else {
+                  player.playTrack(allTracks[0])
+                }
+              }}
+              aria-label={player.isPlaying ? 'Pause' : 'Play'}
+            />
+            {showTrackList && (
+              <div className="track-list-dropdown">
+                {albums.map(album => (
+                  <div key={album.title}>
+                    <div className="track-list-category-header">{album.title}</div>
+                    {album.tracks.map((track, idx) => (
+                      <div
+                        key={idx}
+                        className={`track-list-item ${player.currentTrack?.src === track.src ? 'active' : ''}`}
+                        onClick={() => {
+                          player.playTrack(track)
+                          setShowTrackList(false)
+                        }}
+                      >
+                        <div className="track-list-item-title">{track.title}</div>
+                        <div className="track-list-item-meta">
+                          {track.year || ''}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
@@ -95,7 +145,7 @@ function App() {
             </p>
           </div>
           <div className="player-container">
-            <MusicPlayer />
+            <MusicPlayer player={player} />
           </div>
         </section>
 
@@ -153,7 +203,7 @@ function App() {
       </div>
 
       <footer className="footer">
-        <p>In memory of James Campbell (AIA) • June 17, 1977 - July 1, 2025</p>
+        <p>In memory of James Campbell (AIA) - June 17, 1977 - July 1, 2025</p>
         <p>Forever in the rhythm</p>
       </footer>
     </div>
