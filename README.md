@@ -2,7 +2,14 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.9.2)
+## What's New (v0.9.3)
+
+- Migrate to Cloudflare Pages: wrangler.toml with D1 and R2 bindings
+- Pages Functions: SPA catch-all, CORS middleware, play and counts API endpoints
+- Play count API now served same-origin at /api (was external Cloudflare Worker)
+- GitHub Actions: deploy via wrangler-action instead of GitHub Pages
+
+## v0.9.2
 
 - Initial D1 database schema: subscribers, admin sessions, submissions, analytics, play counts, email logs
 - Migration: 0001_initial.sql with 8 core tables for platform expansion

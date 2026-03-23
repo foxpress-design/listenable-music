@@ -1,0 +1,17 @@
+name = "listenable-music"
+compatibility_date = "2024-12-01"
+pages_build_output_dir = "dist"
+account_id = "da6ad62318a510735da0c69c5c5a9a30"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "listenable-db"
+database_id = "b846e693-348c-41e1-a777-5f493d4fdcb3"
+
+[[r2_buckets]]
+binding = "UPLOADS"
+bucket_name = "listenable-uploads"
+
+[vars]
+ADMIN_EMAIL = "philip@foxpress.design"
+SITE_URL = "https://listenablemusic.ca"

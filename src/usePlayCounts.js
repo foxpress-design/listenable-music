@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 
-const API = import.meta.env.DEV
-  ? 'https://play-counter.foxpress.workers.dev'
-  : 'https://play-counter.foxpress.workers.dev'
+const API = '/api'
 
 export default function usePlayCounts() {
   const [counts, setCounts] = useState({})
