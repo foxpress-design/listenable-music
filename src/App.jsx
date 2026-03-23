@@ -3,6 +3,7 @@ import './App.css'
 import MusicPlayer, { HeaderPlayer } from './MusicPlayer'
 import useAudioPlayer from './useAudioPlayer'
 import usePlayCounts from './usePlayCounts'
+import AiaLogo from './AiaLogo'
 
 function App() {
   const [mounted, setMounted] = useState(false)
@@ -25,7 +26,7 @@ function App() {
 
       <header className="header">
         <div className="header-content">
-          <div className="logo">Listenable Music <span className="logo-version">v0.7.0</span></div>
+          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <span className="logo-version">v0.8.0</span></div>
           <HeaderPlayer player={player} />
         </div>
       </header>
@@ -36,6 +37,7 @@ function App() {
             <img src="/img/IMG_0236.JPG" alt="James Campbell (AIA)" />
           </div>
           <div className="hero-text">
+            <AiaLogo size={64} color="var(--accent)" className="hero-logo" />
             <h1 className="hero-title">
               <span className="glitch">James S. Campbell</span>
             </h1>

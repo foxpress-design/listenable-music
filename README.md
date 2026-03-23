@@ -2,7 +2,13 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.7.1)
+## What's New (v0.8.0)
+
+- AIA logo: custom SVG mark (two overlapping chevrons with center dot)
+- Logo used as browser favicon, in header nav, and above hero title
+- Larger artist photo in The Artist section
+
+## v0.7.1
 
 - Add session history for development continuity
 

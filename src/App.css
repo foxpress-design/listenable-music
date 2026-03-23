@@ -33,6 +33,13 @@
   flex-shrink: 0;
 }
 
+.logo-icon {
+  vertical-align: middle;
+  margin-right: 0.25rem;
+  position: relative;
+  top: -1px;
+}
+
 .logo-version {
   opacity: 0.5;
   font-size: 0.6rem;
@@ -97,6 +104,11 @@
   filter: grayscale(0);
   transform: scale(1.02);
   box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+}
+
+.hero-logo {
+  margin-bottom: 1rem;
+  opacity: 0.8;
 }
 
 .hero-text {
@@ -346,8 +358,8 @@
 }
 
 .dj-photo-inline img {
-  width: 300px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 700px;
   height: auto;
   border-radius: 4px;
   border: 2px solid var(--light-gray);
