@@ -2,7 +2,12 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.2.2)
+## What's New (v0.3.0)
+
+- Move all tracks to GitHub Releases, removing 186MB of MP3s from the repo
+- All 27 tracks now served from release assets
+
+## v0.2.2
 
 - Fix audio playback: defer play() until canplay event fires instead of racing the browser
 - Fix event listener gap during re-renders by attaching listeners once with stable refs
