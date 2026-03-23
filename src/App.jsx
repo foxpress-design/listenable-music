@@ -68,14 +68,18 @@ function App() {
       </header>
 
       <section className="hero">
-        <div className="hero-photo">
-          <img src="/img/IMG_0236.JPG" alt="James Campbell (AIA)" />
+        <div className="hero-columns">
+          <div className="hero-photo">
+            <img src="/img/IMG_0236.JPG" alt="James Campbell (AIA)" />
+          </div>
+          <div className="hero-text">
+            <h1 className="hero-title">
+              <span className="glitch">James S. Campbell</span>
+            </h1>
+            <p className="hero-subtitle">aka AIA</p>
+            <p className="hero-years">June 17, 1977 - July 1, 2025</p>
+          </div>
         </div>
-        <h1 className="hero-title">
-          <span className="glitch">James S. Campbell</span>
-        </h1>
-        <p className="hero-subtitle">aka AIA</p>
-        <p className="hero-years">June 17, 1977 - July 1, 2025</p>
       </section>
 
       {/* Sequencer visual element */}

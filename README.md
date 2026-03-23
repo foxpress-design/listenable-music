@@ -2,7 +2,13 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.4.1)
+## What's New (v0.4.2)
+
+- Hero layout: photo and name side by side in two columns, centered
+- Photo scales up to nearly fill viewport width (clamp 280px to 500px)
+- Stacks vertically on mobile
+
+## v0.4.1
 
 - Replace Artist section photo with IMG_0347 (DJing shot)
 - Hero photo now displays uncropped (full portrait, no square crop)
