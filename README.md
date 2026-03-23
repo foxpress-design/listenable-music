@@ -2,12 +2,19 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.9.6)
+## What's New (v1.0.0) - Platform Launch
 
-- Add admin dashboard shell with magic link auth flow (AdminLogin, AdminLayout, admin.css)
-- Admin page reads ?token= param on load and verifies via POST /api/auth/verify
-- Session token stored in localStorage, shows login form if unauthenticated
-- AdminLayout provides tab navigation for Subscribers, Email, Submissions, Analytics sections
+- **Cloudflare Pages migration**: D1 database, R2 storage, Pages Functions API
+- **Email subscriptions**: Subscribe form with Resend welcome emails and unsubscribe compliance
+- **Admin dashboard** at /admin: magic link auth, subscriber management with CSV export, email composer with batch sending, analytics (plays, subscribers, submissions), submission moderation
+- **Community submissions**: Photo and music upload form with R2 storage, pending/approved/rejected workflow
+- **Bandcamp integration**: James's collection scraped from Bandcamp internal API, cached in D1, displayed with album art grid and iframe embeds
+- **Client-side routing**: react-router-dom for / and /admin routes
+
+## v0.9.6
+
+- Admin dashboard shell with magic link auth flow
+- Tab navigation for Subscribers, Email, Submissions, Analytics sections
 - Styled with site dark theme (pure black, JetBrains Mono, neon green accent)
 
 ## v0.9.5
