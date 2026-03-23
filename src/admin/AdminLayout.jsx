@@ -1,9 +1,17 @@
 import { useState } from 'react'
+import SubscriberList from './SubscriberList'
 
 const TABS = ['Subscribers', 'Email', 'Submissions', 'Analytics']
 
 export default function AdminLayout({ auth, onLogout }) {
   const [activeTab, setActiveTab] = useState('Subscribers')
+
+  function renderContent() {
+    if (activeTab === 'Subscribers') {
+      return <SubscriberList token={auth.token} />
+    }
+    return <p className="admin-placeholder">This section will be implemented next.</p>
+  }
 
   return (
     <div className="admin-page">
@@ -32,7 +40,7 @@ export default function AdminLayout({ auth, onLogout }) {
 
       <main className="admin-content">
         <h2 className="admin-section-title">{activeTab}</h2>
-        <p className="admin-placeholder">This section will be implemented next.</p>
+        {renderContent()}
       </main>
     </div>
   )
