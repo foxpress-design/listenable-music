@@ -529,6 +529,120 @@
   color: var(--text-secondary);
 }
 
+/* Submission Form */
+.submission-form {
+  margin-top: 1.5rem;
+}
+
+.submission-types {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1rem;
+}
+
+.submission-type-btn {
+  padding: 0.5rem 1rem;
+  background: var(--medium-gray);
+  border: 1px solid var(--light-gray);
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.submission-type-btn:first-child {
+  border-right: none;
+}
+
+.submission-type-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--black);
+  font-weight: 700;
+}
+
+.submission-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 420px;
+}
+
+.submission-input {
+  padding: 0.6rem 0.75rem;
+  background: var(--medium-gray);
+  border: 1px solid var(--light-gray);
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  outline: none;
+}
+
+.submission-input:focus {
+  border-color: var(--accent);
+}
+
+.submission-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.submission-textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+.submission-file {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.submission-progress {
+  position: relative;
+  height: 4px;
+  background: var(--medium-gray);
+  border: 1px solid var(--light-gray);
+  overflow: hidden;
+}
+
+.submission-progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.submission-progress-label {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+}
+
+.submission-submit {
+  padding: 0.6rem 1.2rem;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--black);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.submission-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submission-msg {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .header {

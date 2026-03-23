@@ -4,6 +4,7 @@ import useAudioPlayer from '../useAudioPlayer'
 import usePlayCounts from '../usePlayCounts'
 import AiaLogo from '../AiaLogo'
 import SubscribeForm from '../components/SubscribeForm'
+import SubmissionForm from '../components/SubmissionForm'
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
@@ -131,6 +132,17 @@ export default function Home() {
               This tribute stands as a testament to a life lived in rhythm with experimental sound,
               always searching, always listening, always exploring the spaces between the beats.
             </p>
+          </div>
+        </section>
+
+        <section className="section">
+          <h2 className="section-title">Community</h2>
+          <div className="section-content">
+            <p>
+              Share your memories of James. Upload photos or music that remind you of him,
+              and they will appear here after review.
+            </p>
+            <SubmissionForm />
           </div>
         </section>
 
