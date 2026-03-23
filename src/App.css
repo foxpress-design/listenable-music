@@ -208,8 +208,7 @@
 
 .hero-photo img {
   width: 280px;
-  height: 280px;
-  object-fit: cover;
+  height: auto;
   border-radius: 4px;
   border: 2px solid var(--light-gray);
   transition: all 0.3s ease;

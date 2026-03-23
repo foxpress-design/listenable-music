@@ -2,7 +2,12 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v0.4.0)
+## What's New (v0.4.1)
+
+- Replace Artist section photo with IMG_0347 (DJing shot)
+- Hero photo now displays uncropped (full portrait, no square crop)
+
+## v0.4.0
 
 - All tracks hosted in-repo for reliable same-origin playback
 - DJ mixes re-encoded to VBR to fit under Git's 100MB file limit

@@ -123,8 +123,7 @@ function App() {
               </div>
 
               <div className="dj-photo-inline">
-                <img src="/AIA-DJing-Harvest-2007.jpeg" alt="James Campbell (AIA) DJing at Harvest 2007" />
-                <p className="photo-caption">AIA at Harvest 2007</p>
+                <img src="/img/IMG_0347.JPG" alt="James Campbell (AIA) DJing" />
               </div>
             </div>
 
