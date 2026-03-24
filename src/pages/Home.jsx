@@ -13,6 +13,7 @@ export default function Home() {
   const [copied, setCopied] = useState(false)
   const [pageViews, setPageViews] = useState(null)
   const [showThemePref, setShowThemePref] = useState(false)
+  const [showChangelog, setShowChangelog] = useState(false)
   const player = useAudioPlayer()
   const theme = useTheme()
   const { counts, recordPlay } = usePlayCounts()
@@ -37,17 +38,73 @@ export default function Home() {
 
       <header className="header">
         <div className="header-content">
-          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <span className="logo-version">v1.0.0</span></div>
+          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <button className="logo-version" onClick={() => setShowChangelog(!showChangelog)}>v1.1.0</button></div>
           <HeaderPlayer player={player} />
           <button className="theme-toggle" onClick={() => {
             theme.cycle()
             setShowThemePref(true)
             setTimeout(() => setShowThemePref(false), 1500)
           }}>
-            [{showThemePref ? (theme.preference === 'auto' ? 'default' : theme.preference) : 'theme'}]
+            [{showThemePref ? theme.preference : 'theme'}]
           </button>
         </div>
       </header>
+
+      {showChangelog && (
+        <div className="changelog-overlay" onClick={() => setShowChangelog(false)}>
+          <div className="changelog" onClick={(e) => e.stopPropagation()}>
+            <div className="changelog-header">
+              <h3>What's New</h3>
+              <button className="changelog-close" onClick={() => setShowChangelog(false)}>x</button>
+            </div>
+            <div className="changelog-entries">
+              <div className="changelog-entry">
+                <span className="changelog-version">v1.1.0</span>
+                <span className="changelog-date">March 24, 2026</span>
+                <ul>
+                  <li>Light/dark/auto theme toggle with warm sepia light mode</li>
+                  <li>Auto-play toggle (flow/single mode) in header player</li>
+                  <li>Community form: share memories, stories, photos, or music links</li>
+                  <li>Subscribe for notifications when new content is added</li>
+                  <li>Page view counter</li>
+                  <li>Improved text contrast and mobile layout</li>
+                  <li>Social share card with sequencer artwork</li>
+                </ul>
+              </div>
+              <div className="changelog-entry">
+                <span className="changelog-version">v1.0.0</span>
+                <span className="changelog-date">March 23, 2026</span>
+                <ul>
+                  <li>Platform launch on Cloudflare Pages</li>
+                  <li>Music streaming from R2 with full player controls</li>
+                  <li>James's Bandcamp collection browser</li>
+                  <li>Email subscribe with Resend integration</li>
+                  <li>Community photo and music submissions</li>
+                  <li>Admin dashboard with analytics</li>
+                </ul>
+              </div>
+              <div className="changelog-entry">
+                <span className="changelog-version">v0.8.0</span>
+                <span className="changelog-date">March 23, 2026</span>
+                <ul>
+                  <li>AIA logo design and integration</li>
+                  <li>Sticky header with global music player</li>
+                  <li>Mobile-responsive player with track selector</li>
+                </ul>
+              </div>
+              <div className="changelog-entry">
+                <span className="changelog-version">v0.1.0</span>
+                <span className="changelog-date">March 23, 2026</span>
+                <ul>
+                  <li>Initial memorial site with music player</li>
+                  <li>DJ Aia mixes, Nexus albums, and singles</li>
+                  <li>In memoriam, artist bio, and legacy sections</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <section className="hero">
         <div className="hero-columns">

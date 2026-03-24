@@ -56,10 +56,124 @@
 }
 
 .logo-version {
-  opacity: 0.5;
-  font-size: 0.6rem;
+  opacity: 0.6;
+  font-size: 0.65rem;
   letter-spacing: 0.1em;
   margin-left: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.logo-version:hover {
+  color: var(--accent);
+}
+
+/* Changelog */
+.changelog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.changelog {
+  background: var(--dark-gray);
+  border: 1px solid var(--light-gray);
+  max-width: 520px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.changelog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--light-gray);
+  position: sticky;
+  top: 0;
+  background: var(--dark-gray);
+}
+
+.changelog-header h3 {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.changelog-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+}
+
+.changelog-close:hover {
+  color: var(--accent);
+}
+
+.changelog-entries {
+  padding: 0.75rem 1.25rem;
+}
+
+.changelog-entry {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.changelog-entry:last-child {
+  border-bottom: none;
+}
+
+.changelog-version {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-right: 0.75rem;
+}
+
+.changelog-date {
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+}
+
+.changelog-entry ul {
+  list-style: none;
+  margin-top: 0.5rem;
+  padding: 0;
+}
+
+.changelog-entry li {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  padding: 0.15rem 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.changelog-entry li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  opacity: 0.5;
 }
 
 .theme-toggle {
