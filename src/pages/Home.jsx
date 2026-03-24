@@ -68,7 +68,7 @@ export default function Home() {
       {/* Sequencer visual element */}
       <div className="sequencer" aria-hidden="true">
         {[...Array(16)].map((_, i) => (
-          <div key={i} className="sequencer-step" />
+          <div key={i} className="sequencer-step sequencer-random" style={{ animationDelay: `${(i * 0.7 + i * i * 0.3) % 4}s`, animationDuration: `${3 + (i % 5) * 0.8}s` }} />
         ))}
       </div>
 
