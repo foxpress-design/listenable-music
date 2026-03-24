@@ -517,69 +517,34 @@
   }
 }
 
-/* KITT scanner animation - bounces left to right and back */
+/* KITT scanner animation - overlay bounces left to right */
 .sequencer-kitt .sequencer-step {
+  animation: none;
   background: var(--medium-gray);
   border-color: var(--light-gray);
-  animation: kittStep 3s ease-in-out infinite;
 }
 
-/* Forward sweep: steps 1-16 fire at 0% to 46.875% of the cycle */
-/* Return sweep: steps 16-1 fire at 50% to 96.875% */
-/* Each step = 3.125% of the 3s cycle */
-.sequencer-kitt .sequencer-step:nth-child(1)  { animation-delay: calc(0 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(2)  { animation-delay: calc(1 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(3)  { animation-delay: calc(2 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(4)  { animation-delay: calc(3 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(5)  { animation-delay: calc(4 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(6)  { animation-delay: calc(5 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(7)  { animation-delay: calc(6 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(8)  { animation-delay: calc(7 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(9)  { animation-delay: calc(8 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(10) { animation-delay: calc(9 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(11) { animation-delay: calc(10 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(12) { animation-delay: calc(11 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(13) { animation-delay: calc(12 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(14) { animation-delay: calc(13 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(15) { animation-delay: calc(14 * 0.09375s); }
-.sequencer-kitt .sequencer-step:nth-child(16) { animation-delay: calc(15 * 0.09375s); }
+.sequencer-kitt {
+  position: relative;
+  overflow: hidden;
+}
 
-@keyframes kittStep {
-  0% {
-    background: var(--medium-gray);
-    border-color: var(--light-gray);
-    box-shadow: none;
-  }
-  3% {
-    background: var(--accent);
-    border-color: var(--accent);
-    box-shadow: 0 0 12px var(--accent);
-  }
-  10% {
-    background: var(--medium-gray);
-    border-color: var(--light-gray);
-    box-shadow: none;
-  }
-  47% {
-    background: var(--medium-gray);
-    border-color: var(--light-gray);
-    box-shadow: none;
-  }
-  50% {
-    background: var(--accent);
-    border-color: var(--accent);
-    box-shadow: 0 0 12px var(--accent);
-  }
-  57% {
-    background: var(--medium-gray);
-    border-color: var(--light-gray);
-    box-shadow: none;
-  }
-  100% {
-    background: var(--medium-gray);
-    border-color: var(--light-gray);
-    box-shadow: none;
-  }
+.sequencer-kitt::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(100% / 16);
+  background: var(--accent);
+  box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
+  animation: kittScan 2s ease-in-out infinite alternate;
+  opacity: 0.9;
+}
+
+@keyframes kittScan {
+  0% { left: 0; }
+  100% { left: calc(100% - 100% / 16); }
 }
 
 /* Artist section photo */
