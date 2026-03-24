@@ -564,7 +564,7 @@ export default function Home() {
                 onClick={toggleEventLike}
                 title={hasLiked ? 'Remove your interest' : 'Show your interest'}
               >
-                {hasLiked ? '&#9829;' : '&#9825;'} {eventInterest} interested
+                {hasLiked ? '\u2665' : '\u2661'} {eventInterest} interested
               </button>
               <h3 className="event-title">Raise a Pint <br className="mobile-break" />for James</h3>
               <p className="event-date">June 17th, 2026</p>
