@@ -9,29 +9,34 @@ const root = resolve(__dirname, '..')
 const WIDTH = 1200
 const HEIGHT = 630
 
-// AIA logo as SVG with green stroke
-const aiaLogo = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 48" width="80" height="66">
-  <defs>
-    <clipPath id="base"><rect x="0" y="0" width="58" height="46"/></clipPath>
-  </defs>
-  <g clip-path="url(#base)">
-    <polyline points="2,48 20,5 38,48" fill="none" stroke="#00ff88" stroke-width="1.8" stroke-linecap="butt" stroke-linejoin="miter"/>
-    <polyline points="20,48 38,5 56,48" fill="none" stroke="#00ff88" stroke-width="1.8" stroke-linecap="butt" stroke-linejoin="miter"/>
-  </g>
-  <circle cx="29" cy="5" r="2.2" fill="#00ff88"/>
-</svg>
-`
+// Generate sequencer squares SVG
+function sequencerSquares() {
+  const squares = []
+  const startX = 580
+  const startY = 490
+  const size = 28
+  const gap = 6
+  const cols = 16
+  const rows = 2
+
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const x = startX + col * (size + gap)
+      const y = startY + row * (size + gap)
+      // Pseudo-random: some lit, some dim
+      const lit = ((col * 7 + row * 13 + col * col) % 5) < 2
+      const fill = lit ? '#00ff88' : '#1a1a1a'
+      const stroke = lit ? '#00ff88' : '#2a2a2a'
+      const opacity = lit ? (0.5 + ((col * 3 + row) % 4) * 0.15) : 1
+      squares.push(`<rect x="${x}" y="${y}" width="${size}" height="${size}" fill="${fill}" stroke="${stroke}" stroke-width="1" opacity="${opacity}"/>`)
+    }
+  }
+  return squares.join('\n  ')
+}
 
 // Create the text/UI overlay as SVG
 const overlaySvg = `
 <svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}">
-  <defs>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&amp;display=swap');
-    </style>
-  </defs>
-
   <!-- Dark background -->
   <rect width="${WIDTH}" height="${HEIGHT}" fill="#0a0a0a"/>
 
@@ -42,8 +47,8 @@ const overlaySvg = `
   <rect x="60" y="80" width="440" height="490" fill="#111" stroke="#333" stroke-width="1.5" rx="3"/>
 
   <!-- AIA Logo -->
-  <g transform="translate(580, 140)">
-    <svg viewBox="0 0 58 48" width="90" height="74">
+  <g transform="translate(580, 120)">
+    <svg viewBox="0 0 58 48" width="100" height="82">
       <defs>
         <clipPath id="base2"><rect x="0" y="0" width="58" height="46"/></clipPath>
       </defs>
@@ -55,20 +60,25 @@ const overlaySvg = `
     </svg>
   </g>
 
-  <!-- Name -->
-  <text x="580" y="290" fill="#ffffff" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="48" font-weight="700" letter-spacing="2">James S.</text>
-  <text x="580" y="350" fill="#ffffff" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="48" font-weight="700" letter-spacing="2">Campbell</text>
+  <!-- Name - single line -->
+  <text x="580" y="290" fill="#ffffff" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="42" font-weight="700" letter-spacing="1">James S. Campbell</text>
 
   <!-- aka AIA -->
-  <text x="580" y="400" fill="#888888" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" font-weight="300" letter-spacing="1">aka AIA</text>
+  <text x="580" y="340" fill="#cccccc" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="24" font-weight="300" letter-spacing="2">aka AIA</text>
+
+  <!-- Subtitle -->
+  <text x="580" y="390" fill="#999999" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="16" font-weight="300" letter-spacing="1">A Digital Tribute</text>
 
   <!-- Dates -->
-  <text x="580" y="450" fill="#666666" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="18" font-weight="300" letter-spacing="1">June 17, 1977 - July 1, 2025</text>
+  <text x="580" y="440" fill="#999999" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="18" font-weight="300" letter-spacing="1">June 17, 1977 - July 1, 2025</text>
+
+  <!-- Sequencer squares -->
+  ${sequencerSquares()}
 
   <!-- Bottom bar -->
   <rect x="0" y="${HEIGHT - 50}" width="${WIDTH}" height="50" fill="#111111"/>
-  <text x="60" y="${HEIGHT - 20}" fill="#00ff88" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="13" font-weight="400" letter-spacing="4" text-transform="uppercase">LISTENABLE MUSIC</text>
-  <text x="1000" y="${HEIGHT - 20}" fill="#444444" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="12" font-weight="300">listenablemusic.ca</text>
+  <text x="60" y="${HEIGHT - 18}" fill="#00ff88" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" font-weight="400" letter-spacing="4">LISTENABLE MUSIC</text>
+  <text x="960" y="${HEIGHT - 18}" fill="#666666" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="14" font-weight="300">listenablemusic.ca</text>
 
   <!-- Accent line at top -->
   <rect x="0" y="0" width="${WIDTH}" height="2" fill="#00ff88" opacity="0.6"/>
