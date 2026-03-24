@@ -673,6 +673,12 @@
   margin-bottom: 1rem;
 }
 
+.event-note {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
 /* Quote Block */
 .quote {
   background: var(--dark-gray);
