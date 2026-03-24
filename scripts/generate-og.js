@@ -23,11 +23,13 @@ function sequencerSquares() {
     for (let col = 0; col < cols; col++) {
       const x = startX + col * (size + gap)
       const y = startY + row * (size + gap)
-      // Pseudo-random: some lit, some dim
-      const lit = ((col * 7 + row * 13 + col * col) % 5) < 2
+      // Seeded random using a hash-like formula
+      const seed = Math.sin(col * 127.1 + row * 311.7) * 43758.5453
+      const rand = seed - Math.floor(seed)
+      const lit = rand > 0.55
       const fill = lit ? '#00ff88' : '#1a1a1a'
       const stroke = lit ? '#00ff88' : '#2a2a2a'
-      const opacity = lit ? (0.5 + ((col * 3 + row) % 4) * 0.15) : 1
+      const opacity = lit ? (0.4 + rand * 0.6) : 1
       squares.push(`<rect x="${x}" y="${y}" width="${size}" height="${size}" fill="${fill}" stroke="${stroke}" stroke-width="1" opacity="${opacity}"/>`)
     }
   }
