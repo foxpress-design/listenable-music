@@ -12,6 +12,7 @@ export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [copied, setCopied] = useState(false)
   const [pageViews, setPageViews] = useState(null)
+  const [showThemePref, setShowThemePref] = useState(false)
   const player = useAudioPlayer()
   const theme = useTheme()
   const { counts, recordPlay } = usePlayCounts()
@@ -38,8 +39,12 @@ export default function Home() {
         <div className="header-content">
           <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <span className="logo-version">v1.0.0</span></div>
           <HeaderPlayer player={player} />
-          <button className="theme-toggle" onClick={theme.cycle}>
-            [{theme.preference}]
+          <button className="theme-toggle" onClick={() => {
+            theme.cycle()
+            setShowThemePref(true)
+            setTimeout(() => setShowThemePref(false), 1500)
+          }}>
+            [{showThemePref ? (theme.preference === 'auto' ? 'system' : theme.preference) : 'theme'}]
           </button>
         </div>
       </header>
