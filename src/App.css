@@ -720,6 +720,11 @@
   text-align: center;
 }
 
+[data-theme="dark"] .bottom-logo,
+:root:not([data-theme="light"]) .bottom-logo {
+  opacity: 0.85;
+}
+
 .page-views {
   margin-top: 2rem;
   font-size: 0.75rem;
