@@ -61,7 +61,7 @@ export default function Home() {
           <div className="changelog" onClick={(e) => e.stopPropagation()}>
             <div className="changelog-header">
               <h3>What's New</h3>
-              <button className="changelog-close" onClick={() => setShowChangelog(false)}>x</button>
+              <button className="changelog-close" onClick={(e) => { e.stopPropagation(); setShowChangelog(false) }}>x</button>
             </div>
             <div className="changelog-entries">
               <div className="changelog-entry">
@@ -80,75 +80,98 @@ export default function Home() {
                 </ul>
               </div>
               <div className="changelog-entry">
+                <span className="changelog-version">v1.0.1</span>
+                <span className="changelog-date">March 23, 2026</span>
+                <ul>
+                  <li>Music files served from R2 with range request support for seeking</li>
+                  <li>Removed old standalone play-counter worker (migrated to Pages Functions)</li>
+                  <li>Added deploy script</li>
+                </ul>
+              </div>
+              <div className="changelog-entry">
                 <span className="changelog-version">v1.0.0</span>
                 <span className="changelog-date">March 23, 2026</span>
                 <ul>
-                  <li>Platform launch on Cloudflare Pages with D1 and R2</li>
-                  <li>James's Bandcamp collection browser with embedded player</li>
-                  <li>Email subscribe with welcome email via Resend</li>
-                  <li>Community photo and music submissions with moderation</li>
-                  <li>Admin dashboard: subscribers, email composer, analytics, submission review</li>
+                  <li>Platform launch: Cloudflare Pages with D1 database and R2 storage</li>
+                  <li>James's Bandcamp collection browser with album art and embedded player</li>
+                  <li>Email subscriptions with Resend welcome emails and unsubscribe compliance</li>
+                  <li>Community photo and music upload form with moderation workflow</li>
+                  <li>Admin dashboard: subscriber management, email composer, analytics, submission review</li>
                   <li>Magic link authentication for admin access</li>
+                  <li>Client-side routing with react-router-dom</li>
                 </ul>
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.9.0</span>
                 <span className="changelog-date">March 23, 2026</span>
                 <ul>
-                  <li>Mobile-responsive player with collapsible track selector</li>
-                  <li>Elapsed/total time display and EQ animation</li>
-                  <li>Full-width progress bar on mobile</li>
-                  <li>OG share card for Facebook and Twitter</li>
-                  <li>Share section with copy link and Facebook sharing</li>
+                  <li>Mobile player: own line below logo, collapsible track selector, tap-outside dismiss</li>
+                  <li>Elapsed/total time display and EQ animation next to track title</li>
+                  <li>Full-width progress bar replaces header border on mobile</li>
+                  <li>Hero photo preserves aspect ratio on mobile</li>
+                  <li>OG share card (1200x630) for Facebook and Twitter</li>
+                  <li>Share section with copy link and Facebook buttons</li>
                 </ul>
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.8.0</span>
                 <span className="changelog-date">March 23, 2026</span>
                 <ul>
-                  <li>AIA logo design: overlapping chevrons with center dot</li>
-                  <li>Logo as favicon, header mark, and hero element</li>
-                  <li>Full-width music player layout</li>
+                  <li>AIA logo: custom SVG mark (two overlapping chevrons with center dot)</li>
+                  <li>Logo as browser favicon, in header nav, and above hero title</li>
+                  <li>Larger artist photo in The Artist section</li>
+                  <li>Music player expanded to full section width</li>
                 </ul>
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.7.0</span>
                 <span className="changelog-date">March 23, 2026</span>
                 <ul>
-                  <li>Play count tracking with Cloudflare Worker + KV</li>
-                  <li>Per-track and per-album play counts displayed</li>
-                  <li>Version label in header</li>
+                  <li>Play count tracking via Cloudflare Worker + KV storage</li>
+                  <li>Per-track and per-album aggregate play counts in the player</li>
+                  <li>Version label in site header</li>
                 </ul>
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.6.0</span>
                 <span className="changelog-date">March 23, 2026</span>
                 <ul>
-                  <li>Google Analytics (GA4) integration</li>
-                  <li>Track and album download buttons (ZIP)</li>
+                  <li>GA4 analytics with custom events for plays and downloads</li>
+                  <li>Per-track download button in tracklist</li>
+                  <li>Per-album "download all" with client-side ZIP via JSZip</li>
+                  <li>Download progress indicator</li>
                 </ul>
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.5.0</span>
                 <span className="changelog-date">March 23, 2026</span>
                 <ul>
-                  <li>Sticky header with inline music player controls</li>
-                  <li>Track selector dropdown with album categories</li>
+                  <li>Full music player moved to sticky header (prev/play/next, dropdown, progress, volume)</li>
+                  <li>Mobile: minified player with play/pause, track name, tap-to-open track list</li>
                 </ul>
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.4.0</span>
                 <span className="changelog-date">March 23, 2026</span>
                 <ul>
-                  <li>All tracks hosted in-repo for reliable playback</li>
-                  <li>Side-by-side hero layout with larger photo</li>
+                  <li>All tracks hosted in-repo for reliable same-origin playback</li>
+                  <li>DJ mixes re-encoded to VBR to fit under Git's 100MB limit</li>
+                  <li>Side-by-side hero layout with photo and name in two columns</li>
+                </ul>
+              </div>
+              <div className="changelog-entry">
+                <span className="changelog-version">v0.3.0</span>
+                <span className="changelog-date">March 23, 2026</span>
+                <ul>
+                  <li>Move all 27 tracks to GitHub Releases, removing 186MB from repo</li>
                 </ul>
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.2.0</span>
                 <span className="changelog-date">March 23, 2026</span>
                 <ul>
-                  <li>Audio playback fixes and header quick player</li>
+                  <li>Audio playback fixes (defer play until canplay, stable refs for listeners)</li>
+                  <li>Header quick player with track dropdown and shared audio state</li>
                   <li>Dropdown hover gap fix</li>
                 </ul>
               </div>
@@ -157,10 +180,10 @@ export default function Home() {
                 <span className="changelog-date">March 23, 2026</span>
                 <ul>
                   <li>Initial memorial site for James Campbell (AIA)</li>
-                  <li>Music player with 320kbps MP3s</li>
-                  <li>DJ Aia mixes, Nexus Fable, Nexus Shiftless, and singles</li>
+                  <li>Music player with full controls (play/pause, next/prev, seek, volume)</li>
+                  <li>320kbps MP3s: DJ Aia mixes, Nexus Fable, Nexus Shiftless, and singles</li>
                   <li>In memoriam, artist bio, and legacy sections</li>
-                  <li>Sequencer visual elements</li>
+                  <li>Sequencer visual elements and glitch text effects</li>
                 </ul>
               </div>
             </div>
