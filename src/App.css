@@ -998,10 +998,6 @@
     gap: 0.5rem;
   }
 
-  .header {
-    position: relative;
-  }
-
   .header-content .logo {
     display: flex;
     align-items: center;
