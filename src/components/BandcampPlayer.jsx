@@ -20,13 +20,7 @@ export default function BandcampPlayer() {
   if (loading) return <div className="bc-loading">Loading collection...</div>
 
   if (!items.length && fallbackUrl) {
-    return (
-      <div className="bc-fallback">
-        <a href={fallbackUrl} target="_blank" rel="noopener noreferrer" className="link-button">
-          Browse James's Bandcamp Collection
-        </a>
-      </div>
-    )
+    return null
   }
 
   if (!items.length) return null
