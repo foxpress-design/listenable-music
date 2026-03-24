@@ -61,6 +61,7 @@ export async function onRequestPost(context) {
                  <p><strong>Location:</strong> Toronto. Exact venue TBA.</p>
                  <p>We'll gather at an old English pub to raise a pint in his name. We look forward to celebrating with you.</p>
                  <p>Details will be sent as the date approaches.</p>
+                 <p><a href="${context.env.SITE_URL}/#events">Share a link to this event</a></p>
                  <p style="color: #999; font-size: 12px;">
                    <a href="${unsubUrl}">Unsubscribe</a>
                  </p>`,

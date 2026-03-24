@@ -69,6 +69,16 @@ export default function Home() {
     }).catch(() => {})
   }, [hasLiked])
 
+  // Scroll to hash on load (React Router doesn't handle this)
+  useEffect(() => {
+    if (window.location.hash) {
+      setTimeout(() => {
+        const el = document.querySelector(window.location.hash)
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      }, 500)
+    }
+  }, [])
+
   useEffect(() => {
     setMounted(true)
     fetch('/api/pageviews', { method: 'POST' })
