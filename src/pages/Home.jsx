@@ -567,7 +567,7 @@ export default function Home() {
                 {hasLiked ? '\u2665' : '\u2661'} {eventInterest} interested
               </button>
               <h3 className="event-title">Raise a Pint <br className="mobile-break" />for James</h3>
-              <p className="event-date">June 17th, 2026</p>
+              <p className="event-date">June 17th, 2026, Toronto</p>
               <p>
                 On what would have been James's 49th birthday, we'll gather in an old English pub to raise a pint in his name.
                 Good company, good music, and a toast to a life well lived.
