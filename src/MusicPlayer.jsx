@@ -164,6 +164,12 @@ export function HeaderPlayer({ player }) {
         <div className="hp-mobile-btns">
           <button className="hp-btn" onClick={playPrev}>&lt;&lt;</button>
           <button className="hp-btn" onClick={playNext}>&gt;&gt;</button>
+          <button
+            className={`hp-autoplay ${autoPlay ? 'active' : ''}`}
+            onClick={toggleAutoPlay}
+          >
+            [{autoPlay ? 'auto' : 'no-auto'}]
+          </button>
         </div>
 
         {showDropdown && (

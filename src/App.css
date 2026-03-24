@@ -871,21 +871,19 @@
   }
 
   .header-content .logo {
-    width: 100%;
     display: flex;
     align-items: center;
-  }
-
-  .header-content .logo .logo-version {
-    margin-left: auto;
+    flex: 1;
   }
 
   .header-content .theme-toggle {
-    margin-left: auto;
+    flex-shrink: 0;
+    order: 0;
   }
 
   .header-content .hp {
     width: 100%;
+    order: 1;
   }
 
   .hero {
