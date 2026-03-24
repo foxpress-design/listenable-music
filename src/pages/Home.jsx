@@ -569,34 +569,34 @@ export default function Home() {
           <h2 className="section-title">Events</h2>
           <div className="section-content">
             <div className="event-card">
+              <a
+                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Raise+a+Pint+for+James&dates=20260617T180000/20260617T230000&location=Toronto%2C+ON&details=James+Campbell%27s+49th+birthday.+We%27ll+gather+at+an+old+English+pub+to+raise+a+pint+in+his+name.+Venue+TBA.%0A%0Ahttps%3A%2F%2Flistenablemusic.ca%2F%23events"
+                className="link-button event-calendar-btn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                &#x1F4C5; Add to Calendar
+              </a>
+              <h3 className="event-title">Raise a Pint <br className="mobile-break" />for James</h3>
+              <p className="event-date">June 17th, 2026, Toronto</p>
               <button
-                className={`event-badge ${hasLiked ? 'event-badge-liked' : ''}`}
+                className={`event-interested ${hasLiked ? 'event-interested-liked' : ''}`}
                 onClick={toggleEventLike}
                 title={hasLiked ? 'Remove your interest' : 'Show your interest'}
               >
                 {hasLiked ? '\u2665' : '\u2661'} {eventInterest} interested
               </button>
-              <h3 className="event-title">Raise a Pint <br className="mobile-break" />for James</h3>
-              <p className="event-date">June 17th, 2026, Toronto</p>
               <p>
                 On what would have been James's 49th birthday, we'll gather in an old English pub to raise a pint in his name.
                 Good company, good music, and a toast to a life well lived.
               </p>
               <p className="event-note">
-                It's also FIFA World Cup 2026 Match 21 in Toronto that day. Make a weekend of it.
+                It's also FIFA World Cup 2026 Match 21 in Toronto that day. Let's plan accordingly.
               </p>
               <p>
                 Signal your interest below and we'll send you details as the date approaches.
               </p>
               <EventSignup onSignup={() => setEventInterest(prev => (prev || 0) + 1)} />
-              <a
-                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Raise+a+Pint+for+James&dates=20260617T180000/20260617T230000&location=Toronto%2C+ON&details=James+Campbell%27s+49th+birthday.+We%27ll+gather+at+an+old+English+pub+to+raise+a+pint+in+his+name.+Venue+TBA.%0A%0Ahttps%3A%2F%2Flistenablemusic.ca%2F%23events"
-                className="link-button"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                &rarr; Add to Calendar
-              </a>
             </div>
           </div>
         </section>

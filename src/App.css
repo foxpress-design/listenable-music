@@ -619,36 +619,44 @@
   position: relative;
 }
 
-.event-badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: var(--medium-gray);
+.event-interested {
+  display: inline-block;
+  background: none;
   border: 1px solid var(--light-gray);
   color: var(--text-secondary);
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
   letter-spacing: 0.05em;
   font-family: 'JetBrains Mono', monospace;
   cursor: pointer;
   transition: all 0.2s ease;
+  margin-bottom: 1rem;
 }
 
-.event-badge:hover {
+.event-interested:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
 
-.event-badge-liked {
-  background: var(--accent);
+.event-interested-liked {
   border-color: var(--accent);
-  color: var(--black);
+  color: var(--accent);
 }
 
-.event-badge-liked:hover {
+.event-calendar-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  margin-top: 0;
+  border-color: var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+
+.event-calendar-btn:hover {
+  background: var(--accent);
   color: var(--black);
-  opacity: 0.85;
 }
 
 .mobile-break {
