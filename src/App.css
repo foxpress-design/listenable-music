@@ -1461,6 +1461,10 @@
     display: inline;
   }
 
+  .calendar-text-full {
+    display: none;
+  }
+
   .subscribe-fields {
     flex-direction: column;
   }
