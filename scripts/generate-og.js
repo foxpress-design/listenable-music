@@ -44,7 +44,7 @@ const overlaySvg = `
   <rect x="0" y="0" width="${WIDTH}" height="${HEIGHT}" fill="none" stroke="#1a1a1a" stroke-width="2"/>
 
   <!-- Photo area placeholder (will be composited) -->
-  <rect x="60" y="80" width="440" height="490" fill="#111" stroke="#333" stroke-width="1.5" rx="3"/>
+  <rect x="60" y="40" width="440" height="530" fill="#111" stroke="#333" stroke-width="1.5" rx="3"/>
 
   <!-- AIA Logo -->
   <g transform="translate(580, 120)">
@@ -64,13 +64,13 @@ const overlaySvg = `
   <text x="580" y="290" fill="#ffffff" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="42" font-weight="700" letter-spacing="1">James S. Campbell</text>
 
   <!-- aka AIA -->
-  <text x="580" y="340" fill="#cccccc" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="24" font-weight="300" letter-spacing="2">aka AIA</text>
+  <text x="580" y="345" fill="#e0e0e0" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="28" font-weight="400" letter-spacing="3">aka AIA</text>
 
   <!-- Subtitle -->
-  <text x="580" y="390" fill="#999999" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="16" font-weight="300" letter-spacing="1">A Digital Tribute</text>
+  <text x="580" y="400" fill="#cccccc" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" font-weight="300" letter-spacing="1">A Digital Tribute</text>
 
   <!-- Dates -->
-  <text x="580" y="440" fill="#999999" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="18" font-weight="300" letter-spacing="1">June 17, 1977 - July 1, 2025</text>
+  <text x="580" y="450" fill="#cccccc" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" font-weight="300" letter-spacing="1">June 17, 1977 - July 1, 2025</text>
 
   <!-- Sequencer squares -->
   ${sequencerSquares()}
@@ -88,7 +88,7 @@ const overlaySvg = `
 async function generate() {
   // Load and resize the photo
   const photo = await sharp(resolve(root, 'public/img/IMG_0236.JPG'))
-    .resize(440, 490, { fit: 'cover', position: 'top' })
+    .resize(440, 530, { fit: 'cover', position: 'top' })
     .toBuffer()
 
   // Create the base from the SVG overlay
@@ -103,7 +103,7 @@ async function generate() {
       {
         input: photo,
         left: 60,
-        top: 80,
+        top: 40,
       }
     ])
     .png({ quality: 90 })
