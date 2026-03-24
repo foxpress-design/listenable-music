@@ -13,7 +13,7 @@ const HEIGHT = 630
 function sequencerSquares() {
   const squares = []
   const startX = 580
-  const startY = 490
+  const startY = 500
   const size = 28
   const gap = 6
   const cols = 16
@@ -64,21 +64,21 @@ const overlaySvg = `
   <text x="580" y="290" fill="#ffffff" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="42" font-weight="700" letter-spacing="1">James S. Campbell</text>
 
   <!-- aka AIA -->
-  <text x="580" y="345" fill="#e0e0e0" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="28" font-weight="400" letter-spacing="3">aka AIA</text>
+  <text x="580" y="345" fill="#e0e0e0" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="34" font-weight="400" letter-spacing="4">aka AIA</text>
 
   <!-- Subtitle -->
-  <text x="580" y="400" fill="#cccccc" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" font-weight="300" letter-spacing="1">A Digital Tribute</text>
+  <text x="580" y="405" fill="#cccccc" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="26" font-weight="300" letter-spacing="2">A Digital Tribute</text>
 
   <!-- Dates -->
-  <text x="580" y="450" fill="#cccccc" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" font-weight="300" letter-spacing="1">June 17, 1977 - July 1, 2025</text>
+  <text x="580" y="460" fill="#cccccc" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="24" font-weight="300" letter-spacing="1">June 17, 1977 - July 1, 2025</text>
 
   <!-- Sequencer squares -->
   ${sequencerSquares()}
 
   <!-- Bottom bar -->
-  <rect x="0" y="${HEIGHT - 50}" width="${WIDTH}" height="50" fill="#111111"/>
-  <text x="60" y="${HEIGHT - 25}" fill="#00ff88" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="22" font-weight="700" letter-spacing="8" dominant-baseline="middle">LISTENABLE MUSIC</text>
-  <text fill="#cccccc" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" font-weight="400" letter-spacing="2" dominant-baseline="middle" x="1140" y="${HEIGHT - 25}" text-anchor="end">listenablemusic.ca</text>
+  <rect x="0" y="${HEIGHT - 46}" width="${WIDTH}" height="46" fill="#111111"/>
+  <text x="60" y="${HEIGHT - 23}" fill="#00ff88" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="22" font-weight="700" letter-spacing="8" dominant-baseline="middle">LISTENABLE MUSIC</text>
+  <text fill="#cccccc" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" font-weight="400" letter-spacing="2" dominant-baseline="middle" x="1140" y="${HEIGHT - 23}" text-anchor="end">listenablemusic.ca</text>
 
   <!-- Accent line at top -->
   <rect x="0" y="0" width="${WIDTH}" height="2" fill="#00ff88" opacity="0.6"/>
