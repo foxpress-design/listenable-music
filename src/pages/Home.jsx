@@ -575,7 +575,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                &#x1F4C5; Add to Calendar
+                Add to <span className="calendar-text-full">Calendar </span>&#x1F4C5;
               </a>
               <h3 className="event-title">Raise a Pint <br className="mobile-break" />for James</h3>
               <p className="event-date">June 17th, 2026, Toronto</p>
