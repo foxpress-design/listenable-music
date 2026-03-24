@@ -77,8 +77,8 @@ const overlaySvg = `
 
   <!-- Bottom bar -->
   <rect x="0" y="${HEIGHT - 50}" width="${WIDTH}" height="50" fill="#111111"/>
-  <text x="60" y="${HEIGHT - 18}" fill="#00ff88" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="15" font-weight="400" letter-spacing="4">LISTENABLE MUSIC</text>
-  <text x="960" y="${HEIGHT - 18}" fill="#666666" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="14" font-weight="300">listenablemusic.ca</text>
+  <text x="60" y="${HEIGHT - 25}" fill="#00ff88" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="22" font-weight="700" letter-spacing="8" dominant-baseline="middle">LISTENABLE MUSIC</text>
+  <text fill="#cccccc" font-family="'JetBrains Mono', 'Courier New', monospace" font-size="20" font-weight="400" letter-spacing="2" dominant-baseline="middle" x="1140" y="${HEIGHT - 25}" text-anchor="end">listenablemusic.ca</text>
 
   <!-- Accent line at top -->
   <rect x="0" y="0" width="${WIDTH}" height="2" fill="#00ff88" opacity="0.6"/>
