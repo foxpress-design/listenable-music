@@ -1,3 +1,5 @@
+import { logEmail } from '../_email-log.js';
+
 export async function onRequestGet(context) {
   const url = new URL(context.request.url);
   const status = url.searchParams.get('status') || 'pending';
@@ -59,6 +61,7 @@ export async function onRequestPatch(context) {
                  <p style="color: #999; font-size: 12px;"><a href="${siteUrl}">listenablemusic.ca</a></p>`,
         }),
       }).catch(() => {});
+      await logEmail(db, { subject: 'Update on your submission to Listenable Music', preview: `Rejection to ${sub.email}${reason ? ': ' + reason : ''}`, sentBy: context.data.adminEmail });
     }
   }
 

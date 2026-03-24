@@ -28,7 +28,7 @@ export async function onRequestGet(context) {
 
   // Recent sent emails
   const { results: recentEmails } = await db.prepare(
-    'SELECT subject, recipient_count, sent_at FROM sent_emails ORDER BY sent_at DESC LIMIT 5'
+    'SELECT subject, recipient_count, sent_at, sent_by FROM sent_emails ORDER BY sent_at DESC LIMIT 20'
   ).all();
 
   return Response.json({

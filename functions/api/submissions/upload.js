@@ -1,6 +1,9 @@
+import { logEmail } from '../_email-log.js';
+
 async function sendEmails(context, { type, name, email, submissionId, preview }) {
   const resendKey = context.env.RESEND_API_KEY;
   if (!resendKey) return;
+  const db = context.env.DB;
 
   const siteUrl = context.env.SITE_URL || 'https://listenablemusic.ca';
   const adminEmail = context.env.ADMIN_EMAIL;
@@ -25,6 +28,7 @@ async function sendEmails(context, { type, name, email, submissionId, preview })
                <p style="color: #999; font-size: 12px;"><a href="${siteUrl}">listenablemusic.ca</a></p>`,
       }),
     }).catch(() => {});
+    await logEmail(db, { subject: 'Your submission has been received', preview: `Confirmation to ${email}`, sentBy: 'system' });
   }
 
   // Email to admin
@@ -55,6 +59,7 @@ async function sendEmails(context, { type, name, email, submissionId, preview })
                <p style="color: #999; font-size: 12px;">Or review in the <a href="${siteUrl}/admin">admin dashboard</a>.</p>`,
       }),
     }).catch(() => {});
+    await logEmail(db, { subject: `New ${typeLabel} submission from ${name}`, preview: preview || '', sentBy: 'system' });
   }
 }
 

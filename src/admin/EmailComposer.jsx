@@ -8,6 +8,20 @@ export default function EmailComposer({ token }) {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState(null)
   const [error, setError] = useState(null)
+  const [emailHistory, setEmailHistory] = useState([])
+
+  function loadHistory() {
+    fetch('/api/admin/analytics', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(r => r.json())
+      .then(data => setEmailHistory(data.recentEmails || []))
+      .catch(() => {})
+  }
+
+  useEffect(() => {
+    loadHistory()
+  }, [token])
 
   useEffect(() => {
     fetch('/api/admin/subscribers', {
@@ -55,6 +69,7 @@ export default function EmailComposer({ token }) {
         setSubject('')
         setBody('')
         setPreview(false)
+        loadHistory()
       }
     } catch {
       setError('Network error. Please try again.')
@@ -138,6 +153,30 @@ export default function EmailComposer({ token }) {
           {loading ? 'Sending...' : `Send${recipientCount !== null ? ` to ${recipientCount}` : ''}`}
         </button>
       </div>
+
+      {emailHistory.length > 0 && (
+        <div className="email-history">
+          <h4 className="admin-section-title" style={{ marginTop: '2rem' }}>Send History</h4>
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Recipients</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {emailHistory.map((e, i) => (
+                <tr key={i}>
+                  <td>{e.subject}</td>
+                  <td>{e.recipient_count}</td>
+                  <td>{e.sent_at ? new Date(e.sent_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   )
 }
