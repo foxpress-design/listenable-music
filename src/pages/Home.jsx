@@ -129,11 +129,19 @@ export default function Home() {
             <MusicPlayer player={player} counts={counts} />
           </div>
           <h3 className="playlist-category">James's Favourites</h3>
-          <div className="section-content">
+          <div className="section-content bc-intro">
             <p>
               Music that inspired James. Browse his <a href="https://bandcamp.com/jamesambient" target="_blank" rel="noopener noreferrer">Bandcamp collection</a> of favourite albums
               and artists from the minimal and experimental techno scene.
             </p>
+            <a
+              href="https://bandcamp.com/jamesambient"
+              className="link-button"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              → Browse Collection
+            </a>
           </div>
           <div className="player-container">
             <BandcampPlayer />

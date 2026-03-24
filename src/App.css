@@ -834,6 +834,21 @@
   height: 400px;
 }
 
+.bc-intro {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.bc-intro p {
+  flex: 1;
+  margin: 0;
+}
+
+.bc-intro .link-button {
+  flex-shrink: 0;
+}
+
 .bc-fallback {
   margin-top: 1rem;
   text-align: center;
@@ -911,6 +926,11 @@
   .sequencer {
     grid-template-columns: repeat(8, 1fr);
     padding-left: 1rem;
+  }
+
+  .bc-intro {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .subscribe-fields {
