@@ -538,7 +538,7 @@
   width: calc(100% / 16);
   background: var(--accent);
   box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
-  animation: kittScan 2s ease-in-out infinite alternate;
+  animation: kittScan 2s steps(15) infinite alternate;
   opacity: 0.9;
 }
 
