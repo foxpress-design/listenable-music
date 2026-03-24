@@ -216,7 +216,7 @@ export default function Home() {
             <SubscribeForm />
 
             {pageViews !== null && (
-              <p className="page-views">This page has been viewed {pageViews.toLocaleString()} times.</p>
+              <p className="page-views">AIA's digital memorial has been visited by {pageViews.toLocaleString()} friends, fans and family members.</p>
             )}
           </div>
         </section>
