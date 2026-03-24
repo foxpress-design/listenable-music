@@ -30,7 +30,7 @@ export default function Home() {
   const [showSubmitForm, setShowSubmitForm] = useState(false)
   const [approvedPosts, setApprovedPosts] = useState([])
   const [eventInterest, setEventInterest] = useState(null)
-  const currentVersion = 'v1.1.0'
+  const currentVersion = 'v1.2.0'
   const [hasNewVersion, setHasNewVersion] = useState(() => {
     try {
       return localStorage.getItem('aia-last-seen-version') !== currentVersion
@@ -106,6 +106,18 @@ export default function Home() {
               <button className="changelog-close" onClick={(e) => { e.stopPropagation(); setShowChangelog(false) }}>x</button>
             </div>
             <div className="changelog-entries">
+              <div className="changelog-entry">
+                <span className="changelog-version">v1.2.0</span>
+                <span className="changelog-date">March 24, 2026</span>
+                <ul>
+                  <li>Supporting His Memory: cards for Bandcamp, EFF, ISO 50/Tycho, and Simon Stalenhag with featured art</li>
+                  <li>Protect Your Privacy: full-width Proton Mail and Proton VPN section with icons</li>
+                  <li>Events: June 17th birthday gathering with signup form and live interest count badge</li>
+                  <li>Section navigation dropdown on hover from site title</li>
+                  <li>KITT sequencer rewritten with per-step fade trail animation</li>
+                  <li>Subscribe API supports tagging (event signups tracked separately)</li>
+                </ul>
+              </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v1.1.0</span>
                 <span className="changelog-date">March 24, 2026</span>
