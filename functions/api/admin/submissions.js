@@ -10,6 +10,17 @@ export async function onRequestGet(context) {
 
 export async function onRequestPatch(context) {
   const { id, status } = await context.request.json();
+
+  if (status === 'deleted') {
+    const db = context.env.DB;
+    const sub = await db.prepare('SELECT file_key FROM submissions WHERE id = ?').bind(id).first();
+    if (sub && sub.file_key && !sub.file_key.startsWith('http')) {
+      try { await context.env.UPLOADS.delete(sub.file_key) } catch {}
+    }
+    await db.prepare('DELETE FROM submissions WHERE id = ?').bind(id).run();
+    return Response.json({ success: true });
+  }
+
   if (!['approved', 'rejected'].includes(status)) {
     return Response.json({ error: 'Invalid status' }, { status: 400 });
   }

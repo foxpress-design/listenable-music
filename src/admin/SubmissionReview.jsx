@@ -97,7 +97,7 @@ export default function SubmissionReview({ token }) {
                 <div className="submission-card-header-left">
                   <span className="submission-card-name">{sub.name || 'Unknown'}</span>
                   <span className={`submission-type-badge submission-type-${sub.type}`}>
-                    {sub.type === 'music' ? 'Music' : 'Photo'}
+                    {sub.type === 'memory' ? 'Memory' : sub.type === 'music' ? 'Music' : 'Photo'}
                   </span>
                 </div>
                 <span className="submission-card-date">{formatDate(sub.submitted_at)}</span>
@@ -116,8 +116,8 @@ export default function SubmissionReview({ token }) {
                 <p className="submission-card-caption">{sub.caption}</p>
               )}
 
-              {activeFilter === 'pending' && (
-                <div className="submission-card-actions">
+              <div className="submission-card-actions">
+                {activeFilter !== 'approved' && (
                   <button
                     className="btn-approve"
                     disabled={actionLoading === sub.id}
@@ -125,6 +125,8 @@ export default function SubmissionReview({ token }) {
                   >
                     {actionLoading === sub.id ? '...' : 'Approve'}
                   </button>
+                )}
+                {activeFilter !== 'rejected' && (
                   <button
                     className="btn-reject"
                     disabled={actionLoading === sub.id}
@@ -132,8 +134,15 @@ export default function SubmissionReview({ token }) {
                   >
                     {actionLoading === sub.id ? '...' : 'Reject'}
                   </button>
-                </div>
-              )}
+                )}
+                <button
+                  className="btn-reject"
+                  disabled={actionLoading === sub.id}
+                  onClick={() => handleAction(sub.id, 'deleted')}
+                >
+                  {actionLoading === sub.id ? '...' : 'Delete'}
+                </button>
+              </div>
             </div>
           ))}
         </div>
