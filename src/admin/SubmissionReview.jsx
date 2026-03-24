@@ -77,7 +77,10 @@ export default function SubmissionReview({ token }) {
     fetchSubmissions(activeFilter)
   }, [activeFilter, fetchSubmissions])
 
-  async function handleAction(id, status) {
+  const [rejectId, setRejectId] = useState(null)
+  const [rejectReason, setRejectReason] = useState('')
+
+  async function handleAction(id, status, reason) {
     setActionLoading(id)
     try {
       const res = await fetch('/api/admin/submissions', {
@@ -86,9 +89,11 @@ export default function SubmissionReview({ token }) {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ id, status }),
+        body: JSON.stringify({ id, status, reason }),
       })
       if (!res.ok) throw new Error(`Action failed (${res.status})`)
+      setRejectId(null)
+      setRejectReason('')
       await fetchSubmissions(activeFilter)
     } catch (err) {
       setError(err.message)
@@ -163,13 +168,13 @@ export default function SubmissionReview({ token }) {
                     {actionLoading === sub.id ? '...' : 'Approve'}
                   </button>
                 )}
-                {activeFilter !== 'rejected' && (
+                {activeFilter !== 'rejected' && rejectId !== sub.id && (
                   <button
                     className="btn-reject"
                     disabled={actionLoading === sub.id}
-                    onClick={() => handleAction(sub.id, 'rejected')}
+                    onClick={() => setRejectId(sub.id)}
                   >
-                    {actionLoading === sub.id ? '...' : 'Reject'}
+                    Reject
                   </button>
                 )}
                 <button
@@ -180,6 +185,32 @@ export default function SubmissionReview({ token }) {
                   {actionLoading === sub.id ? '...' : 'Delete'}
                 </button>
               </div>
+              {rejectId === sub.id && (
+                <div className="submission-reject-form">
+                  <textarea
+                    className="admin-input"
+                    placeholder="Reason for rejection (optional, will be emailed to submitter)"
+                    value={rejectReason}
+                    onChange={(e) => setRejectReason(e.target.value)}
+                    rows={2}
+                  />
+                  <div className="submission-card-actions">
+                    <button
+                      className="btn-reject"
+                      disabled={actionLoading === sub.id}
+                      onClick={() => handleAction(sub.id, 'rejected', rejectReason || undefined)}
+                    >
+                      {actionLoading === sub.id ? '...' : 'Confirm Reject'}
+                    </button>
+                    <button
+                      className="btn-reject"
+                      onClick={() => { setRejectId(null); setRejectReason('') }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>

@@ -759,3 +759,15 @@
   opacity: 0.4;
   cursor: not-allowed;
 }
+
+.submission-reject-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.submission-reject-form .admin-input {
+  min-height: 50px;
+  resize: vertical;
+}
