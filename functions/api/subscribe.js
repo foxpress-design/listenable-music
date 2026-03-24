@@ -106,7 +106,7 @@ export async function onRequestPost(context) {
         to: adminEmail,
         subject: `New ${type}: ${normalizedEmail}`,
         html: `<p><strong>${normalizedEmail}</strong>${nameLabel} just signed up.</p>
-               <p><strong>Type:</strong> ${isEvent ? 'Event: Raise a Pint for James' : 'Mailing list'}</p>
+               <p><strong>Type:</strong> ${isEvent ? 'Event: <a href="' + context.env.SITE_URL + '/#events">Raise a Pint for James</a>' : 'Mailing list'}</p>
                <p><strong>Source:</strong> ${tag || 'website'}</p>`,
       }),
     });
