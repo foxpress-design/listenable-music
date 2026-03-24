@@ -73,6 +73,22 @@
   color: var(--accent);
 }
 
+.version-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-left: 0.3rem;
+  vertical-align: top;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
 /* Changelog */
 .changelog-overlay {
   position: fixed;

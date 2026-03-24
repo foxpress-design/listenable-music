@@ -14,6 +14,12 @@ export default function Home() {
   const [pageViews, setPageViews] = useState(null)
   const [showThemePref, setShowThemePref] = useState(false)
   const [showChangelog, setShowChangelog] = useState(false)
+  const currentVersion = 'v1.1.0'
+  const [hasNewVersion, setHasNewVersion] = useState(() => {
+    try {
+      return localStorage.getItem('aia-last-seen-version') !== currentVersion
+    } catch { return false }
+  })
   const player = useAudioPlayer()
   const theme = useTheme()
   const { counts, recordPlay } = usePlayCounts()
@@ -38,7 +44,7 @@ export default function Home() {
 
       <header className="header">
         <div className="header-content">
-          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <button className="logo-version" onClick={() => setShowChangelog(!showChangelog)}>v1.1.0</button></div>
+          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <button className="logo-version" onClick={() => { setShowChangelog(!showChangelog); if (hasNewVersion) { setHasNewVersion(false); try { localStorage.setItem('aia-last-seen-version', currentVersion) } catch {} } }}>{currentVersion}{hasNewVersion && <span className="version-dot" />}</button></div>
           <HeaderPlayer player={player} />
           <button className="theme-toggle" onClick={() => {
             theme.cycle()
