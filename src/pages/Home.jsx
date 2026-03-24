@@ -225,7 +225,6 @@ export default function Home() {
               </a>
             </div>
 
-            <p className="page-views" style={{ marginTop: '2rem' }}>This page was last updated on March 23, 2026.</p>
             <p className="subscribe-label">Get notified when new memories or content are added:</p>
             <SubscribeForm />
 
@@ -249,6 +248,7 @@ export default function Home() {
         <p className="footer-credit">
           Site maintained by his biggest fan and friend. For additions or corrections, <a href="mailto:feedback@listenablemusic.ca?subject=Listenable%20Music%20-%20Feedback">get in touch</a>.
         </p>
+        <p className="footer-credit">Last updated March 24, 2026.</p>
       </footer>
     </div>
   )
