@@ -60,9 +60,10 @@ export async function onRequestPost(context) {
   }
 
   // Log to sent_emails
+  const htmlBody = body.replace(/\n/g, '<br>');
   await db.prepare(
-    "INSERT INTO sent_emails (subject, body_preview, recipient_count, sent_by) VALUES (?, ?, ?, ?)"
-  ).bind(subject, body.substring(0, 200), sent, context.data.adminEmail || 'admin').run();
+    "INSERT INTO sent_emails (subject, body_preview, recipient_count, sent_by, body_html) VALUES (?, ?, ?, ?, ?)"
+  ).bind(subject, body.substring(0, 200), sent, context.data.adminEmail || 'admin', htmlBody).run();
 
   return Response.json({ sent, failed, total: subscribers.length });
 }

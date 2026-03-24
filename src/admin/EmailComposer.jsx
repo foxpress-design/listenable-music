@@ -9,14 +9,29 @@ export default function EmailComposer({ token }) {
   const [result, setResult] = useState(null)
   const [error, setError] = useState(null)
   const [emailHistory, setEmailHistory] = useState([])
+  const [previewEmail, setPreviewEmail] = useState(null)
+  const [loadingPreview, setLoadingPreview] = useState(false)
 
   function loadHistory() {
-    fetch('/api/admin/analytics', {
+    fetch('/api/admin/emails', {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(r => r.json())
-      .then(data => setEmailHistory(data.recentEmails || []))
+      .then(data => setEmailHistory(data.emails || []))
       .catch(() => {})
+  }
+
+  async function openPreview(id) {
+    setLoadingPreview(true)
+    try {
+      const res = await fetch(`/api/admin/emails?id=${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      const data = await res.json()
+      if (data.email) setPreviewEmail(data.email)
+    } catch {} finally {
+      setLoadingPreview(false)
+    }
   }
 
   useEffect(() => {
@@ -156,25 +171,56 @@ export default function EmailComposer({ token }) {
 
       {emailHistory.length > 0 && (
         <div className="email-history">
-          <h4 className="admin-section-title" style={{ marginTop: '2rem' }}>Send History</h4>
+          <h4 className="admin-section-title" style={{ marginTop: '2rem' }}>All Emails ({emailHistory.length})</h4>
           <table className="admin-table">
             <thead>
               <tr>
                 <th>Subject</th>
-                <th>Recipients</th>
+                <th>To</th>
+                <th>Sent By</th>
                 <th>Date</th>
               </tr>
             </thead>
             <tbody>
-              {emailHistory.map((e, i) => (
-                <tr key={i}>
+              {emailHistory.map((e) => (
+                <tr key={e.id} onClick={() => openPreview(e.id)} style={{ cursor: 'pointer' }} className="email-history-row">
                   <td>{e.subject}</td>
                   <td>{e.recipient_count}</td>
+                  <td><span className={`email-sent-by ${e.sent_by === 'system' ? 'email-sent-system' : ''}`}>{e.sent_by === 'system' ? 'system' : 'manual'}</span></td>
                   <td>{e.sent_at ? new Date(e.sent_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {previewEmail && (
+        <div className="email-preview-overlay" onClick={() => setPreviewEmail(null)}>
+          <div className="email-preview-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="email-preview-modal-header">
+              <h4>{previewEmail.subject}</h4>
+              <button className="email-preview-modal-close" onClick={() => setPreviewEmail(null)}>x</button>
+            </div>
+            <div className="email-preview-modal-meta">
+              <span>To: {previewEmail.recipient_count} recipient{previewEmail.recipient_count === 1 ? '' : 's'}</span>
+              <span>By: {previewEmail.sent_by}</span>
+              <span>{previewEmail.sent_at ? new Date(previewEmail.sent_at).toLocaleString() : ''}</span>
+            </div>
+            <div className="email-preview-modal-body">
+              {previewEmail.body_html ? (
+                <div dangerouslySetInnerHTML={{ __html: previewEmail.body_html }} />
+              ) : (
+                <p style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>{previewEmail.body_preview || 'No preview available'}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {loadingPreview && (
+        <div className="email-preview-overlay">
+          <p style={{ color: 'var(--accent)' }}>Loading...</p>
         </div>
       )}
     </div>

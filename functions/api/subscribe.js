@@ -1,3 +1,5 @@
+import { logEmail } from './_email-log.js';
+
 export async function onRequestPost(context) {
   const { email, name, tag } = await context.request.json();
 
@@ -91,6 +93,15 @@ export async function onRequestPost(context) {
         to: normalizedEmail,
         ...emailContent,
       }),
+    });
+
+    // Log to sent_emails
+    await logEmail(db, {
+      subject: emailContent.subject,
+      preview: `To: ${normalizedEmail}`,
+      recipientCount: 1,
+      sentBy: 'system',
+      bodyHtml: emailContent.html,
     });
   }
 
