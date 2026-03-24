@@ -131,7 +131,7 @@ export default function Home() {
               <div className="changelog-entry">
                 <span className="changelog-version">v0.6.0</span>
                 <ul>
-                  <li>GA4 analytics with custom events for plays and downloads</li>
+                  <li>Custom events for play counts and downloads</li>
                   <li>Per-track download button in tracklist</li>
                   <li>Per-album "download all" with client-side ZIP via JSZip</li>
                   <li>Download progress indicator</li>
