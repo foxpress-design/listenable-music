@@ -764,6 +764,61 @@
   text-align: center;
 }
 
+/* Community Posts */
+.community-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.community-post {
+  border: 1px solid var(--light-gray);
+  background: var(--medium-gray);
+  padding: 1.25rem;
+}
+
+.community-post-img {
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--light-gray);
+}
+
+.community-post-memory {
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  margin: 0 0 0.75rem;
+  white-space: pre-wrap;
+}
+
+.community-post-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.community-post-name {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.community-post-caption {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.community-toggle {
+  margin-bottom: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+
 /* Submission Form */
 .submission-form {
   margin-top: 1.5rem;

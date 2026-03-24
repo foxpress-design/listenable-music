@@ -8,12 +8,26 @@ import SubscribeForm from '../components/SubscribeForm'
 import SubmissionForm from '../components/SubmissionForm'
 import BandcampPlayer from '../components/BandcampPlayer'
 
+function CommunityMemory({ id }) {
+  const [text, setText] = useState(null)
+  useEffect(() => {
+    fetch(`/api/submissions/file/${id}`)
+      .then(r => r.text())
+      .then(setText)
+      .catch(() => {})
+  }, [id])
+  if (!text) return null
+  return <p className="community-post-memory">{text}</p>
+}
+
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [copied, setCopied] = useState(false)
   const [pageViews, setPageViews] = useState(null)
   const [showThemePref, setShowThemePref] = useState(false)
   const [showChangelog, setShowChangelog] = useState(false)
+  const [showSubmitForm, setShowSubmitForm] = useState(false)
+  const [approvedPosts, setApprovedPosts] = useState([])
   const currentVersion = 'v1.1.0'
   const [hasNewVersion, setHasNewVersion] = useState(() => {
     try {
@@ -29,6 +43,10 @@ export default function Home() {
     fetch('/api/pageviews', { method: 'POST' })
       .then(r => r.json())
       .then(d => setPageViews(d.views))
+      .catch(() => {})
+    fetch('/api/submissions/approved')
+      .then(r => r.json())
+      .then(d => setApprovedPosts(d.submissions || []))
       .catch(() => {})
   }, [])
 
@@ -304,11 +322,34 @@ export default function Home() {
         <section className="section">
           <h2 className="section-title">Community</h2>
           <div className="section-content">
-            <p>
-              Share your memories of James. Upload photos or music that remind you of him,
-              and they will appear here after review.
-            </p>
-            <SubmissionForm />
+            {approvedPosts.length > 0 && (
+              <div className="community-posts">
+                {approvedPosts.map(post => (
+                  <div key={post.id} className="community-post">
+                    {post.type === 'photo' && post.file_key && (
+                      <img className="community-post-img" src={`/api/submissions/file/${post.id}`} alt={post.caption || 'Community photo'} loading="lazy" />
+                    )}
+                    {post.type === 'memory' && post.file_key && (
+                      <CommunityMemory id={post.id} />
+                    )}
+                    {post.type === 'music' && post.file_key && post.file_key.startsWith('http') && (
+                      <a href={post.file_key} className="link-button" target="_blank" rel="noopener noreferrer">
+                        → {post.file_name || 'Listen'}
+                      </a>
+                    )}
+                    <div className="community-post-meta">
+                      <span className="community-post-name">{post.name}</span>
+                      {post.caption && <span className="community-post-caption">{post.caption}</span>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <button className="link-button community-toggle" onClick={() => setShowSubmitForm(!showSubmitForm)}>
+              {showSubmitForm ? '- Close' : '+ Do you have a memory, photo, or music to share about James?'}
+            </button>
+            {showSubmitForm && <SubmissionForm />}
           </div>
         </section>
 
