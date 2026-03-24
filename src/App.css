@@ -27,9 +27,9 @@
   top: 0;
   z-index: 100;
   padding: 0.75rem 1.5rem;
+  padding-top: calc(0.75rem + env(safe-area-inset-top, 0px));
   border-bottom: 1px solid var(--light-gray);
-  background: linear-gradient(180deg, var(--dark-gray) 0%, var(--black) 100%);
-  backdrop-filter: blur(10px);
+  background: var(--black);
 }
 
 .header-content {
