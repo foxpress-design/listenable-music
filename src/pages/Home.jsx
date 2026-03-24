@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import MusicPlayer, { HeaderPlayer } from '../MusicPlayer'
 import useAudioPlayer from '../useAudioPlayer'
 import usePlayCounts from '../usePlayCounts'
@@ -29,8 +29,12 @@ export default function Home() {
   const [showChangelog, setShowChangelog] = useState(false)
   const [showSubmitForm, setShowSubmitForm] = useState(false)
   const [navPinned, setNavPinned] = useState(false)
+  const navRef = useRef(null)
   const [approvedPosts, setApprovedPosts] = useState([])
-  const [eventInterest, setEventInterest] = useState(null)
+  const [eventInterest, setEventInterest] = useState(0)
+  const [hasLiked, setHasLiked] = useState(() => {
+    try { return localStorage.getItem('event-june17-liked') === '1' } catch { return false }
+  })
   const currentVersion = 'v1.2.0'
   const [hasNewVersion, setHasNewVersion] = useState(() => {
     try {
@@ -40,6 +44,30 @@ export default function Home() {
   const player = useAudioPlayer()
   const theme = useTheme()
   const { counts, recordPlay } = usePlayCounts()
+
+  // Close nav on outside click (mobile support)
+  useEffect(() => {
+    if (!navPinned) return
+    const handleClick = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setNavPinned(false)
+      }
+    }
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [navPinned])
+
+  const toggleEventLike = useCallback(() => {
+    const action = hasLiked ? 'unlike' : 'like'
+    setHasLiked(!hasLiked)
+    setEventInterest(prev => hasLiked ? Math.max(0, prev - 1) : prev + 1)
+    try { localStorage.setItem('event-june17-liked', hasLiked ? '0' : '1') } catch {}
+    fetch('/api/event-interest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action }),
+    }).catch(() => {})
+  }, [hasLiked])
 
   useEffect(() => {
     setMounted(true)
@@ -69,7 +97,7 @@ export default function Home() {
 
       <header className="header">
         <div className="header-content">
-          <div className={`logo logo-nav-wrapper ${navPinned ? 'nav-open' : ''}`}>
+          <div ref={navRef} className={`logo logo-nav-wrapper ${navPinned ? 'nav-open' : ''}`}>
             <AiaLogo size={16} color="var(--accent)" className="logo-icon" onClick={() => setNavPinned(!navPinned)} style={{ cursor: 'pointer' }} />
             <span className="logo-title">Listenable Music <span className="nav-arrow">&#9662;</span></span>
             <button className="logo-version" onClick={() => { setShowChangelog(!showChangelog); if (hasNewVersion) { setHasNewVersion(false); try { localStorage.setItem('aia-last-seen-version', currentVersion) } catch {} } }}>{currentVersion}{hasNewVersion && <span className="version-dot" />}</button>
@@ -531,10 +559,14 @@ export default function Home() {
           <h2 className="section-title">Events</h2>
           <div className="section-content">
             <div className="event-card">
-              {eventInterest > 0 && (
-                <span className="event-badge">{eventInterest} interested</span>
-              )}
-              <h3 className="event-title">Raise a Pint for James</h3>
+              <button
+                className={`event-badge ${hasLiked ? 'event-badge-liked' : ''}`}
+                onClick={toggleEventLike}
+                title={hasLiked ? 'Remove your interest' : 'Show your interest'}
+              >
+                {hasLiked ? '&#9829;' : '&#9825;'} {eventInterest} interested
+              </button>
+              <h3 className="event-title">Raise a Pint <br className="mobile-break" />for James</h3>
               <p className="event-date">June 17th, 2026</p>
               <p>
                 On what would have been James's 49th birthday, we'll gather in an old English pub to raise a pint in his name.

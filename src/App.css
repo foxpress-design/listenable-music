@@ -623,13 +623,36 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: var(--accent);
-  color: var(--black);
+  background: var(--medium-gray);
+  border: 1px solid var(--light-gray);
+  color: var(--text-secondary);
   font-size: 0.7rem;
   font-weight: 700;
   padding: 0.3rem 0.6rem;
   letter-spacing: 0.05em;
   font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.event-badge:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.event-badge-liked {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--black);
+}
+
+.event-badge-liked:hover {
+  color: var(--black);
+  opacity: 0.85;
+}
+
+.mobile-break {
+  display: none;
 }
 
 .event-title {
@@ -1418,6 +1441,10 @@
 
   .support-grid {
     grid-template-columns: 1fr;
+  }
+
+  .mobile-break {
+    display: inline;
   }
 
   .subscribe-fields {

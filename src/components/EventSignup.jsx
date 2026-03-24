@@ -20,7 +20,7 @@ export default function EventSignup({ onSignup }) {
       const data = await res.json()
       if (res.ok) {
         setStatus('success')
-        setMessage(data.message || "You're in. We'll be in touch.")
+        setMessage(data.message || "We look forward to celebrating with you.")
         setName('')
         setEmail('')
         if (onSignup) onSignup()
