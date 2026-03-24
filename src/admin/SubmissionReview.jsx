@@ -20,6 +20,21 @@ function formatDate(str) {
   })
 }
 
+function PhotoPreview({ token, id }) {
+  const [src, setSrc] = useState(null)
+  useEffect(() => {
+    fetch(`/api/admin/submission-file/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(r => r.blob())
+      .then(blob => setSrc(URL.createObjectURL(blob)))
+      .catch(() => {})
+    return () => { if (src) URL.revokeObjectURL(src) }
+  }, [token, id])
+  if (!src) return null
+  return <img className="submission-card-preview" src={src} alt="Submitted photo" />
+}
+
 function MemoryPreview({ token, id }) {
   const [text, setText] = useState(null)
   useEffect(() => {
@@ -127,12 +142,7 @@ export default function SubmissionReview({ token }) {
               </div>
 
               {sub.type === 'photo' && sub.file_key && (
-                <img
-                  className="submission-card-preview"
-                  src={`/api/admin/submission-file/${sub.id}`}
-                  alt={sub.caption || 'Submitted photo'}
-                  loading="lazy"
-                />
+                <PhotoPreview token={token} id={sub.id} />
               )}
 
               {sub.type === 'memory' && sub.file_key && (
