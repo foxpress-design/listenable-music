@@ -71,6 +71,10 @@ export async function onRequestPost(context) {
           subject: 'Welcome to Listenable Music',
           html: `<p>Thank you for subscribing to Listenable Music, a tribute to James Campbell (AIA).</p>
                  <p>We will notify you when new content, photos, or music is shared.</p>
+                 <hr style="border:none;border-top:1px solid #333;margin:2rem 0">
+                 <p><strong>Upcoming Event</strong></p>
+                 <p><strong><a href="${context.env.SITE_URL}/#events">Raise a Pint for James</a></strong> - June 17th, 2026, Toronto</p>
+                 <p>On what would have been James's 49th birthday, we'll gather at an old English pub to raise a pint in his name. <a href="${context.env.SITE_URL}/#events">Sign up for the event</a> to get details as the date approaches.</p>
                  <p style="color: #999; font-size: 12px;">
                    <a href="${unsubUrl}">Unsubscribe</a>
                  </p>`,
