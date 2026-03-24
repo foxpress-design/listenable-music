@@ -63,42 +63,98 @@ export default function Home() {
                 <span className="changelog-date">March 24, 2026</span>
                 <ul>
                   <li>Light/dark/auto theme toggle with warm sepia light mode</li>
-                  <li>Auto-play toggle (flow/single mode) in header player</li>
-                  <li>Community form: share memories, stories, photos, or music links</li>
+                  <li>Flow/single auto-play toggle in header player</li>
+                  <li>Community form: share memories, stories, photos, or music links (YouTube, Spotify, Tidal)</li>
+                  <li>Anonymous submission option with rights confirmation</li>
                   <li>Subscribe for notifications when new content is added</li>
-                  <li>Page view counter</li>
-                  <li>Improved text contrast and mobile layout</li>
-                  <li>Social share card with sequencer artwork</li>
+                  <li>Page view counter and clickable changelog</li>
+                  <li>Improved text contrast, mobile layout, and social share card</li>
+                  <li>Music streaming fix for R2 storage</li>
+                  <li>CI/CD auto-deploy to Cloudflare Pages</li>
                 </ul>
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v1.0.0</span>
                 <span className="changelog-date">March 23, 2026</span>
                 <ul>
-                  <li>Platform launch on Cloudflare Pages</li>
-                  <li>Music streaming from R2 with full player controls</li>
-                  <li>James's Bandcamp collection browser</li>
-                  <li>Email subscribe with Resend integration</li>
-                  <li>Community photo and music submissions</li>
-                  <li>Admin dashboard with analytics</li>
+                  <li>Platform launch on Cloudflare Pages with D1 and R2</li>
+                  <li>James's Bandcamp collection browser with embedded player</li>
+                  <li>Email subscribe with welcome email via Resend</li>
+                  <li>Community photo and music submissions with moderation</li>
+                  <li>Admin dashboard: subscribers, email composer, analytics, submission review</li>
+                  <li>Magic link authentication for admin access</li>
+                </ul>
+              </div>
+              <div className="changelog-entry">
+                <span className="changelog-version">v0.9.0</span>
+                <span className="changelog-date">March 23, 2026</span>
+                <ul>
+                  <li>Mobile-responsive player with collapsible track selector</li>
+                  <li>Elapsed/total time display and EQ animation</li>
+                  <li>Full-width progress bar on mobile</li>
+                  <li>OG share card for Facebook and Twitter</li>
+                  <li>Share section with copy link and Facebook sharing</li>
                 </ul>
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.8.0</span>
                 <span className="changelog-date">March 23, 2026</span>
                 <ul>
-                  <li>AIA logo design and integration</li>
-                  <li>Sticky header with global music player</li>
-                  <li>Mobile-responsive player with track selector</li>
+                  <li>AIA logo design: overlapping chevrons with center dot</li>
+                  <li>Logo as favicon, header mark, and hero element</li>
+                  <li>Full-width music player layout</li>
+                </ul>
+              </div>
+              <div className="changelog-entry">
+                <span className="changelog-version">v0.7.0</span>
+                <span className="changelog-date">March 23, 2026</span>
+                <ul>
+                  <li>Play count tracking with Cloudflare Worker + KV</li>
+                  <li>Per-track and per-album play counts displayed</li>
+                  <li>Version label in header</li>
+                </ul>
+              </div>
+              <div className="changelog-entry">
+                <span className="changelog-version">v0.6.0</span>
+                <span className="changelog-date">March 23, 2026</span>
+                <ul>
+                  <li>Google Analytics (GA4) integration</li>
+                  <li>Track and album download buttons (ZIP)</li>
+                </ul>
+              </div>
+              <div className="changelog-entry">
+                <span className="changelog-version">v0.5.0</span>
+                <span className="changelog-date">March 23, 2026</span>
+                <ul>
+                  <li>Sticky header with inline music player controls</li>
+                  <li>Track selector dropdown with album categories</li>
+                </ul>
+              </div>
+              <div className="changelog-entry">
+                <span className="changelog-version">v0.4.0</span>
+                <span className="changelog-date">March 23, 2026</span>
+                <ul>
+                  <li>All tracks hosted in-repo for reliable playback</li>
+                  <li>Side-by-side hero layout with larger photo</li>
+                </ul>
+              </div>
+              <div className="changelog-entry">
+                <span className="changelog-version">v0.2.0</span>
+                <span className="changelog-date">March 23, 2026</span>
+                <ul>
+                  <li>Audio playback fixes and header quick player</li>
+                  <li>Dropdown hover gap fix</li>
                 </ul>
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.1.0</span>
                 <span className="changelog-date">March 23, 2026</span>
                 <ul>
-                  <li>Initial memorial site with music player</li>
-                  <li>DJ Aia mixes, Nexus albums, and singles</li>
+                  <li>Initial memorial site for James Campbell (AIA)</li>
+                  <li>Music player with 320kbps MP3s</li>
+                  <li>DJ Aia mixes, Nexus Fable, Nexus Shiftless, and singles</li>
                   <li>In memoriam, artist bio, and legacy sections</li>
+                  <li>Sequencer visual elements</li>
                 </ul>
               </div>
             </div>

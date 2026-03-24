@@ -107,6 +107,7 @@
   position: sticky;
   top: 0;
   background: var(--dark-gray);
+  z-index: 1;
 }
 
 .changelog-header h3 {
