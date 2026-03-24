@@ -26,10 +26,12 @@ function sequencerSquares() {
       // Seeded random using a hash-like formula
       const seed = Math.sin(col * 127.1 + row * 311.7) * 43758.5453
       const rand = seed - Math.floor(seed)
-      const lit = rand > 0.55
+      const seed2 = Math.sin(col * 269.3 + row * 183.1) * 29571.7137
+      const rand2 = seed2 - Math.floor(seed2)
+      const lit = rand > 0.72
       const fill = lit ? '#00ff88' : '#1a1a1a'
       const stroke = lit ? '#00ff88' : '#2a2a2a'
-      const opacity = lit ? (0.4 + rand * 0.6) : 1
+      const opacity = lit ? (0.15 + rand2 * 0.85).toFixed(2) : 1
       squares.push(`<rect x="${x}" y="${y}" width="${size}" height="${size}" fill="${fill}" stroke="${stroke}" stroke-width="1" opacity="${opacity}"/>`)
     }
   }
