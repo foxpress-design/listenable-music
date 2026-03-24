@@ -882,7 +882,7 @@
   }
 
   .header-content .hp {
-    width: 100%;
+    flex-basis: 100%;
     order: 1;
   }
 
