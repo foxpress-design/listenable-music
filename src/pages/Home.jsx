@@ -247,7 +247,7 @@ export default function Home() {
         <p>In memory of James Campbell (AIA) - June 17, 1977 - July 1, 2025</p>
         <p>Forever in the rhythm</p>
         <p className="footer-credit">
-          Maintained by his friend Fox Jones. For additions or corrections, <a href="mailto:feedback@listenablemusic.ca?subject=Listenable%20Music%20-%20Feedback">get in touch</a>.
+          Site maintained by his biggest fan and friend. For additions or corrections, <a href="mailto:feedback@listenablemusic.ca?subject=Listenable%20Music%20-%20Feedback">get in touch</a>.
         </p>
       </footer>
     </div>
