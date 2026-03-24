@@ -2,14 +2,14 @@
 export async function onRequestGet(context) {
   const path = context.params.path;
   if (!path || path.length === 0) {
-    return new Response('Not found', { status: 404 });
+    return new Response('Not found', { status: 404, headers: { 'Cache-Control': 'no-store' } });
   }
 
-  const key = `music/${path.join('/')}`;
+  const key = `music/${path.map(p => decodeURIComponent(p)).join('/')}`;
   const object = await context.env.UPLOADS.get(key);
 
   if (!object) {
-    return new Response('Not found', { status: 404 });
+    return new Response('Not found', { status: 404, headers: { 'Cache-Control': 'no-store' } });
   }
 
   const headers = new Headers();
