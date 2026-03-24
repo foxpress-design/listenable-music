@@ -131,7 +131,7 @@ export function HeaderPlayer({ player }) {
             onClick={toggleAutoPlay}
             title={autoPlay ? 'Auto-play on' : 'Auto-play off'}
           >
-            [{autoPlay ? 'auto-play' : 'no-auto'}]
+            [{autoPlay ? 'flow' : 'single'}]
           </button>
         </div>
       </div>
@@ -168,7 +168,7 @@ export function HeaderPlayer({ player }) {
             className={`hp-autoplay ${autoPlay ? 'active' : ''}`}
             onClick={toggleAutoPlay}
           >
-            [{autoPlay ? 'auto' : 'no-auto'}]
+            [{autoPlay ? 'flow' : 'single'}]
           </button>
         </div>
 

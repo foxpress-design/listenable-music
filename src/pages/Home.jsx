@@ -44,7 +44,7 @@ export default function Home() {
             setShowThemePref(true)
             setTimeout(() => setShowThemePref(false), 1500)
           }}>
-            [{showThemePref ? theme.preference : 'theme'}]
+            [{showThemePref ? (theme.preference === 'auto' ? 'default' : theme.preference) : 'theme'}]
           </button>
         </div>
       </header>
