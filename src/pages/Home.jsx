@@ -370,10 +370,10 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Second sequencer */}
-      <div className="sequencer" aria-hidden="true">
+      {/* Second sequencer - KITT scanner */}
+      <div className="sequencer sequencer-kitt" aria-hidden="true">
         {[...Array(16)].map((_, i) => (
-          <div key={i} className="sequencer-step" style={{ animationDelay: `${i * 0.15}s` }} />
+          <div key={i} className="sequencer-step" />
         ))}
       </div>
 

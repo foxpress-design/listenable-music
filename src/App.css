@@ -517,6 +517,35 @@
   }
 }
 
+/* KITT scanner animation */
+.sequencer-kitt .sequencer-step {
+  animation: none;
+  background: var(--medium-gray);
+  border-color: var(--light-gray);
+}
+
+.sequencer-kitt {
+  position: relative;
+}
+
+.sequencer-kitt::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: calc(100% / 16);
+  background: var(--accent);
+  box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
+  animation: kittScan 2.5s ease-in-out infinite alternate;
+  opacity: 0.9;
+  border-radius: 1px;
+}
+
+@keyframes kittScan {
+  0% { left: 0; }
+  100% { left: calc(100% - 100% / 16); }
+}
+
 /* Artist section photo */
 .artist-content {
   display: flex;
