@@ -27,21 +27,11 @@
   top: 0;
   z-index: 100;
   padding: 0.75rem 1.5rem;
-  padding-top: calc(0.75rem + env(safe-area-inset-top, 0px));
+  padding-top: 0.75rem;
   border-bottom: 1px solid var(--light-gray);
   background: var(--black);
 }
 
-.header::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: env(safe-area-inset-top, 0px);
-  background: var(--black);
-  z-index: 101;
-}
 
 .header-content {
   display: flex;
