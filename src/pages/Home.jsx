@@ -96,8 +96,6 @@ export default function Home() {
                   <li>James's Bandcamp collection browser with album art and embedded player</li>
                   <li>Email subscriptions with Resend welcome emails and unsubscribe compliance</li>
                   <li>Community photo and music upload form with moderation workflow</li>
-                  <li>Admin dashboard: subscriber management, email composer, analytics, submission review</li>
-                  <li>Magic link authentication for admin access</li>
                   <li>Client-side routing with react-router-dom</li>
                 </ul>
               </div>

@@ -13,16 +13,9 @@ A digital tribute site for James Campbell (AIA), featuring his music collection 
 
 - **Cloudflare Pages migration**: D1 database, R2 storage, Pages Functions API
 - **Email subscriptions**: Subscribe form with Resend welcome emails and unsubscribe compliance
-- **Admin dashboard** at /admin: magic link auth, subscriber management with CSV export, email composer with batch sending, analytics (plays, subscribers, submissions), submission moderation
 - **Community submissions**: Photo and music upload form with R2 storage, pending/approved/rejected workflow
 - **Bandcamp integration**: James's collection scraped from Bandcamp internal API, cached in D1, displayed with album art grid and iframe embeds
 - **Client-side routing**: react-router-dom for / and /admin routes
-
-## v0.9.6
-
-- Admin dashboard shell with magic link auth flow
-- Tab navigation for Subscribers, Email, Submissions, Analytics sections
-- Styled with site dark theme (pure black, JetBrains Mono, neon green accent)
 
 ## v0.9.5
 
