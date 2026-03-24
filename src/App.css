@@ -48,6 +48,61 @@
   color: var(--accent);
   white-space: nowrap;
   flex-shrink: 0;
+  position: relative;
+}
+
+.logo-nav-wrapper {
+  position: relative;
+}
+
+.logo-title {
+  cursor: pointer;
+}
+
+.nav-arrow {
+  display: none;
+}
+
+.section-nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.5rem;
+  background: var(--dark-gray);
+  border: 1px solid var(--light-gray);
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  width: 220px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+.logo-nav-wrapper:hover .section-nav,
+.logo-nav-wrapper:focus-within .section-nav {
+  opacity: 1;
+  visibility: visible;
+}
+
+.section-nav-link {
+  display: block;
+  padding: 0.6rem 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  transition: color 0.15s ease, background 0.15s ease;
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.section-nav-link:last-child {
+  border-bottom: none;
+}
+
+.section-nav-link:hover {
+  color: var(--accent);
+  background: var(--medium-gray);
 }
 
 .logo-icon {
@@ -55,6 +110,11 @@
   margin-right: 0.25rem;
   position: relative;
   top: -1px;
+  transition: transform 0.3s ease;
+}
+
+.logo-nav-wrapper:hover .logo-icon {
+  transform: rotate(180deg);
 }
 
 .logo-version {
@@ -428,6 +488,163 @@
   transform: translateX(4px);
 }
 
+/* Supporting His Memory */
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.support-card {
+  background: var(--medium-gray);
+  border: 1px solid var(--light-gray);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.support-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.support-card:hover {
+  border-color: var(--accent);
+}
+
+.support-card:hover::before {
+  transform: scaleX(1);
+}
+
+.support-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.support-card-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.support-card .link-button {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.support-card-art {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--light-gray);
+  filter: grayscale(30%);
+  transition: all 0.3s ease;
+}
+
+.support-card:hover .support-card-art {
+  filter: none;
+  border-color: var(--accent);
+}
+
+.support-card-links {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.support-card-full {
+  grid-column: 1 / -1;
+  text-align: center;
+  align-items: center;
+}
+
+.support-card-full .support-card-links {
+  justify-content: center;
+}
+
+.support-card-full .link-button {
+  flex: none;
+  white-space: nowrap;
+}
+
+.support-proton-logo {
+  height: 32px;
+  width: auto;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.support-card:hover .support-proton-logo {
+  opacity: 1;
+}
+
+.button-icon {
+  height: 18px;
+  width: auto;
+  vertical-align: middle;
+}
+
+.support-card-links .link-button {
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  flex: 1;
+  justify-content: center;
+}
+
+/* Events */
+.event-card {
+  background: var(--medium-gray);
+  border: 1px solid var(--light-gray);
+  border-left: 3px solid var(--accent);
+  padding: 2rem;
+  position: relative;
+}
+
+.event-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--accent);
+  color: var(--black);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  letter-spacing: 0.05em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.event-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.event-date {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.event-card p {
+  margin-bottom: 1rem;
+}
+
 /* Quote Block */
 .quote {
   background: var(--dark-gray);
@@ -519,34 +736,51 @@
   }
 }
 
-/* KITT scanner animation - overlay bounces left to right */
+/* KITT scanner animation - steps light up and fade as scanner passes */
 .sequencer-kitt .sequencer-step {
-  animation: none;
+  animation: kittStep 4s ease-in-out infinite alternate;
   background: var(--medium-gray);
   border-color: var(--light-gray);
 }
 
-.sequencer-kitt {
-  position: relative;
-  overflow: hidden;
-}
+.sequencer-kitt .sequencer-step:nth-child(1)  { animation-delay: 0s; }
+.sequencer-kitt .sequencer-step:nth-child(2)  { animation-delay: 0.133s; }
+.sequencer-kitt .sequencer-step:nth-child(3)  { animation-delay: 0.266s; }
+.sequencer-kitt .sequencer-step:nth-child(4)  { animation-delay: 0.4s; }
+.sequencer-kitt .sequencer-step:nth-child(5)  { animation-delay: 0.533s; }
+.sequencer-kitt .sequencer-step:nth-child(6)  { animation-delay: 0.666s; }
+.sequencer-kitt .sequencer-step:nth-child(7)  { animation-delay: 0.8s; }
+.sequencer-kitt .sequencer-step:nth-child(8)  { animation-delay: 0.933s; }
+.sequencer-kitt .sequencer-step:nth-child(9)  { animation-delay: 1.066s; }
+.sequencer-kitt .sequencer-step:nth-child(10) { animation-delay: 1.2s; }
+.sequencer-kitt .sequencer-step:nth-child(11) { animation-delay: 1.333s; }
+.sequencer-kitt .sequencer-step:nth-child(12) { animation-delay: 1.466s; }
+.sequencer-kitt .sequencer-step:nth-child(13) { animation-delay: 1.6s; }
+.sequencer-kitt .sequencer-step:nth-child(14) { animation-delay: 1.733s; }
+.sequencer-kitt .sequencer-step:nth-child(15) { animation-delay: 1.866s; }
+.sequencer-kitt .sequencer-step:nth-child(16) { animation-delay: 2s; }
 
-.sequencer-kitt::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: calc(100% / 16);
-  background: var(--accent);
-  box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
-  animation: kittScan 2s steps(15) infinite alternate;
-  opacity: 0.9;
-}
-
-@keyframes kittScan {
-  0% { left: 0; }
-  100% { left: calc(100% - 100% / 16); }
+@keyframes kittStep {
+  0%, 8% {
+    background: var(--medium-gray);
+    border-color: var(--light-gray);
+    box-shadow: none;
+  }
+  10% {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+  }
+  20% {
+    background: color-mix(in srgb, var(--accent) 40%, var(--medium-gray));
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--light-gray));
+    box-shadow: 0 0 5px var(--accent);
+  }
+  30%, 100% {
+    background: var(--medium-gray);
+    border-color: var(--light-gray);
+    box-shadow: none;
+  }
 }
 
 /* Artist section photo */
@@ -1175,6 +1409,10 @@
   .bc-intro {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .support-grid {
+    grid-template-columns: 1fr;
   }
 
   .subscribe-fields {

@@ -149,6 +149,7 @@ code {
 /* Scroll behavior */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 /* Subtle fade-in animation */

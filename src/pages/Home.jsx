@@ -7,6 +7,7 @@ import useTheme from '../useTheme'
 import SubscribeForm from '../components/SubscribeForm'
 import SubmissionForm from '../components/SubmissionForm'
 import BandcampPlayer from '../components/BandcampPlayer'
+import EventSignup from '../components/EventSignup'
 
 function CommunityMemory({ id }) {
   const [text, setText] = useState(null)
@@ -28,6 +29,7 @@ export default function Home() {
   const [showChangelog, setShowChangelog] = useState(false)
   const [showSubmitForm, setShowSubmitForm] = useState(false)
   const [approvedPosts, setApprovedPosts] = useState([])
+  const [eventInterest, setEventInterest] = useState(null)
   const currentVersion = 'v1.1.0'
   const [hasNewVersion, setHasNewVersion] = useState(() => {
     try {
@@ -48,6 +50,10 @@ export default function Home() {
       .then(r => r.json())
       .then(d => setApprovedPosts(d.submissions || []))
       .catch(() => {})
+    fetch('/api/event-interest')
+      .then(r => r.json())
+      .then(d => setEventInterest(d.count))
+      .catch(() => {})
   }, [])
 
   useEffect(() => {
@@ -62,7 +68,25 @@ export default function Home() {
 
       <header className="header">
         <div className="header-content">
-          <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <button className="logo-version" onClick={() => { setShowChangelog(!showChangelog); if (hasNewVersion) { setHasNewVersion(false); try { localStorage.setItem('aia-last-seen-version', currentVersion) } catch {} } }}>{currentVersion}{hasNewVersion && <span className="version-dot" />}</button></div>
+          <div className="logo logo-nav-wrapper">
+            <AiaLogo size={16} color="var(--accent)" className="logo-icon" />
+            <span className="logo-title">Listenable Music <span className="nav-arrow">&#9662;</span></span>
+            <button className="logo-version" onClick={() => { setShowChangelog(!showChangelog); if (hasNewVersion) { setHasNewVersion(false); try { localStorage.setItem('aia-last-seen-version', currentVersion) } catch {} } }}>{currentVersion}{hasNewVersion && <span className="version-dot" />}</button>
+            <nav className="section-nav">
+              {[
+                ['#in-memoriam', 'In Memoriam'],
+                ['#the-artist', 'The Artist'],
+                ['#music', 'Music'],
+                ['#legacy', 'Legacy'],
+                ['#community', 'Community'],
+                ['#supporting', 'Supporting His Memory'],
+                ['#events', 'Events'],
+                ['#connect', 'Connect'],
+              ].map(([href, label]) => (
+                <a key={href} href={href} className="section-nav-link">{label}</a>
+              ))}
+            </nav>
+          </div>
           <HeaderPlayer player={player} />
           <button className="theme-toggle" onClick={() => {
             theme.cycle()
@@ -223,7 +247,7 @@ export default function Home() {
       </div>
 
       <main className="main">
-        <section className="section">
+        <section id="in-memoriam" className="section">
           <h2 className="section-title">In Memoriam</h2>
           <div className="section-content">
             <p>
@@ -241,7 +265,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section">
+        <section id="the-artist" className="section">
           <h2 className="section-title">The Artist</h2>
           <div className="section-content">
             <div className="artist-content">
@@ -272,7 +296,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section">
+        <section id="music" className="section">
           <h2 className="section-title">Music</h2>
           <div className="section-content">
             <p>
@@ -303,7 +327,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section">
+        <section id="legacy" className="section">
           <h2 className="section-title">Legacy</h2>
           <div className="section-content">
             <p>
@@ -319,7 +343,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section">
+        <section id="community" className="section">
           <h2 className="section-title">Community</h2>
           <div className="section-content">
             {approvedPosts.length > 0 && (
@@ -353,7 +377,165 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section">
+        <section id="supporting" className="section">
+          <h2 className="section-title">Supporting His Memory</h2>
+          <div className="section-content">
+            <p>
+              James was passionate about independent music, digital rights, and visual art.
+              One of the best ways to honor him is to support the things he cared about.
+            </p>
+
+            <div className="support-grid">
+              <div className="support-card">
+                <a href="https://bandcamp.com/jamesambient" target="_blank" rel="noopener noreferrer"><img src="/bandcamp-collection.jpg" alt="From James's Bandcamp collection" className="support-card-art" /></a>
+                <h3 className="support-card-title">Bandcamp</h3>
+                <p className="support-card-text">
+                  James has 213 artists in his Bandcamp collection. Buy a track or an album, support the artists he loved, and keep their music alive.
+                </p>
+                <a
+                  href="https://bandcamp.com/jamesambient"
+                  className="link-button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  &rarr; JamesAmbient's BC Collection
+                </a>
+              </div>
+
+              <div className="support-card">
+                <a href="https://www.eff.org" target="_blank" rel="noopener noreferrer"><img src="/eff-art.jpg" alt="Electronic Frontier Foundation" className="support-card-art" /></a>
+                <h3 className="support-card-title">Electronic Frontier Foundation</h3>
+                <p className="support-card-text">
+                  The EFF defends civil liberties, privacy, free expression, and innovation in the digital world.
+                  Get acquainted with their values, <a href="https://www.eff.org/effector" target="_blank" rel="noopener noreferrer">sign up for their newsletter</a>,
+                  buy a hoodie or some stickers to put on your laptop, and <a href="https://effector.simplecast.com" target="_blank" rel="noopener noreferrer">listen to the podcast</a>.
+                </p>
+                <div className="support-card-links">
+                  <a
+                    href="https://www.eff.org"
+                    className="link-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    &rarr; Visit EFF.org
+                  </a>
+                  <a
+                    href="https://supporters.eff.org/donate/join-eff-4"
+                    className="link-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    &rarr; Donate
+                  </a>
+                </div>
+              </div>
+
+              <div className="support-card">
+                <a href="https://iso50.com" target="_blank" rel="noopener noreferrer"><img src="/iso50-art.jpg" alt="Zabriskie Point by Scott Hansen / ISO 50" className="support-card-art" /></a>
+                <h3 className="support-card-title">ISO 50 / Tycho Gallery</h3>
+                <p className="support-card-text">
+                  Scott Hansen is the artist and musician behind Tycho, one of James's favourite ambient/electronic acts.
+                  ISO 50 is his visual art and design studio. Browse their <a href="https://merch.ambientinks.com/collections/tychoiso50/featured" target="_blank" rel="noopener noreferrer">shop for records and prints</a>,
+                  and <a href="https://mailchi.mp/iso50/iso50" target="_blank" rel="noopener noreferrer">sign up for the newsletter</a>.
+                </p>
+                <div className="support-card-links">
+                  <a
+                    href="https://iso50.com"
+                    className="link-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    &rarr; ISO50 Gallery
+                  </a>
+                  <a
+                    href="https://tychomusic.com"
+                    className="link-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    &rarr; Tycho Music
+                  </a>
+                </div>
+              </div>
+
+              <div className="support-card">
+                <a href="https://www.simonstalenhag.se" target="_blank" rel="noopener noreferrer"><img src="/stalenhag.jpg" alt="Art by Simon Stålenhag" className="support-card-art" /></a>
+                <h3 className="support-card-title">Simon St&aring;lenhag</h3>
+                <p className="support-card-text">
+                  Swedish artist blending retro-nostalgic Scandinavian landscapes with dystopian sci-fi imagery.
+                  Giant abandoned robots, mysterious technological ruins, and haunting beauty. Pick up a print or one of his books.
+                </p>
+                <div className="support-card-links">
+                  <a
+                    href="https://www.simonstalenhag.se"
+                    className="link-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    &rarr; Gallery
+                  </a>
+                  <a
+                    href="http://www.redbubble.com/people/simonstalenhag"
+                    className="link-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    &rarr; Buy Prints
+                  </a>
+                </div>
+              </div>
+
+              <div className="support-card support-card-full">
+                <img src="/proton-logo.svg" alt="Proton" className="support-proton-logo" />
+                <h3 className="support-card-title">Protect Your Privacy Online</h3>
+                <p className="support-card-text">
+                  James believed in digital privacy and freedom. Take a step to protect yours.
+                </p>
+                <div className="support-card-links">
+                  <a
+                    href="https://proton.me/mail"
+                    className="link-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src="/proton-mail.svg" alt="" className="button-icon" /> Proton Mail
+                  </a>
+                  <a
+                    href="https://protonvpn.com"
+                    className="link-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src="/proton-vpn.svg" alt="" className="button-icon" /> Proton VPN
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="events" className="section">
+          <h2 className="section-title">Events</h2>
+          <div className="section-content">
+            <div className="event-card">
+              {eventInterest > 0 && (
+                <span className="event-badge">{eventInterest} interested</span>
+              )}
+              <h3 className="event-title">Raise a Pint for James</h3>
+              <p className="event-date">June 17th, 2026</p>
+              <p>
+                On what would have been James's 49th birthday, we'll gather in an old English pub to raise a pint in his name.
+                Good company, good music, and a toast to a life well lived.
+              </p>
+              <p>
+                Signal your interest below and we'll send you details as the date approaches.
+              </p>
+              <EventSignup onSignup={() => setEventInterest(prev => (prev || 0) + 1)} />
+            </div>
+          </div>
+        </section>
+
+        <section id="connect" className="section">
           <h2 className="section-title">Connect</h2>
           <div className="section-content">
             <p>

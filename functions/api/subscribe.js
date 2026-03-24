@@ -1,5 +1,5 @@
 export async function onRequestPost(context) {
-  const { email, name } = await context.request.json();
+  const { email, name, tag } = await context.request.json();
 
   if (!email || !/^.+@.+\..+$/.test(email)) {
     return Response.json({ error: 'Valid email required' }, { status: 400 });
@@ -28,9 +28,10 @@ export async function onRequestPost(context) {
     ).bind(trimmedName, existing.id).run();
     subscriberId = existing.id;
   } else {
+    const source = tag || 'website';
     const result = await db.prepare(
-      'INSERT INTO subscribers (email, name) VALUES (?, ?)'
-    ).bind(normalizedEmail, trimmedName).run();
+      'INSERT INTO subscribers (email, name, source) VALUES (?, ?, ?)'
+    ).bind(normalizedEmail, trimmedName, source).run();
     subscriberId = result.meta.last_row_id;
   }
 
