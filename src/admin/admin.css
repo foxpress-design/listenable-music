@@ -771,3 +771,78 @@
   min-height: 50px;
   resize: vertical;
 }
+
+/* Events Manager */
+.event-admin-card {
+  background: var(--medium-gray);
+  border: 1px solid var(--light-gray);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.event-admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.event-admin-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.event-admin-meta {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.event-admin-meta code {
+  background: var(--dark-gray);
+  padding: 0.1rem 0.4rem;
+  font-size: 0.75rem;
+}
+
+.event-admin-count {
+  background: var(--accent);
+  color: var(--black);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  white-space: nowrap;
+}
+
+.event-admin-actions {
+  margin-top: 1rem;
+}
+
+.event-email-form {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--light-gray);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.event-email-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.event-email-result {
+  color: var(--accent);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.event-add-form {
+  background: var(--medium-gray);
+  border: 1px solid var(--light-gray);
+  padding: 1.5rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

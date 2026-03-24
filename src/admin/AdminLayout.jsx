@@ -3,8 +3,9 @@ import SubscriberList from './SubscriberList'
 import Analytics from './Analytics.jsx'
 import EmailComposer from './EmailComposer'
 import SubmissionReview from './SubmissionReview'
+import EventsManager from './EventsManager'
 
-const TABS = ['Subscribers', 'Email', 'Submissions', 'Analytics']
+const TABS = ['Subscribers', 'Email', 'Submissions', 'Events', 'Analytics']
 
 export default function AdminLayout({ auth, onLogout }) {
   const [activeTab, setActiveTab] = useState('Subscribers')
@@ -21,6 +22,9 @@ export default function AdminLayout({ auth, onLogout }) {
     }
     if (activeTab === 'Submissions') {
       return <SubmissionReview token={auth.token} />
+    }
+    if (activeTab === 'Events') {
+      return <EventsManager token={auth.token} />
     }
     return <p className="admin-placeholder">This section will be implemented next.</p>
   }
