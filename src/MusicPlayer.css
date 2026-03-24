@@ -12,7 +12,9 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .hp-buttons {
@@ -58,6 +60,10 @@
   position: relative;
   cursor: pointer;
   min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  overflow: hidden;
 }
 
 .hp-track-name {
@@ -74,11 +80,13 @@
   color: var(--accent);
   font-size: 0.7rem;
   animation: hpBlink 1s infinite;
+  flex-shrink: 0;
 }
 
 .hp-error {
   color: #ff4444;
   font-size: 0.7rem;
+  flex-shrink: 0;
 }
 
 @keyframes hpBlink {
