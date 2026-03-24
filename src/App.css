@@ -32,6 +32,16 @@
   background: var(--black);
 }
 
+.header::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: var(--black);
+}
+
 .header-content {
   display: flex;
   align-items: center;
