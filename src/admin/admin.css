@@ -332,8 +332,86 @@
 }
 
 @media (max-width: 768px) {
+  .admin-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .admin-header-left {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .admin-header-right {
+    width: 100%;
+    justify-content: space-between;
+    font-size: 0.75rem;
+  }
+
+  .admin-email {
+    font-size: 0.7rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 60%;
+  }
+
+  .admin-tabs {
+    padding: 0 0.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .admin-tab {
+    font-size: 0.7rem;
+    padding: 0.6rem 0.75rem;
+    white-space: nowrap;
+  }
+
+  .admin-content {
+    padding: 1.25rem 1rem;
+  }
+
+  .admin-stats {
+    gap: 0.75rem;
+  }
+
+  .admin-stat {
+    min-width: 0;
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .admin-stat-value {
+    font-size: 1.2rem;
+  }
+
   .admin-analytics-grid {
     grid-template-columns: 1fr;
+  }
+
+  .admin-table {
+    font-size: 0.7rem;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 0.4rem 0.5rem;
+  }
+
+  .email-form {
+    max-width: 100%;
+  }
+
+  .submission-review {
+    max-width: 100%;
+  }
+
+  .submission-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
   }
 }
 
