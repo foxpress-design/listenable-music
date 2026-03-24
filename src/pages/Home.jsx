@@ -363,7 +363,7 @@ export default function Home() {
             {pageViews !== null && (
               <p className="page-views">AIA's digital memorial has been visited {pageViews.toLocaleString()} times by fans and family members.</p>
             )}
-            <div className="bottom-logo" style={{ textAlign: 'center', margin: '3rem 0 1.5rem' }}>
+            <div className="bottom-logo" style={{ textAlign: 'center', margin: '3rem 0 0.75rem' }}>
               <AiaLogo size={120} color="var(--accent)" />
             </div>
           </div>
