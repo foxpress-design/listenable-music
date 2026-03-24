@@ -1,7 +1,67 @@
+async function sendEmails(context, { type, name, email, submissionId, preview }) {
+  const resendKey = context.env.RESEND_API_KEY;
+  if (!resendKey) return;
+
+  const siteUrl = context.env.SITE_URL || 'https://listenablemusic.ca';
+  const adminEmail = context.env.ADMIN_EMAIL;
+  const typeLabel = type === 'memory' ? 'memory' : type === 'photo' ? 'photo' : 'music';
+
+  // Email to submitter (if they provided email)
+  if (email) {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'Listenable Music <hello@listenablemusic.ca>',
+        to: email,
+        subject: 'Your submission has been received',
+        html: `<p>Hi ${name},</p>
+               <p>Thank you for sharing your ${typeLabel} on the James Campbell (AIA) memorial.</p>
+               <p>Your submission has been received and will be reviewed shortly. Once approved, it will appear on the site for everyone to see.</p>
+               <p>With gratitude,<br/>Listenable Music</p>
+               <p style="color: #999; font-size: 12px;"><a href="${siteUrl}">listenablemusic.ca</a></p>`,
+      }),
+    }).catch(() => {});
+  }
+
+  // Email to admin
+  if (adminEmail) {
+    const approveUrl = `${siteUrl}/api/submissions/action?id=${submissionId}&action=approved&key=${encodeURIComponent(resendKey.slice(-8))}`;
+    const rejectUrl = `${siteUrl}/api/submissions/action?id=${submissionId}&action=rejected&key=${encodeURIComponent(resendKey.slice(-8))}`;
+
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'Listenable Music <hello@listenablemusic.ca>',
+        to: adminEmail,
+        subject: `New ${typeLabel} submission from ${name}`,
+        html: `<p>New ${typeLabel} submission on Listenable Music:</p>
+               <table style="font-family: monospace; font-size: 14px; margin: 16px 0;">
+                 <tr><td style="padding: 4px 12px 4px 0; color: #999;">From</td><td>${name}${email ? ` (${email})` : ''}</td></tr>
+                 <tr><td style="padding: 4px 12px 4px 0; color: #999;">Type</td><td>${typeLabel}</td></tr>
+                 ${preview ? `<tr><td style="padding: 4px 12px 4px 0; color: #999;">Content</td><td>${preview}</td></tr>` : ''}
+               </table>
+               <p>
+                 <a href="${approveUrl}" style="display: inline-block; padding: 10px 24px; background: #166534; color: #4ade80; text-decoration: none; font-family: monospace; font-weight: bold; margin-right: 8px;">APPROVE</a>
+                 <a href="${rejectUrl}" style="display: inline-block; padding: 10px 24px; background: #333; color: #999; text-decoration: none; font-family: monospace; font-weight: bold;">REJECT</a>
+               </p>
+               <p style="color: #999; font-size: 12px;">Or review in the <a href="${siteUrl}/admin">admin dashboard</a>.</p>`,
+      }),
+    }).catch(() => {});
+  }
+}
+
 export async function onRequestPost(context) {
   try {
     const formData = await context.request.formData();
-    const type = formData.get('type'); // 'memory', 'photo', or 'music'
+    const type = formData.get('type');
     const name = formData.get('name');
     const email = formData.get('email');
     const caption = formData.get('caption');
@@ -26,10 +86,14 @@ export async function onRequestPost(context) {
         httpMetadata: { contentType: 'text/plain' },
       });
 
-      await db.prepare(
+      const result = await db.prepare(
         `INSERT INTO submissions (type, name, email, caption, file_key, file_name, file_size)
          VALUES (?, ?, ?, ?, ?, ?, ?)`
       ).bind('memory', name, email || null, caption || null, storyKey, 'story.txt', story.length).run();
+
+      const submissionId = result.meta.last_row_id;
+      const preview = story.length > 200 ? story.slice(0, 200) + '...' : story;
+      await sendEmails(context, { type, name, email, submissionId, preview });
 
       return Response.json({ message: 'Thank you! Your memory will be reviewed and shared.' });
     }
@@ -39,15 +103,17 @@ export async function onRequestPost(context) {
         return Response.json({ error: 'Please provide a URL' }, { status: 400 });
       }
 
-      await db.prepare(
+      const result = await db.prepare(
         `INSERT INTO submissions (type, name, email, caption, file_key, file_name, file_size)
          VALUES (?, ?, ?, ?, ?, ?, ?)`
       ).bind('music', name, email || null, caption || null, musicUrl, `${musicSource} link`, 0).run();
 
+      const submissionId = result.meta.last_row_id;
+      await sendEmails(context, { type, name, email, submissionId, preview: musicUrl });
+
       return Response.json({ message: 'Thank you! Your submission will be reviewed.' });
     }
 
-    // File upload (photo or music file)
     if (!file) {
       return Response.json({ error: 'Please select a file to upload' }, { status: 400 });
     }
@@ -69,10 +135,13 @@ export async function onRequestPost(context) {
       httpMetadata: { contentType: file.type },
     });
 
-    await db.prepare(
+    const result = await db.prepare(
       `INSERT INTO submissions (type, name, email, caption, file_key, file_name, file_size)
        VALUES (?, ?, ?, ?, ?, ?, ?)`
     ).bind(type, name, email || null, caption || null, key, file.name, file.size).run();
+
+    const submissionId = result.meta.last_row_id;
+    await sendEmails(context, { type, name, email, submissionId, preview: file.name });
 
     return Response.json({ message: 'Thank you! Your submission will be reviewed.' });
   } catch (err) {
