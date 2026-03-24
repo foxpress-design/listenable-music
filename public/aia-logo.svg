@@ -1,10 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 48">
-  <defs>
-    <clipPath id="base"><rect x="0" y="0" width="58" height="46"/></clipPath>
-  </defs>
-  <g clip-path="url(#base)">
-    <polyline points="2,48 20,5 38,48" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="butt" stroke-linejoin="miter"/>
-    <polyline points="20,48 38,5 56,48" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="butt" stroke-linejoin="miter"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    rect.bg { fill: #000000; }
+    .logo { stroke: #00ff88; fill: none; }
+    .dot { fill: #00ff88; }
+    @media (prefers-color-scheme: light) {
+      rect.bg { fill: #ffffff; }
+      .logo { stroke: #000000; }
+      .dot { fill: #000000; }
+    }
+  </style>
+  <rect class="bg" x="0" y="0" width="64" height="64" rx="2" ry="2"/>
+  <g transform="translate(3, 10)">
+    <defs>
+      <clipPath id="base"><rect x="0" y="0" width="58" height="46"/></clipPath>
+    </defs>
+    <g clip-path="url(#base)">
+      <polyline class="logo" points="2,48 20,5 38,48" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="miter"/>
+      <polyline class="logo" points="20,48 38,5 56,48" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="miter"/>
+    </g>
+    <circle class="dot" cx="29" cy="5" r="3"/>
   </g>
-  <circle cx="29" cy="5" r="2.2" fill="#ffffff"/>
 </svg>

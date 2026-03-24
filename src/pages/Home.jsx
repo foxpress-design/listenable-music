@@ -3,6 +3,7 @@ import MusicPlayer, { HeaderPlayer } from '../MusicPlayer'
 import useAudioPlayer from '../useAudioPlayer'
 import usePlayCounts from '../usePlayCounts'
 import AiaLogo from '../AiaLogo'
+import useTheme from '../useTheme'
 import SubscribeForm from '../components/SubscribeForm'
 import SubmissionForm from '../components/SubmissionForm'
 import BandcampPlayer from '../components/BandcampPlayer'
@@ -10,11 +11,17 @@ import BandcampPlayer from '../components/BandcampPlayer'
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [pageViews, setPageViews] = useState(null)
   const player = useAudioPlayer()
+  const theme = useTheme()
   const { counts, recordPlay } = usePlayCounts()
 
   useEffect(() => {
     setMounted(true)
+    fetch('/api/pageviews', { method: 'POST' })
+      .then(r => r.json())
+      .then(d => setPageViews(d.views))
+      .catch(() => {})
   }, [])
 
   useEffect(() => {
@@ -31,6 +38,9 @@ export default function Home() {
         <div className="header-content">
           <div className="logo"><AiaLogo size={16} color="var(--accent)" className="logo-icon" /> Listenable Music <span className="logo-version">v1.0.0</span></div>
           <HeaderPlayer player={player} />
+          <button className="theme-toggle" onClick={theme.cycle}>
+            [{theme.preference}]
+          </button>
         </div>
       </header>
 
@@ -118,13 +128,10 @@ export default function Home() {
           <div className="player-container">
             <MusicPlayer player={player} counts={counts} />
           </div>
-        </section>
-
-        <section className="section">
-          <h2 className="section-title">James's Collection</h2>
+          <h3 className="playlist-category">James's Favourites</h3>
           <div className="section-content">
             <p>
-              Music that inspired James. Browse his Bandcamp collection of favourite albums
+              Music that inspired James. Browse his <a href="https://bandcamp.com/jamesambient" target="_blank" rel="noopener noreferrer">Bandcamp collection</a> of favourite albums
               and artists from the minimal and experimental techno scene.
             </p>
           </div>
@@ -164,10 +171,10 @@ export default function Home() {
           <h2 className="section-title">Connect</h2>
           <div className="section-content">
             <p>
-              James would love nothing more than for you to support his favourite artists by
-              purchasing their tracks on Bandcamp. Keep the spirit of independent electronic
-              music alive.
+              Help keep James's music alive. Support his favourite artists on Bandcamp,
+              share this tribute, and stay connected.
             </p>
+
             <div className="links">
               <a
                 href="https://soundcloud.com/listenablemusic"
@@ -185,20 +192,6 @@ export default function Home() {
               >
                 → Bandcamp
               </a>
-            </div>
-          </div>
-        </section>
-
-        <section className="section">
-          <h2 className="section-title">Share</h2>
-          <div className="section-content">
-            <p>
-              Help keep James's music alive. Share this tribute with anyone who
-              would appreciate his work.
-            </p>
-            <p className="subscribe-label">Get notified about new content:</p>
-            <SubscribeForm />
-            <div className="links">
               <button
                 className="link-button"
                 onClick={() => {
@@ -218,6 +211,13 @@ export default function Home() {
                 → Share on Facebook
               </a>
             </div>
+
+            <p className="subscribe-label">Get notified when new memories or content are added:</p>
+            <SubscribeForm />
+
+            {pageViews !== null && (
+              <p className="page-views">This page has been viewed {pageViews.toLocaleString()} times.</p>
+            )}
           </div>
         </section>
       </main>
@@ -232,6 +232,9 @@ export default function Home() {
       <footer className="footer">
         <p>In memory of James Campbell (AIA) - June 17, 1977 - July 1, 2025</p>
         <p>Forever in the rhythm</p>
+        <p className="footer-credit">
+          Maintained by his friend Fox Jones. For additions or corrections, <a href="mailto:feedback@listenablemusic.ca">get in touch</a>.
+        </p>
       </footer>
     </div>
   )

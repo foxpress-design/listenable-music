@@ -37,8 +37,8 @@ export function HeaderPlayer({ player }) {
 
   const {
     currentTrack, isPlaying, currentTime, duration,
-    volume, loading, error, playTrack, togglePlay, playNext,
-    playPrev, seekTo, setVolume,
+    volume, loading, error, autoPlay, playTrack, togglePlay, playNext,
+    playPrev, seekTo, setVolume, toggleAutoPlay,
   } = player
 
   const handleProgressClick = (e) => {
@@ -126,6 +126,13 @@ export function HeaderPlayer({ player }) {
             onChange={(e) => setVolume(parseFloat(e.target.value))}
             className="hp-volume"
           />
+          <button
+            className={`hp-autoplay ${autoPlay ? 'active' : ''}`}
+            onClick={toggleAutoPlay}
+            title={autoPlay ? 'Auto-play on' : 'Auto-play off'}
+          >
+            [{autoPlay ? 'auto-play' : 'no-auto'}]
+          </button>
         </div>
       </div>
 

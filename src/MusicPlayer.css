@@ -98,7 +98,7 @@
   background: var(--dark-gray);
   border: 1px solid var(--light-gray);
   z-index: 1000;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 20px var(--shadow-color);
 }
 
 .hp-dropdown-cat {
@@ -214,6 +214,31 @@
   background: var(--accent);
   border: none;
   cursor: pointer;
+}
+
+.hp-autoplay {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.4rem;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+  opacity: 0.5;
+}
+
+.hp-autoplay:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.hp-autoplay.active {
+  color: var(--accent);
+  opacity: 0.7;
 }
 
 /* ========== Mobile Header Player ========== */

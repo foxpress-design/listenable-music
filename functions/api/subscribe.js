@@ -1,5 +1,5 @@
 export async function onRequestPost(context) {
-  const { email } = await context.request.json();
+  const { email, name } = await context.request.json();
 
   if (!email || !/^.+@.+\..+$/.test(email)) {
     return Response.json({ error: 'Valid email required' }, { status: 400 });
@@ -19,16 +19,18 @@ export async function onRequestPost(context) {
     return Response.json({ message: 'You are already subscribed.' });
   }
 
+  const trimmedName = name ? name.trim() : null;
+
   if (existing && existing.unsubscribed_at) {
     // Re-subscribe
     await db.prepare(
-      "UPDATE subscribers SET unsubscribed_at = NULL, subscribed_at = datetime('now') WHERE id = ?"
-    ).bind(existing.id).run();
+      "UPDATE subscribers SET unsubscribed_at = NULL, subscribed_at = datetime('now'), name = COALESCE(?, name) WHERE id = ?"
+    ).bind(trimmedName, existing.id).run();
     subscriberId = existing.id;
   } else {
     const result = await db.prepare(
-      'INSERT INTO subscribers (email) VALUES (?)'
-    ).bind(normalizedEmail).run();
+      'INSERT INTO subscribers (email, name) VALUES (?, ?)'
+    ).bind(normalizedEmail, trimmedName).run();
     subscriberId = result.meta.last_row_id;
   }
 

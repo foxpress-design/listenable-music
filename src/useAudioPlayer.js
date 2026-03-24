@@ -11,7 +11,10 @@ export default function useAudioPlayer() {
   const [volume, setVolume] = useState(0.8)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [autoPlay, setAutoPlay] = useState(true)
   const pendingPlayRef = useRef(false)
+  const autoPlayRef = useRef(autoPlay)
+  autoPlayRef.current = autoPlay
 
   const currentFlatIdx = currentTrack
     ? allTracks.findIndex(t => t.src === currentTrack.src)
@@ -103,6 +106,7 @@ export default function useAudioPlayer() {
       setError(msg)
     }
     const onEnded = () => {
+      if (!autoPlayRef.current) return
       const idx = currentFlatIdxRef.current
       if (idx >= 0) {
         const next = allTracks[(idx + 1) % allTracks.length]
@@ -135,6 +139,8 @@ export default function useAudioPlayer() {
     if (audioRef.current) audioRef.current.volume = volume
   }, [volume])
 
+  const toggleAutoPlay = useCallback(() => setAutoPlay(v => !v), [])
+
   return {
     audioRef,
     currentTrack,
@@ -144,6 +150,7 @@ export default function useAudioPlayer() {
     volume,
     loading,
     error,
+    autoPlay,
     currentFlatIdx,
     playTrack,
     togglePlay,
@@ -151,5 +158,6 @@ export default function useAudioPlayer() {
     playPrev,
     seekTo,
     setVolume,
+    toggleAutoPlay,
   }
 }

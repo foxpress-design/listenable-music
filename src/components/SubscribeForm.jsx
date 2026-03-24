@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 export default function SubscribeForm() {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState(null) // null | 'sending' | 'success' | 'error'
   const [message, setMessage] = useState('')
@@ -14,12 +15,13 @@ export default function SubscribeForm() {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, name: name || undefined }),
       })
       const data = await res.json()
       if (res.ok) {
         setStatus('success')
         setMessage(data.message || 'Subscribed. Thank you.')
+        setName('')
         setEmail('')
       } else {
         setStatus('error')
@@ -33,23 +35,33 @@ export default function SubscribeForm() {
 
   return (
     <form className="subscribe-form" onSubmit={handleSubmit}>
-      <div className="subscribe-row">
+      <div className="subscribe-fields">
         <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="your@email.com"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Your name / DJ handle (optional)"
           className="subscribe-input"
-          required
           disabled={status === 'sending'}
         />
-        <button
-          type="submit"
-          className="subscribe-btn"
-          disabled={status === 'sending'}
-        >
-          {status === 'sending' ? '...' : 'Subscribe'}
-        </button>
+        <div className="subscribe-row">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="your@email.com"
+            className="subscribe-input"
+            required
+            disabled={status === 'sending'}
+          />
+          <button
+            type="submit"
+            className="subscribe-btn"
+            disabled={status === 'sending'}
+          >
+            {status === 'sending' ? '...' : 'Subscribe'}
+          </button>
+        </div>
       </div>
       {status === 'success' && <p className="subscribe-msg subscribe-success">{message}</p>}
       {status === 'error' && <p className="subscribe-msg subscribe-error">{message}</p>}
