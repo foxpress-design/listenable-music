@@ -379,3 +379,122 @@
 - Bandcamp collection player only works on production (needs D1)
 - Update `currentVersion` in Home.jsx and last-updated date on future changes
 - Consider adding approved submission notification email to submitter
+
+## 2026-03-24: Supporting His Memory, Events, admin Events tab (v1.2.0 -> v1.2.1+)
+
+### Summary
+
+**Supporting His Memory section (between Community and Connect):**
+- Four cards in a responsive grid: Bandcamp, EFF, ISO 50/Tycho, Simon Stalenhag
+- Each card has a featured art image (desaturated, colorizes on hover), description with inline links, and action buttons
+- Bandcamp: James's collection (213 artists), links to bandcamp.com/jamesambient
+- EFF: hoodie image with logo overlay (ImageMagick composite), newsletter link, podcast link, Visit EFF.org + Donate buttons
+- ISO 50 / Tycho: Scott Hansen's Zabriskie Point art, shop/newsletter links, ISO50 Gallery + Tycho Music buttons
+- Simon Stalenhag: Swedish sci-fi landscape painting, Gallery + Buy Prints buttons
+- Full-width "Protect Your Privacy Online" card at bottom with Proton logo, Proton Mail and Proton VPN buttons with SVG icons
+- All images clickable, linking to respective sites
+- Button pairs display inline with equal width
+
+**Events section (between Supporting His Memory and Connect):**
+- "Raise a Pint for James" event card for June 17th, 2026, Toronto
+- James's 49th birthday
+- FIFA World Cup 2026 Match 21 note
+- "Add to Calendar" button (Google Calendar, positioned top-right of card)
+- EventSignup component with name/email form, tagged as `event-june17` in DB
+- Clickable interest badge: heart to like/unlike (once per browser via localStorage)
+- Interest count combines DB signups + likes (likes stored in D1 kv table)
+- Event signup sends dedicated email with date, location (Toronto, TBA), calendar link, share link
+- Already-subscribed users can still sign up for event (updates their source tag)
+- New mailing list subscribers get upcoming event info in welcome email
+
+**Site navigation dropdown:**
+- Hover over "Listenable Music" title to reveal section nav dropdown
+- Click AIA logo to pin/dismiss nav (logo rotates 180 degrees when open)
+- Dismisses on outside click (mobile support) and on item selection
+- Smooth scroll to sections with 7rem scroll-padding-top
+- Hash links work on page load (React Router scroll fix with 500ms delay)
+- 8 sections: In Memoriam, The Artist, Music, Legacy, Community, Supporting His Memory, Events, Connect
+
+**KITT sequencer rewrite:**
+- Replaced `::after` overlay with per-step animation
+- Each step lights up in sequence with staggered delays and fade trail
+- Uses `color-mix()` for intermediate fade states
+- Bounces back and forth via `alternate`
+
+**Admin notifications:**
+- Admin gets email on every new mailing list and event signup
+- Includes email, name, signup type, source tag
+- Event name links to website #events section
+
+**Admin Events tab:**
+- New tab in admin dashboard
+- Lists active events with subscriber counts (green badge)
+- Full attendee table per event (email, name, signup date)
+- "Email attendees" button opens inline compose form, sends only to that event's subscribers
+- "Add Event" form (name, date, location, subscriber tag)
+- Event configs stored in D1 kv table as `event-config-{tag}`
+- API endpoints: GET/POST /api/admin/events, POST /api/admin/events/email
+
+**Admin Email history:**
+- Full history of all emails (system and manual) with body_html column
+- New migration 0003: `ALTER TABLE sent_emails ADD COLUMN body_html TEXT`
+- All email sends now log full HTML body (subscribe, event, admin campaigns)
+- Email history table shows subject, recipients, sent by (system/manual badge), date
+- Click any row to open preview modal with full email content
+- New API endpoint: GET /api/admin/emails (list all, or ?id=N for single)
+
+**D1 migrations:**
+- 0002_kv_table.sql: Simple key-value store for counters and settings
+- 0003_email_body.sql: body_html column on sent_emails
+- Both applied to local and production
+
+### Key Decisions
+- Featured art images downloaded to public/ folder (not hotlinked) for reliability
+- EFF logo composited onto hoodie image using ImageMagick
+- Event interest uses D1 kv table (not Cloudflare KV namespace) for simplicity
+- Like/unlike is anonymous (localStorage only), signups require email
+- Event configs stored as JSON in kv table, keyed by `event-config-{tag}`
+- All emails (system auto and manual) logged with full HTML for admin preview
+
+### Files Created
+- `src/components/EventSignup.jsx` - event signup form with tag
+- `src/admin/EventsManager.jsx` - admin events management
+- `functions/api/event-interest.js` - GET/POST event interest counts
+- `functions/api/admin/events.js` - GET/POST event configs
+- `functions/api/admin/events/email.js` - send email to event attendees
+- `functions/api/admin/emails.js` - email history API
+- `migrations/0002_kv_table.sql` - kv table
+- `migrations/0003_email_body.sql` - body_html column
+- `public/bandcamp-collection.jpg` - Bandcamp card art
+- `public/eff-art.jpg` - EFF hoodie with logo overlay
+- `public/iso50-art.jpg` - ISO 50 Zabriskie Point art
+- `public/stalenhag.jpg` - Simon Stalenhag painting
+- `public/eff-logo.svg` - EFF block letter mark (later replaced)
+- `public/proton-logo.svg` - Proton logo
+- `public/proton-mail.svg` - Proton Mail icon
+- `public/proton-vpn.svg` - Proton VPN icon
+
+### Files Modified
+- `src/pages/Home.jsx` - Supporting His Memory, Events, nav dropdown, hash scroll, version bump
+- `src/App.css` - support grid/cards, event card/badge, nav dropdown, KITT rewrite, Proton styles
+- `src/index.css` - scroll-padding-top
+- `src/admin/AdminLayout.jsx` - Events tab
+- `src/admin/EmailComposer.jsx` - full email history with preview modal
+- `src/admin/admin.css` - events manager, email history/preview styles
+- `functions/api/subscribe.js` - event signup flow, admin notifications, email logging
+- `functions/api/admin/send-email.js` - log full HTML body
+- `functions/api/admin/events/email.js` - log full HTML body
+- `functions/api/_email-log.js` - added bodyHtml parameter
+
+### Current State
+- v1.2.0+ deployed to production
+- Events section live with interest tracking
+- Admin Events tab functional
+- All email history viewable in admin
+- Branch: `claude/james-campbell-tribute-site-Gwdbs`
+
+### Open Items
+- Migrate existing play count data from KV to D1
+- Bandcamp collection player only works on production (needs D1)
+- Update `currentVersion` to next version on future changes
+- Event venue TBA (will need update as June 17th approaches)
