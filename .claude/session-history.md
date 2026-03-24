@@ -155,8 +155,127 @@
 - Domain transfer from Namecheap to Cloudflare (not started yet)
 - Set up Resend account and verify listenablemusic.ca domain
 - Set Resend API key: `npx wrangler pages secret put RESEND_API_KEY`
-- Add CLOUDFLARE_API_TOKEN to GitHub Actions secrets for CI deploy
 - Migrate existing play count data from KV to D1
-- Point listenablemusic.ca DNS to Cloudflare Pages project
 - Add Resend DNS records (SPF, DKIM) for email sending
-- Test all features end-to-end on production
+
+## 2026-03-23: Light/dark theme, UI polish, R2 music fix (v1.1.0)
+
+### Summary
+
+**Light/dark/auto theme toggle:**
+- Added `useTheme` hook with localStorage persistence and `prefers-color-scheme` media query listener
+- Three modes cycling: auto (system) -> light -> dark
+- Light mode uses warm sepia-toned palette (#ede4d4 background, darkened green #007a48 accent)
+- Dark mode vignette overlay (rgba(0,0,0,0.35)), light mode warm sepia vignette
+- Increased background grid visibility in dark mode (3% -> 6% opacity)
+- Theme toggle shows `[theme]`, briefly flashes selection (system/light/dark) for 1.5s
+- All hardcoded colors replaced with CSS variables for theme compatibility
+- Admin page colors (approve button, status indicators) also theme-aware
+
+**Favicon update:**
+- Transparent background, white logo on dark tabs, black on light tabs
+- Cache-busted with ?v=3 query param
+
+**Auto-play toggle:**
+- Added `[auto-play]`/`[no-auto]` button next to volume slider in header player
+- Controls whether tracks advance automatically when a song ends
+- Shows on desktop next to volume, on mobile inline with << >> buttons
+
+**Community submission form polish:**
+- Added "Share a Memory" tab (default) for text stories/memories
+- Added music URL sources: YouTube, Spotify, Tidal (in addition to file upload)
+- "Submit anonymously" checkbox hides name/email fields
+- "I confirm I have the right to share this content" required checkbox
+- "Notify me when new memories or content are added" subscribe checkbox
+- Name placeholder: "Your name / DJ handle (or both)"
+- Tab renamed from "Share Music" to "Music / Video"
+- Wider form (420px -> 520px)
+
+**Subscribe form polish:**
+- Added name field ("Your name / DJ handle (optional)")
+- Inline layout on desktop (name + email + button in one row), stacks on mobile
+- Centered form and label
+- Backend updated to store subscriber name in D1
+
+**Section consolidation:**
+- Merged "Connect" and "Share" into single "Connect" section
+- Bandcamp collection moved into Music section under "James's Favourites" subheading
+- Two-column layout for Bandcamp intro (text left, browse button right)
+
+**Page view counter:**
+- Created `/api/pageviews` endpoint with D1 `page_views` table
+- Displays "AIA's digital memorial has been visited by X friends, fans and family members."
+- Added "This page was last updated on March 23, 2026."
+
+**Footer:**
+- Added credit line: "Maintained by his friend Fox Jones" with mailto feedback@listenablemusic.ca
+
+**Text contrast:**
+- Dark mode: primary #e0e0e0 -> #f0f0f0, secondary #999 -> #b0b0b0
+- Light mode: primary #2a2520 -> #1a1510, secondary #6b6560 -> #504840
+
+**R2 music streaming fix:**
+- Discovered R2 bucket was empty (files never uploaded from git history)
+- Extracted all 27 MP3s from git commit 4130fa8 and uploaded to R2
+- Fixed `functions/[[path]].js` catch-all intercepting `/music/` and `/api/` routes (was serving SPA fallback instead of function)
+- Fixed URL-encoded path params (added `decodeURIComponent`)
+- Added `Cache-Control: no-store` on 404 responses to prevent edge caching of errors
+
+**CI/CD fix:**
+- Added `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` GitHub secrets
+- Fixed wrangler-action config (added `packageManager: pnpm`)
+- Set `--branch=main` for production deploys
+- CI now passes and deploys to production on push
+
+**Mobile header layout:**
+- Theme toggle `[theme]` on first line with logo + version
+- Player controls on second line with `[auto]` inline with << >> buttons
+- Progress bar full width on third line
+
+### Key Decisions
+- Warm sepia light mode (not pure white or cool gray) to match memorial tone
+- Theme toggle shows generic `[theme]` to avoid confusion with `[auto-play]`
+- "auto" renamed to "system" in UI display
+- R2 music keys match original file paths (with spaces, parentheses)
+- 404 responses not cached at edge to prevent stale errors after R2 uploads
+
+### D1 Migrations Applied
+- `ALTER TABLE subscribers ADD COLUMN name TEXT` (already existed)
+- `CREATE TABLE IF NOT EXISTS page_views (page TEXT PRIMARY KEY, count INTEGER DEFAULT 0)`
+
+### Files Modified
+- `src/useTheme.js` - new theme hook
+- `src/index.css` - light mode variables, new utility variables
+- `src/App.css` - theme toggle, vignette, form styles, mobile layout, contrast
+- `src/MusicPlayer.css` - auto-play button, inline loading fix, mobile layout
+- `src/MusicPlayer.jsx` - auto-play toggle (desktop + mobile)
+- `src/useAudioPlayer.js` - autoPlay state, conditional track advancement
+- `src/pages/Home.jsx` - theme toggle, section consolidation, page views, footer credit
+- `src/components/SubmissionForm.jsx` - memory tab, music URLs, anonymous, rights checkbox
+- `src/components/SubscribeForm.jsx` - name field, inline layout
+- `src/admin/admin.css` - theme-aware status/button colors
+- `src/AiaLogo.jsx` - unchanged (uses currentColor)
+- `public/aia-logo.svg` - transparent bg, light/dark adaptive
+- `index.html` - cache-busted favicon
+- `functions/[[path]].js` - exclude music/api from SPA fallback
+- `functions/music/[[path]].js` - decodeURIComponent, no-store on 404
+- `functions/api/pageviews.js` - new page view counter
+- `functions/api/subscribe.js` - accept and store name
+- `.github/workflows/deploy.yml` - CI fixes, production deploy
+- `docs/superpowers/plans/2026-03-23-light-mode.md` - implementation plan
+
+### Current State
+- v1.1.0 deployed to production at listenablemusic.ca
+- All 27 MP3s in R2, streaming works
+- CI deploys to production on push
+- Branch: `claude/james-campbell-tribute-site-Gwdbs`
+- Old `play-counter` worker can be safely deleted from Cloudflare
+
+### Open Items
+- Domain transfer from Namecheap to Cloudflare (not started)
+- Set up Resend account and verify listenablemusic.ca domain
+- Set Resend API key: `npx wrangler pages secret put RESEND_API_KEY`
+- Add Resend DNS records (SPF, DKIM) for email sending
+- Migrate existing play count data from KV to D1
+- Bandcamp collection player only works on production (needs D1)
+- Update last-updated date in Home.jsx when making future changes
