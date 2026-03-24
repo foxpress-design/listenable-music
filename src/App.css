@@ -935,6 +935,7 @@
   .sequencer {
     grid-template-columns: repeat(8, 1fr);
     padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .bc-intro {
