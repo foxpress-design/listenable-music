@@ -90,6 +90,28 @@ export async function onRequestPost(context) {
     });
   }
 
+  // Notify admin of new signup
+  const adminEmail = context.env.ADMIN_EMAIL;
+  if (resendKey && adminEmail) {
+    const type = isEvent ? 'event signup' : 'mailing list signup';
+    const nameLabel = trimmedName ? ` (${trimmedName})` : '';
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'Listenable Music <hello@listenablemusic.ca>',
+        to: adminEmail,
+        subject: `New ${type}: ${normalizedEmail}`,
+        html: `<p><strong>${normalizedEmail}</strong>${nameLabel} just signed up.</p>
+               <p><strong>Type:</strong> ${isEvent ? 'Event: Raise a Pint for James' : 'Mailing list'}</p>
+               <p><strong>Source:</strong> ${tag || 'website'}</p>`,
+      }),
+    });
+  }
+
   const message = isEvent
     ? "We look forward to celebrating with you. Check your email for details."
     : 'Subscribed. Thank you.';
