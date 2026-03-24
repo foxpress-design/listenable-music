@@ -20,6 +20,20 @@ function formatDate(str) {
   })
 }
 
+function MemoryPreview({ token, id }) {
+  const [text, setText] = useState(null)
+  useEffect(() => {
+    fetch(`/api/admin/submission-file/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(r => r.text())
+      .then(setText)
+      .catch(() => setText('(could not load)'))
+  }, [token, id])
+  if (!text) return null
+  return <p className="submission-card-memory">{text}</p>
+}
+
 export default function SubmissionReview({ token }) {
   const [activeFilter, setActiveFilter] = useState('pending')
   const [submissions, setSubmissions] = useState([])
@@ -111,6 +125,19 @@ export default function SubmissionReview({ token }) {
                   </span>
                 )}
               </div>
+
+              {sub.type === 'photo' && sub.file_key && (
+                <img
+                  className="submission-card-preview"
+                  src={`/api/admin/submission-file/${sub.id}`}
+                  alt={sub.caption || 'Submitted photo'}
+                  loading="lazy"
+                />
+              )}
+
+              {sub.type === 'memory' && sub.file_key && (
+                <MemoryPreview token={token} id={sub.id} />
+              )}
 
               {sub.caption && (
                 <p className="submission-card-caption">{sub.caption}</p>

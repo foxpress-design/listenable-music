@@ -677,6 +677,25 @@
   font-size: 0.78rem;
 }
 
+.submission-card-preview {
+  max-width: 100%;
+  max-height: 300px;
+  border: 1px solid var(--light-gray);
+  object-fit: contain;
+}
+
+.submission-card-memory {
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0.75rem;
+  background: var(--medium-gray);
+  border: 1px solid var(--light-gray);
+  white-space: pre-wrap;
+}
+
 .submission-card-caption {
   color: var(--text-secondary);
   font-family: 'JetBrains Mono', monospace;
