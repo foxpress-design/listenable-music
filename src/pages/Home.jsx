@@ -212,6 +212,7 @@ export default function Home() {
               </a>
             </div>
 
+            <p className="page-views" style={{ marginTop: '2rem' }}>This page was last updated on March 23, 2026.</p>
             <p className="subscribe-label">Get notified when new memories or content are added:</p>
             <SubscribeForm />
 
