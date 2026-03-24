@@ -784,6 +784,8 @@
   font-size: 0.8rem;
   cursor: pointer;
   transition: all 0.15s ease;
+  flex: 1;
+  text-align: center;
 }
 
 .submission-type-btn + .submission-type-btn {
@@ -817,6 +819,7 @@
   flex-direction: column;
   gap: 0.5rem;
   max-width: 520px;
+  width: 100%;
 }
 
 .submission-input {
@@ -831,6 +834,15 @@
 
 .submission-input:focus {
   border-color: var(--accent);
+}
+
+.submission-input:-webkit-autofill,
+.submission-input:-webkit-autofill:focus,
+.subscribe-input:-webkit-autofill,
+.subscribe-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--medium-gray) inset;
+  -webkit-text-fill-color: var(--text-primary);
+  caret-color: var(--text-primary);
 }
 
 .submission-input::placeholder {
