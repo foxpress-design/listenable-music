@@ -80,9 +80,14 @@
 }
 
 .logo-nav-wrapper:hover .section-nav,
-.logo-nav-wrapper:focus-within .section-nav {
+.logo-nav-wrapper:focus-within .section-nav,
+.logo-nav-wrapper.nav-open .section-nav {
   opacity: 1;
   visibility: visible;
+}
+
+.logo-nav-wrapper.nav-open .logo-icon {
+  transform: rotate(180deg);
 }
 
 .section-nav-link {

@@ -28,6 +28,7 @@ export default function Home() {
   const [showThemePref, setShowThemePref] = useState(false)
   const [showChangelog, setShowChangelog] = useState(false)
   const [showSubmitForm, setShowSubmitForm] = useState(false)
+  const [navPinned, setNavPinned] = useState(false)
   const [approvedPosts, setApprovedPosts] = useState([])
   const [eventInterest, setEventInterest] = useState(null)
   const currentVersion = 'v1.2.0'
@@ -68,8 +69,8 @@ export default function Home() {
 
       <header className="header">
         <div className="header-content">
-          <div className="logo logo-nav-wrapper">
-            <AiaLogo size={16} color="var(--accent)" className="logo-icon" />
+          <div className={`logo logo-nav-wrapper ${navPinned ? 'nav-open' : ''}`}>
+            <AiaLogo size={16} color="var(--accent)" className="logo-icon" onClick={() => setNavPinned(!navPinned)} style={{ cursor: 'pointer' }} />
             <span className="logo-title">Listenable Music <span className="nav-arrow">&#9662;</span></span>
             <button className="logo-version" onClick={() => { setShowChangelog(!showChangelog); if (hasNewVersion) { setHasNewVersion(false); try { localStorage.setItem('aia-last-seen-version', currentVersion) } catch {} } }}>{currentVersion}{hasNewVersion && <span className="version-dot" />}</button>
             <nav className="section-nav">
@@ -83,7 +84,7 @@ export default function Home() {
                 ['#events', 'Events'],
                 ['#connect', 'Connect'],
               ].map(([href, label]) => (
-                <a key={href} href={href} className="section-nav-link">{label}</a>
+                <a key={href} href={href} className="section-nav-link" onClick={() => setNavPinned(false)}>{label}</a>
               ))}
             </nav>
           </div>
@@ -592,13 +593,13 @@ export default function Home() {
               </a>
             </div>
 
-            <p className="subscribe-label">Get notified when new memories or content are added:</p>
+            <p className="subscribe-label">Get notified when new memories, content, or events are added:</p>
             <SubscribeForm />
 
             {pageViews !== null && (
               <p className="page-views">AIA's digital memorial has been visited {pageViews.toLocaleString()} times by fans and family members.</p>
             )}
-            <div className="bottom-logo" style={{ textAlign: 'center', margin: '5.4rem 0 0' }}>
+            <div className="bottom-logo" style={{ textAlign: 'center', margin: '3rem 0 0' }}>
               <AiaLogo size={120} color="var(--accent)" />
             </div>
           </div>
