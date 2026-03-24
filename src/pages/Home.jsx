@@ -115,7 +115,6 @@ export default function Home() {
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.8.0</span>
-                <span className="changelog-date">March 23, 2026</span>
                 <ul>
                   <li>AIA logo: custom SVG mark (two overlapping chevrons with center dot)</li>
                   <li>Logo as browser favicon, in header nav, and above hero title</li>
@@ -125,7 +124,6 @@ export default function Home() {
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.7.0</span>
-                <span className="changelog-date">March 23, 2026</span>
                 <ul>
                   <li>Play count tracking via Cloudflare Worker + KV storage</li>
                   <li>Per-track and per-album aggregate play counts in the player</li>
@@ -134,7 +132,6 @@ export default function Home() {
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.6.0</span>
-                <span className="changelog-date">March 23, 2026</span>
                 <ul>
                   <li>GA4 analytics with custom events for plays and downloads</li>
                   <li>Per-track download button in tracklist</li>
@@ -144,7 +141,6 @@ export default function Home() {
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.5.0</span>
-                <span className="changelog-date">March 23, 2026</span>
                 <ul>
                   <li>Full music player moved to sticky header (prev/play/next, dropdown, progress, volume)</li>
                   <li>Mobile: minified player with play/pause, track name, tap-to-open track list</li>
@@ -152,7 +148,6 @@ export default function Home() {
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.4.0</span>
-                <span className="changelog-date">March 23, 2026</span>
                 <ul>
                   <li>All tracks hosted in-repo for reliable same-origin playback</li>
                   <li>DJ mixes re-encoded to VBR to fit under Git's 100MB limit</li>
@@ -161,14 +156,12 @@ export default function Home() {
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.3.0</span>
-                <span className="changelog-date">March 23, 2026</span>
                 <ul>
                   <li>Move all 27 tracks to GitHub Releases, removing 186MB from repo</li>
                 </ul>
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.2.0</span>
-                <span className="changelog-date">March 23, 2026</span>
                 <ul>
                   <li>Audio playback fixes (defer play until canplay, stable refs for listeners)</li>
                   <li>Header quick player with track dropdown and shared audio state</li>
@@ -177,7 +170,6 @@ export default function Home() {
               </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v0.1.0</span>
-                <span className="changelog-date">March 23, 2026</span>
                 <ul>
                   <li>Initial memorial site for James Campbell (AIA)</li>
                   <li>Music player with full controls (play/pause, next/prev, seek, volume)</li>
