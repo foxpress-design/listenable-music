@@ -650,7 +650,7 @@ export default function Home() {
             <SubscribeForm />
 
             {pageViews !== null && (
-              <p className="page-views">AIA's digital memorial has been visited {pageViews.toLocaleString()} times by fans and family members.</p>
+              <p className="page-views">AIA's digital memorial has been visited {pageViews.toLocaleString()} times by fans, friends, and family members.</p>
             )}
             <div className="bottom-logo" style={{ textAlign: 'center', margin: '3rem 0 0' }}>
               <AiaLogo size={120} color="var(--accent)" />
