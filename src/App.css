@@ -43,7 +43,6 @@
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--accent);
-  opacity: 0.7;
   white-space: nowrap;
   flex-shrink: 0;
 }
