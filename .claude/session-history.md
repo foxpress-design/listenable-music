@@ -272,10 +272,110 @@
 - Old `play-counter` worker can be safely deleted from Cloudflare
 
 ### Open Items
-- Domain transfer from Namecheap to Cloudflare (not started)
-- Set up Resend account and verify listenablemusic.ca domain
-- Set Resend API key: `npx wrangler pages secret put RESEND_API_KEY`
-- Add Resend DNS records (SPF, DKIM) for email sending
 - Migrate existing play count data from KV to D1
 - Bandcamp collection player only works on production (needs D1)
 - Update last-updated date in Home.jsx when making future changes
+
+## 2026-03-24: UI polish, submissions, email notifications, admin improvements
+
+### Summary
+
+**Continued UI polish:**
+- Favicon: transparent background, white on dark tabs, black on light tabs
+- Header: switched to `position: fixed` (matching glhi-holdings approach) to prevent content showing through status bar on iPhone
+- Added `theme-color` meta tags for iOS status bar coloring (dark: #000, light: #ede4d4)
+- Theme toggle: shows `[theme]` by default, flashes `[auto]`/`[light]`/`[dark]` on click for 1.5s
+- Auto-play renamed to `[flow]`/`[single]` to avoid confusion with theme `[auto]`
+- Version number: removed double opacity, now clickable to open changelog
+- Changelog popup: full version history from v0.1.0 to v1.1.0 with dates for recent versions
+- Pulsing green notification dot on version when new changes are live (localStorage tracks last seen version)
+- Text contrast increased in both themes
+- Mobile: connect buttons in 2x2 full-width grid, balanced sequencer padding
+- Bottom sequencer: KITT scanner animation (bouncing left-to-right using `steps(15) infinite alternate`)
+- Top sequencer: randomized flash timing
+- Larger AIA logo at bottom of Connect section (120px, slightly transparent in dark mode)
+- Footer: "Site maintained by his biggest fan and friend" with feedback mailto link, last updated date
+- OG card: multiple iterations improving text size, contrast, randomized sequencer dots, cache-busted
+
+**Community submissions system:**
+- D1 schema updated: added `memory` type to submissions CHECK constraint, made `email`/`file_key`/`file_name` nullable
+- Backend handles three submission types: memory (text stored in R2), photo (file in R2), music (file or URL from YouTube/Spotify/Tidal)
+- Approved submissions displayed in Community section with photos inline, memories as text blocks, music as links
+- Submission form collapsed behind "Do you have a memory, photo, or music to share about James?" toggle
+- Public file endpoint `/api/submissions/file/[id]` serves only approved submissions
+
+**Email notifications (Resend):**
+- RESEND_API_KEY added to Pages secrets
+- Subscriber welcome email on sign-up
+- Submission confirmation email to submitter
+- New submission notification to admin with APPROVE/REJECT buttons in email
+- Email action endpoint `/api/submissions/action` for one-click approve/reject from email (auth via last 8 chars of API key)
+- Rejection email to submitter with optional reason, encouraging resubmission
+- All emails logged to `sent_emails` table via shared `_email-log.js` helper
+
+**Admin dashboard improvements:**
+- Mobile responsive: header wraps, tabs scroll, compact stats/tables
+- Submission review: memory type badge, photo preview (fetched with auth token via blob URL), memory text preview
+- Actions on all statuses: approve from rejected, reject from approved, delete from any
+- Reject form with optional reason field (emailed to submitter)
+- Delete removes submission from D1 and file from R2
+- Email history table in Email tab showing subject, recipients, date (last 20 entries)
+
+**CI/CD:**
+- GitHub secrets: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID
+- Workflow fixed: `packageManager: pnpm`, `--branch=main` for production deploys
+- CI now passes and auto-deploys to production
+
+**R2 music fix:**
+- Extracted all 27 MP3s from git history (commit 4130fa8) and uploaded to R2
+- Fixed SPA catch-all intercepting `/music/` and `/api/` routes
+- Added `decodeURIComponent` for URL-encoded path params
+- 404 responses not cached (`Cache-Control: no-store`)
+
+### D1 Migrations Applied
+- `CREATE TABLE page_views (page TEXT PRIMARY KEY, count INTEGER DEFAULT 0)`
+- Recreated `submissions` table: added `memory` type, made `email`/`file_key`/`file_name` nullable
+
+### Infrastructure
+- Resend API key set in Pages secrets
+- `play-counter` worker deleted from Cloudflare (safe, functionality migrated to Pages Functions)
+- R2 bucket populated with all 27 MP3 files
+
+### Files Modified (major)
+- `src/pages/Home.jsx` - changelog popup, community posts, theme toggle, visitor counter, bottom logo
+- `src/App.css` - fixed header, KITT scanner, community posts, autofill fix, vignette, contrast
+- `src/MusicPlayer.jsx` - flow/single toggle on mobile
+- `src/MusicPlayer.css` - auto-play button styling, inline loading fix
+- `src/admin/SubmissionReview.jsx` - photo/memory preview, reject form, delete action
+- `src/admin/EmailComposer.jsx` - email send history table
+- `src/admin/admin.css` - mobile responsive, preview styles, reject form
+- `src/components/SubmissionForm.jsx` - memory tab, music URLs, anonymous, rights checkbox
+- `src/components/SubscribeForm.jsx` - name field, inline layout
+- `src/components/BandcampPlayer.jsx` - removed redundant fallback button
+- `functions/api/submissions/upload.js` - memory/URL handling, email notifications, logging
+- `functions/api/submissions/action.js` - new: email approve/reject endpoint
+- `functions/api/submissions/file/[id].js` - new: public file serving for approved submissions
+- `functions/api/admin/submission-file/[id].js` - new: admin file serving with auth
+- `functions/api/admin/submissions.js` - delete, rejection email with reason, logging
+- `functions/api/_email-log.js` - new: shared email logging helper
+- `functions/api/pageviews.js` - new: page view counter
+- `functions/[[path]].js` - exclude music/api from SPA fallback
+- `functions/music/[[path]].js` - decodeURIComponent fix
+- `index.html` - theme-color meta, cache-busted favicon/OG
+- `public/aia-logo.svg` - transparent adaptive favicon
+- `public/og-card.png` - updated social card
+- `.github/workflows/deploy.yml` - CI fixes
+
+### Current State
+- Site live at listenablemusic.ca with all features working
+- CI auto-deploys to production on push
+- Resend email notifications active
+- Community submissions flowing: submit -> email confirm -> admin review -> approve/reject -> public display
+- Branch: `claude/james-campbell-tribute-site-Gwdbs`
+
+### Open Items
+- GitHub Issue #1: Add events section
+- Migrate existing play count data from KV to D1
+- Bandcamp collection player only works on production (needs D1)
+- Update `currentVersion` in Home.jsx and last-updated date on future changes
+- Consider adding approved submission notification email to submitter
