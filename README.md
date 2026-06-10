@@ -2,7 +2,15 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v1.2.2)
+## What's New (v1.2.3)
+
+- Move Events section to top of page (before In Memoriam)
+- Update event title to include "FIFA World Cup: England v Croatia"
+- Link venue name to Google Maps
+- Simplify signup prompt text to "Sign up here for updates"
+- Update Events nav link order to match new section order
+
+## v1.2.2
 
 - Update June 17 event with confirmed venue (The Draft Room, 395 Keele St, Toronto), 4pm reservation, England v Croatia kickoff, and updated Google Calendar link (4pm-8pm)
 
