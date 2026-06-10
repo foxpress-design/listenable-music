@@ -2,7 +2,11 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v1.2.14)
+## What's New (v1.2.15)
+
+- Email replies now route to philip@foxpress.design instead of bouncing (hello@listenablemusic.ca is send-only)
+
+## v1.2.14
 
 - Email deliverability: all admin-sent emails now include a plain-text alternative and List-Unsubscribe headers, reducing spam filter false positives
 

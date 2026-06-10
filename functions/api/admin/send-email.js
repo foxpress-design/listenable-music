@@ -64,6 +64,7 @@ export async function onRequestPost(context) {
         },
         body: JSON.stringify({
           from: 'Listenable Music <hello@listenablemusic.ca>',
+          reply_to: 'philip@foxpress.design',
           to: sub.email,
           subject,
           html: wrapHtml(htmlBody, unsubUrl),
