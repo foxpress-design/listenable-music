@@ -2,7 +2,11 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v1.2.15)
+## What's New (v1.2.16)
+
+- Fix: Resend rate limit errors when sending to multiple subscribers (250ms delay between sends)
+
+## v1.2.15
 
 - Email replies now route to philip@foxpress.design instead of bouncing (hello@listenablemusic.ca is send-only)
 

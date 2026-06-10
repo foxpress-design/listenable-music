@@ -54,6 +54,7 @@ export async function onRequestPost(context) {
 
     const unsubUrl = `${context.env.SITE_URL}/api/unsubscribe?token=${unsub.token}`;
 
+    if (sent + failed > 0) await new Promise(r => setTimeout(r, 250));
     const htmlBody = body.replace(/\n/g, '<br>');
     try {
       const res = await fetch('https://api.resend.com/emails', {

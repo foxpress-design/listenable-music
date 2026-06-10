@@ -35,7 +35,7 @@ export default function Home() {
   const [hasLiked, setHasLiked] = useState(() => {
     try { return localStorage.getItem('event-june17-liked') === '1' } catch { return false }
   })
-  const currentVersion = 'v1.2.15'
+  const currentVersion = 'v1.2.16'
   const [hasNewVersion, setHasNewVersion] = useState(() => {
     try {
       return localStorage.getItem('aia-last-seen-version') !== currentVersion
@@ -145,6 +145,13 @@ export default function Home() {
               <button className="changelog-close" onClick={(e) => { e.stopPropagation(); setShowChangelog(false) }}>x</button>
             </div>
             <div className="changelog-entries">
+              <div className="changelog-entry">
+                <span className="changelog-version">v1.2.16</span>
+                <span className="changelog-date">June 9, 2026</span>
+                <ul>
+                  <li>Fix: rate limit errors when sending to multiple subscribers (250ms delay between sends)</li>
+                </ul>
+              </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v1.2.15</span>
                 <span className="changelog-date">June 9, 2026</span>

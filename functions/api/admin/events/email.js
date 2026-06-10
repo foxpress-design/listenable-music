@@ -57,6 +57,7 @@ export async function onRequestPost(context) {
       tokenRow = { token: newToken };
     }
 
+    if (sent + failed > 0) await new Promise(r => setTimeout(r, 250));
     const unsubUrl = `${context.env.SITE_URL}/api/unsubscribe?token=${tokenRow.token}`;
     const htmlBody = body.replace(/\n/g, '<br>');
 
