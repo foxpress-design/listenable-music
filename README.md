@@ -4,52 +4,10 @@ A digital tribute site for James Campbell (AIA), featuring his music collection 
 
 ## What's New (v1.2.12)
 
-- Revert venue icon to pin emoji
-
-## v1.2.11
-
-- Use map icon on venue subtitle only (not body text), switched to map emoji
-
-## v1.2.10
-
-- Add map pin icon to venue links so directions are obvious
-
-## v1.2.9
-
-- Restore "FIFA World Cup" full text in event title; break to two lines on mobile after "/"
-
-## v1.2.8
-
-- Restore "Add to Calendar" full text on desktop (icon-only on mobile)
-
-## v1.2.7
-
-- Move "Add to calendar" button inline with "interested" button, matching size and style
-
-## v1.2.6
-
-- Link venue in event date line to Google Maps
-
-## v1.2.5
-
-- Fix missing space after venue link in event description
-- Simplify calendar button to "Add to (icon)"
-
-## v1.2.4
-
-- Shorten event title to "FIFA WC" to prevent overlap with calendar button
-
-## v1.2.3
-
-- Move Events section to top of page (before In Memoriam)
-- Update event title to include "FIFA World Cup: England v Croatia"
-- Link venue name to Google Maps
-- Simplify signup prompt text to "Sign up here for updates"
-- Update Events nav link order to match new section order
-
-## v1.2.2
-
-- Update June 17 event with confirmed venue (The Draft Room, 395 Keele St, Toronto), 4pm reservation, England v Croatia kickoff, and updated Google Calendar link (4pm-8pm)
+- June 17 event fully updated: confirmed venue (The Draft Room, 395 Keele St, Toronto), 4pm reservation, England v Croatia (FIFA World Cup 2026)
+- Events section moved to top of page
+- Venue links to Google Maps with pin icon
+- "Add to Calendar" button sits inline with interest counter, shows full text on desktop
 
 ## v1.2.1
 

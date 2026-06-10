@@ -35,7 +35,7 @@ export default function Home() {
   const [hasLiked, setHasLiked] = useState(() => {
     try { return localStorage.getItem('event-june17-liked') === '1' } catch { return false }
   })
-  const currentVersion = 'v1.2.1'
+  const currentVersion = 'v1.2.12'
   const [hasNewVersion, setHasNewVersion] = useState(() => {
     try {
       return localStorage.getItem('aia-last-seen-version') !== currentVersion
@@ -145,6 +145,16 @@ export default function Home() {
               <button className="changelog-close" onClick={(e) => { e.stopPropagation(); setShowChangelog(false) }}>x</button>
             </div>
             <div className="changelog-entries">
+              <div className="changelog-entry">
+                <span className="changelog-version">v1.2.12</span>
+                <span className="changelog-date">June 9, 2026</span>
+                <ul>
+                  <li>June 17 event updated: The Draft Room (395 Keele St), 4pm reservation, England v Croatia (FIFA World Cup 2026)</li>
+                  <li>Events section moved to the top of the page</li>
+                  <li>Venue links to Google Maps with pin icon</li>
+                  <li>"Add to Calendar" button sits inline with interest counter</li>
+                </ul>
+              </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v1.2.1</span>
                 <span className="changelog-date">June 10, 2026</span>
