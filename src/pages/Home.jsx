@@ -310,7 +310,7 @@ export default function Home() {
           <h2 className="section-title">Events</h2>
           <div className="section-content">
             <div className="event-card">
-              <h3 className="event-title">Raise a Pint for James / FIFA WC: England v Croatia</h3>
+              <h3 className="event-title">Raise a Pint for James /<br className="mobile-break" /> FIFA World Cup: England v Croatia</h3>
               <p className="event-date">June 17th, 2026 &middot; <a href="https://maps.app.goo.gl/jQvTBCCPYnDG2CG96" target="_blank" rel="noopener noreferrer">The Draft Room, Toronto</a></p>
               <div className="event-actions">
                 <button
