@@ -37,7 +37,7 @@ export default function EventsManager({ token }) {
   async function handleRemoveSub(tag, id, email) {
     if (!window.confirm(`Remove ${email} from this event list?`)) return
     try {
-      const res = await fetch(`/api/admin/events/subscriber?tag=${encodeURIComponent(tag)}&id=${id}`, {
+      const res = await fetch(`/api/admin/events/subscriber?id=${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -48,8 +48,13 @@ export default function EventsManager({ token }) {
           return { ...prev, [tag]: set }
         })
         loadEvents()
+      } else {
+        const data = await res.json().catch(() => ({}))
+        alert(`Remove failed: ${data.error || res.status}`)
       }
-    } catch {}
+    } catch (err) {
+      alert(`Remove failed: ${err.message}`)
+    }
   }
 
   function loadEvents() {
