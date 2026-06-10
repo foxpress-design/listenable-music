@@ -316,7 +316,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Add to <span className="calendar-text-full">Calendar </span>&#x1F4C5;
+                Add to &#x1F4C5;
               </a>
               <h3 className="event-title">Raise a Pint for James / FIFA WC: England v Croatia</h3>
               <p className="event-date">June 17th, 2026 &middot; The Draft Room, Toronto</p>
@@ -328,7 +328,7 @@ export default function Home() {
                 {hasLiked ? '♥' : '♡'} {eventInterest} interested
               </button>
               <p>
-                On what would have been James's 49th birthday, we'll gather at <a href="https://maps.app.goo.gl/jQvTBCCPYnDG2CG96" target="_blank" rel="noopener noreferrer">The Draft Room (395 Keele St, Toronto)</a>
+                On what would have been James's 49th birthday, we'll gather at <a href="https://maps.app.goo.gl/jQvTBCCPYnDG2CG96" target="_blank" rel="noopener noreferrer">The Draft Room (395 Keele St, Toronto)</a>{' '}
                 to watch the football and raise a pint in his name. We've got a reservation from 4pm and plan to be
                 there for a few hours, until 8pm at least. Come join us at any point in the evening; if you can't make
                 it until a little later, that's fine.
