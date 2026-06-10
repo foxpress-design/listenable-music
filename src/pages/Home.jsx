@@ -318,7 +318,7 @@ export default function Home() {
               >
                 Add to <span className="calendar-text-full">Calendar </span>&#x1F4C5;
               </a>
-              <h3 className="event-title">Raise a Pint for James / FIFA World Cup: England v Croatia</h3>
+              <h3 className="event-title">Raise a Pint for James / FIFA WC: England v Croatia</h3>
               <p className="event-date">June 17th, 2026 &middot; The Draft Room, Toronto</p>
               <button
                 className={`event-interested ${hasLiked ? 'event-interested-liked' : ''}`}

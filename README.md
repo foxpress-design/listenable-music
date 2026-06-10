@@ -2,7 +2,11 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v1.2.3)
+## What's New (v1.2.4)
+
+- Shorten event title to "FIFA WC" to prevent overlap with calendar button
+
+## v1.2.3
 
 - Move Events section to top of page (before In Memoriam)
 - Update event title to include "FIFA World Cup: England v Croatia"
