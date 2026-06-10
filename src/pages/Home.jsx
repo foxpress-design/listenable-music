@@ -146,6 +146,13 @@ export default function Home() {
             </div>
             <div className="changelog-entries">
               <div className="changelog-entry">
+                <span className="changelog-version">v1.2.17</span>
+                <span className="changelog-date">June 10, 2026</span>
+                <ul>
+                  <li>Minor: cleaned up changelog copy</li>
+                </ul>
+              </div>
+              <div className="changelog-entry">
                 <span className="changelog-version">v1.2.16</span>
                 <span className="changelog-date">June 9, 2026</span>
                 <ul>
@@ -156,7 +163,7 @@ export default function Home() {
                 <span className="changelog-version">v1.2.15</span>
                 <span className="changelog-date">June 9, 2026</span>
                 <ul>
-                  <li>Emails: replies now go to philip@foxpress.design instead of bouncing</li>
+                  <li>Emails: replies now go to a real address instead of bouncing</li>
                 </ul>
               </div>
               <div className="changelog-entry">
