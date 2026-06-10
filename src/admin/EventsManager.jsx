@@ -7,6 +7,9 @@ export default function EventsManager({ token }) {
   const [newEvent, setNewEvent] = useState({ name: '', date: '', location: '', tag: '' })
   const [saving, setSaving] = useState(false)
 
+  // Edit state: { tag, name, date, location } or null
+  const [editingEvent, setEditingEvent] = useState(null)
+
   // Email state
   const [emailTarget, setEmailTarget] = useState(null)
   const [emailSubject, setEmailSubject] = useState('')
@@ -92,6 +95,28 @@ export default function EventsManager({ token }) {
     }
   }
 
+  async function handleEditEvent(e) {
+    e.preventDefault()
+    if (!editingEvent.name || !editingEvent.date) return
+    setSaving(true)
+    try {
+      const res = await fetch('/api/admin/events', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editingEvent),
+      })
+      if (res.ok) {
+        setEditingEvent(null)
+        loadEvents()
+      }
+    } catch {} finally {
+      setSaving(false)
+    }
+  }
+
   async function handleSendEmail() {
     if (!emailSubject.trim() || !emailBody.trim() || !emailTarget) return
 
@@ -156,8 +181,55 @@ export default function EventsManager({ token }) {
                 {evt.date}{evt.location ? `, ${evt.location}` : ''} &middot; Tag: <code>{evt.tag}</code>
               </p>
             </div>
-            <span className="event-admin-count">{evt.subscriber_count} signed up</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <span className="event-admin-count">{evt.subscriber_count} signed up</span>
+              <button
+                className="admin-btn admin-btn-sm"
+                onClick={() => setEditingEvent(editingEvent?.tag === evt.tag ? null : { ...evt })}
+              >
+                {editingEvent?.tag === evt.tag ? 'Cancel' : 'Edit'}
+              </button>
+            </div>
           </div>
+
+          {editingEvent?.tag === evt.tag && (
+            <form className="event-add-form" onSubmit={handleEditEvent} style={{ marginTop: '1rem' }}>
+              <input
+                className="admin-input"
+                type="text"
+                placeholder="Event name"
+                value={editingEvent.name}
+                onChange={e => setEditingEvent({ ...editingEvent, name: e.target.value })}
+                required
+              />
+              <input
+                className="admin-input"
+                type="text"
+                placeholder="Date (e.g. June 17th, 2026)"
+                value={editingEvent.date}
+                onChange={e => setEditingEvent({ ...editingEvent, date: e.target.value })}
+                required
+              />
+              <input
+                className="admin-input"
+                type="text"
+                placeholder="Location (e.g. Toronto)"
+                value={editingEvent.location}
+                onChange={e => setEditingEvent({ ...editingEvent, location: e.target.value })}
+              />
+              <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+                Tag <code>{evt.tag}</code> cannot be changed (it links to subscriber records).
+              </p>
+              <div className="event-email-actions">
+                <button className="admin-btn" type="submit" disabled={saving}>
+                  {saving ? 'Saving...' : 'Save'}
+                </button>
+                <button className="admin-btn" type="button" onClick={() => setEditingEvent(null)} style={{ opacity: 0.7 }}>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          )}
 
           {evt.subscribers && evt.subscribers.length > 0 && (
             <table className="admin-table" style={{ marginTop: '1rem' }}>
