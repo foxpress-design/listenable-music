@@ -311,7 +311,7 @@ export default function Home() {
           <div className="section-content">
             <div className="event-card">
               <h3 className="event-title">Raise a Pint for James /<br className="mobile-break" /> FIFA World Cup: England v Croatia</h3>
-              <p className="event-date">June 17th, 2026 &middot; <a href="https://maps.app.goo.gl/jQvTBCCPYnDG2CG96" target="_blank" rel="noopener noreferrer">The Draft Room, Toronto &#x1F5FA;&#xFE0F;</a></p>
+              <p className="event-date">June 17th, 2026 &middot; <a href="https://maps.app.goo.gl/jQvTBCCPYnDG2CG96" target="_blank" rel="noopener noreferrer">The Draft Room, Toronto &#x1F4CD;</a></p>
               <div className="event-actions">
                 <button
                   className={`event-interested ${hasLiked ? 'event-interested-liked' : ''}`}
