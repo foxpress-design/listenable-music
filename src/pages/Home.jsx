@@ -326,7 +326,7 @@ export default function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Add to &#x1F4C5;
+                  Add to <span className="calendar-text-full">Calendar </span>&#x1F4C5;
                 </a>
               </div>
               <p>
