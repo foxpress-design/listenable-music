@@ -319,7 +319,7 @@ export default function Home() {
                 Add to &#x1F4C5;
               </a>
               <h3 className="event-title">Raise a Pint for James / FIFA WC: England v Croatia</h3>
-              <p className="event-date">June 17th, 2026 &middot; The Draft Room, Toronto</p>
+              <p className="event-date">June 17th, 2026 &middot; <a href="https://maps.app.goo.gl/jQvTBCCPYnDG2CG96" target="_blank" rel="noopener noreferrer">The Draft Room, Toronto</a></p>
               <button
                 className={`event-interested ${hasLiked ? 'event-interested-liked' : ''}`}
                 onClick={toggleEventLike}
