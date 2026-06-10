@@ -619,19 +619,27 @@
   position: relative;
 }
 
+.event-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
 .event-interested {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   background: none;
   border: 1px solid var(--light-gray);
   color: var(--text-secondary);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  padding: 0.3rem 0.75rem;
+  padding: 0.75rem 1.5rem;
   letter-spacing: 0.05em;
   font-family: 'JetBrains Mono', monospace;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-bottom: 1rem;
 }
 
 .event-interested:hover {
@@ -645,10 +653,6 @@
 }
 
 .event-calendar-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  margin-top: 0;
   border-color: var(--accent);
   color: var(--accent);
   background: transparent;

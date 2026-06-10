@@ -2,7 +2,11 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v1.2.6)
+## What's New (v1.2.7)
+
+- Move "Add to calendar" button inline with "interested" button, matching size and style
+
+## v1.2.6
 
 - Link venue in event date line to Google Maps
 
