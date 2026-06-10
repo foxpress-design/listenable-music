@@ -311,7 +311,7 @@ export default function Home() {
           <div className="section-content">
             <div className="event-card">
               <h3 className="event-title">Raise a Pint for James /<br className="mobile-break" /> FIFA World Cup: England v Croatia</h3>
-              <p className="event-date">June 17th, 2026 &middot; <a href="https://maps.app.goo.gl/jQvTBCCPYnDG2CG96" target="_blank" rel="noopener noreferrer">The Draft Room, Toronto</a></p>
+              <p className="event-date">June 17th, 2026 &middot; <a href="https://maps.app.goo.gl/jQvTBCCPYnDG2CG96" target="_blank" rel="noopener noreferrer">The Draft Room, Toronto &#x1F4CD;</a></p>
               <div className="event-actions">
                 <button
                   className={`event-interested ${hasLiked ? 'event-interested-liked' : ''}`}
@@ -330,7 +330,7 @@ export default function Home() {
                 </a>
               </div>
               <p>
-                On what would have been James's 49th birthday, we'll gather at <a href="https://maps.app.goo.gl/jQvTBCCPYnDG2CG96" target="_blank" rel="noopener noreferrer">The Draft Room (395 Keele St, Toronto)</a>{' '}
+                On what would have been James's 49th birthday, we'll gather at <a href="https://maps.app.goo.gl/jQvTBCCPYnDG2CG96" target="_blank" rel="noopener noreferrer">The Draft Room (395 Keele St, Toronto) &#x1F4CD;</a>{' '}
                 to watch the football and raise a pint in his name. We've got a reservation from 4pm and plan to be
                 there for a few hours, until 8pm at least. Come join us at any point in the evening; if you can't make
                 it until a little later, that's fine.

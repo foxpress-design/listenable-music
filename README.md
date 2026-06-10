@@ -2,7 +2,11 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v1.2.9)
+## What's New (v1.2.10)
+
+- Add map pin icon to venue links so directions are obvious
+
+## v1.2.9
 
 - Restore "FIFA World Cup" full text in event title; break to two lines on mobile after "/"
 
