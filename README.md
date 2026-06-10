@@ -2,7 +2,16 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v1.2.12)
+## What's New (v1.2.14)
+
+- Email deliverability: all admin-sent emails now include a plain-text alternative and List-Unsubscribe headers, reducing spam filter false positives
+
+## v1.2.13
+
+- Admin Events: per-subscriber checkboxes for targeted email sends
+- Admin Events: remove individual subscribers from event list
+
+## v1.2.12
 
 - June 17 event fully updated: confirmed venue (The Draft Room, 395 Keele St, Toronto), 4pm reservation, England v Croatia (FIFA World Cup 2026)
 - Events section moved to top of page
