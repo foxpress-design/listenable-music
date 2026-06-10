@@ -311,6 +311,17 @@
   padding: 0.45rem 0.9rem;
 }
 
+.admin-btn-danger {
+  background: transparent;
+  border-color: #c0392b;
+  color: #c0392b;
+}
+
+.admin-btn-danger:hover {
+  background: #c0392b;
+  color: #fff;
+}
+
 /* Status */
 
 .status-active {

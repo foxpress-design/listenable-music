@@ -1,5 +1,5 @@
 export async function onRequestPost(context) {
-  const { tag, subject, body } = await context.request.json();
+  const { tag, subject, body, emails } = await context.request.json();
 
   if (!tag || !subject || !body) {
     return Response.json({ error: 'Tag, subject, and body are required' }, { status: 400 });
@@ -13,7 +13,13 @@ export async function onRequestPost(context) {
     'SELECT id, email FROM subscribers WHERE source = ? AND unsubscribed_at IS NULL'
   ).bind(tag).all();
 
-  const subscribers = subs.results || [];
+  let subscribers = subs.results || [];
+
+  // If specific emails were selected, filter to only those
+  if (Array.isArray(emails) && emails.length > 0) {
+    const emailSet = new Set(emails.map(e => e.toLowerCase()));
+    subscribers = subscribers.filter(s => emailSet.has(s.email.toLowerCase()));
+  }
   let sent = 0;
   let failed = 0;
 

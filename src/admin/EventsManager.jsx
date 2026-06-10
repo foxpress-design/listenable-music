@@ -14,6 +14,44 @@ export default function EventsManager({ token }) {
   const [sending, setSending] = useState(false)
   const [sendResult, setSendResult] = useState(null)
 
+  // Per-event selected subscriber IDs: { [tag]: Set<id> }
+  const [selectedSubs, setSelectedSubs] = useState({})
+
+  function toggleSub(tag, id) {
+    setSelectedSubs(prev => {
+      const set = new Set(prev[tag] || [])
+      if (set.has(id)) set.delete(id)
+      else set.add(id)
+      return { ...prev, [tag]: set }
+    })
+  }
+
+  function toggleAll(tag, subscribers) {
+    setSelectedSubs(prev => {
+      const set = prev[tag] || new Set()
+      const allSelected = subscribers.every(s => set.has(s.id))
+      return { ...prev, [tag]: allSelected ? new Set() : new Set(subscribers.map(s => s.id)) }
+    })
+  }
+
+  async function handleRemoveSub(tag, id, email) {
+    if (!window.confirm(`Remove ${email} from this event list?`)) return
+    try {
+      const res = await fetch(`/api/admin/events/subscriber?tag=${encodeURIComponent(tag)}&id=${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      if (res.ok) {
+        setSelectedSubs(prev => {
+          const set = new Set(prev[tag] || [])
+          set.delete(id)
+          return { ...prev, [tag]: set }
+        })
+        loadEvents()
+      }
+    } catch {}
+  }
+
   function loadEvents() {
     fetch('/api/admin/events', {
       headers: { Authorization: `Bearer ${token}` },
@@ -51,10 +89,23 @@ export default function EventsManager({ token }) {
 
   async function handleSendEmail() {
     if (!emailSubject.trim() || !emailBody.trim() || !emailTarget) return
-    const confirmed = window.confirm(
-      `Send to ${emailTarget.subscriber_count} subscriber${emailTarget.subscriber_count === 1 ? '' : 's'} signed up for "${emailTarget.name}"?`
-    )
-    if (!confirmed) return
+
+    const selected = selectedSubs[emailTarget.tag] || new Set()
+    const allSubs = emailTarget.subscribers || []
+    let emailsFilter = null
+
+    if (selected.size > 0) {
+      emailsFilter = allSubs.filter(s => selected.has(s.id)).map(s => s.email)
+      const confirmed = window.confirm(
+        `Send to ${emailsFilter.length} selected subscriber${emailsFilter.length === 1 ? '' : 's'}?`
+      )
+      if (!confirmed) return
+    } else {
+      const confirmed = window.confirm(
+        `Email all ${emailTarget.subscriber_count} recipient${emailTarget.subscriber_count === 1 ? '' : 's'}?`
+      )
+      if (!confirmed) return
+    }
 
     setSending(true)
     setSendResult(null)
@@ -65,7 +116,12 @@ export default function EventsManager({ token }) {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ tag: emailTarget.tag, subject: emailSubject, body: emailBody }),
+        body: JSON.stringify({
+          tag: emailTarget.tag,
+          subject: emailSubject,
+          body: emailBody,
+          ...(emailsFilter ? { emails: emailsFilter } : {}),
+        }),
       })
       const data = await res.json()
       if (res.ok) {
@@ -102,17 +158,42 @@ export default function EventsManager({ token }) {
             <table className="admin-table" style={{ marginTop: '1rem' }}>
               <thead>
                 <tr>
+                  <th style={{ width: '2rem' }}>
+                    <input
+                      type="checkbox"
+                      title="Select all"
+                      checked={evt.subscribers.length > 0 && evt.subscribers.every(s => selectedSubs[evt.tag]?.has(s.id))}
+                      onChange={() => toggleAll(evt.tag, evt.subscribers)}
+                    />
+                  </th>
                   <th>Email</th>
                   <th>Name</th>
                   <th>Signed Up</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 {evt.subscribers.map(s => (
                   <tr key={s.id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedSubs[evt.tag]?.has(s.id) || false}
+                        onChange={() => toggleSub(evt.tag, s.id)}
+                      />
+                    </td>
                     <td>{s.email}</td>
                     <td>{s.name || '-'}</td>
                     <td>{new Date(s.subscribed_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</td>
+                    <td>
+                      <button
+                        className="admin-btn admin-btn-sm admin-btn-danger"
+                        title="Remove from event"
+                        onClick={() => handleRemoveSub(evt.tag, s.id, s.email)}
+                      >
+                        Remove
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -130,7 +211,11 @@ export default function EventsManager({ token }) {
               }}
               disabled={evt.subscriber_count === 0}
             >
-              Email {evt.subscriber_count} attendee{evt.subscriber_count === 1 ? '' : 's'}
+              {(() => {
+                const selCount = selectedSubs[evt.tag]?.size || 0
+                if (selCount > 0) return `Email ${selCount} selected`
+                return `Email ${evt.subscriber_count} attendee${evt.subscriber_count === 1 ? '' : 's'}`
+              })()}
             </button>
           </div>
 
