@@ -2,7 +2,7 @@ name: Deploy to Cloudflare Pages
 
 on:
   push:
-    branches: [claude/james-campbell-tribute-site-Gwdbs, main]
+    branches: [main]
   workflow_dispatch:
 
 jobs:

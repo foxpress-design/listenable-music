@@ -498,3 +498,61 @@
 - Bandcamp collection player only works on production (needs D1)
 - Update `currentVersion` to next version on future changes
 - Event venue TBA (will need update as June 17th approaches)
+
+## 2026-06-10: Version number correction (v1.2.1)
+
+### Summary
+- Discovered version number discrepancy: README and package.json said v1.0.2 but live site showed v1.2.0
+- Root cause: June 10 admin login fix commit incorrectly set version to v1.0.2 (site was already at v1.2.0)
+- Home.jsx currentVersion string happened not to be touched in that commit, so UI stayed correct at v1.2.0
+- Fixed by bumping package.json, README, and Home.jsx currentVersion to v1.2.1
+- Added v1.2.1 changelog entry in the in-app changelog popup
+
+### Files Modified
+- `package.json` - version 1.2.1
+- `README.md` - What's New header corrected to v1.2.1
+- `src/pages/Home.jsx` - currentVersion = 'v1.2.1', added v1.2.1 changelog entry
+
+### Current State
+- Commit 521bcae on branch, not yet pushed
+- Branch: `claude/james-campbell-tribute-site-Gwdbs`
+
+### Open Items
+- Push branch and deploy when ready
+
+## 2026-06-10: Admin login deliverability fix + SPF/DKIM/DMARC (v1.0.2)
+
+### Summary
+
+**Created CLAUDE.md** with full codebase documentation: commands, architecture overview, frontend/backend structure, D1 schema, R2 storage layout, deployment notes.
+
+**Admin login email going to Junk (fixed):**
+- Root cause: login.js was sending from `admin@listenablemusic.ca` (a thin sender) instead of `hello@listenablemusic.ca` (used by all other working email). Body was also a bare 3-line URL which is a spam signal.
+- Fix in `functions/api/auth/login.js`:
+  - Changed sender to `hello@listenablemusic.ca`
+  - Rewrote body with greeting, styled button, plain-text `text:` alternative, and signature
+  - Added try/catch, `res.ok` check, `console.error` on failure, and `logEmail` logging to `sent_emails`
+- Verified fix works (email now lands in Inbox)
+
+**Email domain authentication (DNS, done in Cloudflare):**
+- DKIM: was already configured at `resend._domainkey.listenablemusic.ca` (two keys)
+- SPF: updated root TXT from `include:_spf.mx.cloudflare.net ~all` to add `include:amazonses.com`
+- DMARC: strengthened root `_dmarc.listenablemusic.ca` from `p=none` to `p=quarantine; rua=mailto:philip@foxpress.design`
+- `send.listenablemusic.ca`: Resend bounce subdomain, already has correct SPF/MX, no changes needed
+
+### Files Modified
+- `CLAUDE.md` - new, codebase documentation
+- `functions/api/auth/login.js` - sender, body, error handling, logging
+- `package.json` - version 1.0.2
+- `README.md` - changelog for v1.0.2
+
+### Current State
+- v1.0.2 deployed to production
+- Admin login emails reliably land in Inbox
+- Full SPF/DKIM/DMARC in place for listenablemusic.ca
+- Branch: `claude/james-campbell-tribute-site-Gwdbs`
+
+### Open Items
+- Migrate existing play count data from KV to D1
+- Bandcamp collection player only works on production (needs D1)
+- Event venue TBA (will need update as June 17th approaches)
