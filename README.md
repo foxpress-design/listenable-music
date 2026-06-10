@@ -2,7 +2,7 @@
 
 A digital tribute site for James Campbell (AIA), featuring his music collection with an integrated web player.
 
-## What's New (v1.0.2)
+## What's New (v1.2.1)
 
 - Fix admin login emails landing in Junk: changed sender from admin@ to hello@ (matching subscribe/broadcast emails), added HTML button + plain-text alternative body to reduce spam score, and added error handling + sent_emails logging to the login function
 

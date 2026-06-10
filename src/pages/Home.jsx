@@ -35,7 +35,7 @@ export default function Home() {
   const [hasLiked, setHasLiked] = useState(() => {
     try { return localStorage.getItem('event-june17-liked') === '1' } catch { return false }
   })
-  const currentVersion = 'v1.2.0'
+  const currentVersion = 'v1.2.1'
   const [hasNewVersion, setHasNewVersion] = useState(() => {
     try {
       return localStorage.getItem('aia-last-seen-version') !== currentVersion
@@ -145,6 +145,14 @@ export default function Home() {
               <button className="changelog-close" onClick={(e) => { e.stopPropagation(); setShowChangelog(false) }}>x</button>
             </div>
             <div className="changelog-entries">
+              <div className="changelog-entry">
+                <span className="changelog-version">v1.2.1</span>
+                <span className="changelog-date">June 10, 2026</span>
+                <ul>
+                  <li>Admin login emails now reliably land in inbox (changed sender, improved email body, added logging)</li>
+                  <li>Full SPF/DKIM/DMARC email authentication for listenablemusic.ca</li>
+                </ul>
+              </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v1.2.0</span>
                 <span className="changelog-date">March 24, 2026</span>
