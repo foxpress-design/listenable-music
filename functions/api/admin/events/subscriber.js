@@ -16,6 +16,7 @@ export async function onRequestDelete(context) {
     return Response.json({ error: 'Subscriber not found' }, { status: 404 });
   }
 
+  await db.prepare('DELETE FROM unsubscribe_tokens WHERE subscriber_id = ?').bind(id).run();
   await db.prepare('DELETE FROM subscribers WHERE id = ?').bind(id).run();
 
   return Response.json({ ok: true });
