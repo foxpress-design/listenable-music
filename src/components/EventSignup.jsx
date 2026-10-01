@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function EventSignup({ onSignup }) {
+export default function EventSignup({ tag, onSignup }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState(null)
@@ -15,7 +15,7 @@ export default function EventSignup({ onSignup }) {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, name: name || undefined, tag: 'event-june17' }),
+        body: JSON.stringify({ email, name: name || undefined, tag }),
       })
       const data = await res.json()
       if (res.ok) {

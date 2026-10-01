@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import MusicPlayer, { HeaderPlayer } from '../MusicPlayer'
 import useAudioPlayer from '../useAudioPlayer'
 import usePlayCounts from '../usePlayCounts'
@@ -8,6 +8,7 @@ import SubscribeForm from '../components/SubscribeForm'
 import SubmissionForm from '../components/SubmissionForm'
 import BandcampPlayer from '../components/BandcampPlayer'
 import EventSignup from '../components/EventSignup'
+import { events, isPast } from '../events'
 
 function CommunityMemory({ id }) {
   const [text, setText] = useState(null)
@@ -21,6 +22,61 @@ function CommunityMemory({ id }) {
   return <p className="community-post-memory">{text}</p>
 }
 
+function UpcomingEvent({ event }) {
+  const likedKey = `${event.tag}-liked`
+  const [interest, setInterest] = useState(0)
+  const [hasLiked, setHasLiked] = useState(() => {
+    try { return localStorage.getItem(likedKey) === '1' } catch { return false }
+  })
+
+  useEffect(() => {
+    fetch(`/api/event-interest?tag=${event.tag}`)
+      .then(r => r.json())
+      .then(d => setInterest(d.count))
+      .catch(() => {})
+  }, [event.tag])
+
+  const toggleLike = () => {
+    setHasLiked(!hasLiked)
+    setInterest(prev => hasLiked ? Math.max(0, prev - 1) : prev + 1)
+    try { localStorage.setItem(likedKey, hasLiked ? '0' : '1') } catch {}
+    fetch('/api/event-interest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tag: event.tag, action: hasLiked ? 'unlike' : 'like' }),
+    }).catch(() => {})
+  }
+
+  return (
+    <div className="event-card">
+      <h3 className="event-title">{event.title}</h3>
+      <p className="event-date">{event.dateLabel} &middot; <a href={event.mapUrl} target="_blank" rel="noopener noreferrer">{event.location} &#x1F4CD;</a></p>
+      <div className="event-actions">
+        <button
+          className={`event-interested ${hasLiked ? 'event-interested-liked' : ''}`}
+          onClick={toggleLike}
+          title={hasLiked ? 'Remove your interest' : 'Show your interest'}
+        >
+          {hasLiked ? '♥' : '♡'} {interest} interested
+        </button>
+        <a
+          href={event.calendarUrl}
+          className="link-button event-calendar-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Add to <span className="calendar-text-full">Calendar </span>&#x1F4C5;
+        </a>
+      </div>
+      {event.body}
+      <p>
+        Sign up here for updates.
+      </p>
+      <EventSignup tag={event.tag} onSignup={() => setInterest(prev => prev + 1)} />
+    </div>
+  )
+}
+
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [copied, setCopied] = useState(false)
@@ -31,16 +87,14 @@ export default function Home() {
   const [navPinned, setNavPinned] = useState(false)
   const navRef = useRef(null)
   const [approvedPosts, setApprovedPosts] = useState([])
-  const [eventInterest, setEventInterest] = useState(0)
-  const [hasLiked, setHasLiked] = useState(() => {
-    try { return localStorage.getItem('event-june17-liked') === '1' } catch { return false }
-  })
-  const currentVersion = 'v1.2.16'
+  const currentVersion = 'v1.2.18'
   const [hasNewVersion, setHasNewVersion] = useState(() => {
     try {
       return localStorage.getItem('aia-last-seen-version') !== currentVersion
     } catch { return false }
   })
+  const upcoming = events.filter(e => !isPast(e.date))
+  const past = events.filter(e => isPast(e.date))
   const player = useAudioPlayer()
   const theme = useTheme()
   const { counts, recordPlay } = usePlayCounts()
@@ -56,18 +110,6 @@ export default function Home() {
     document.addEventListener('click', handleClick)
     return () => document.removeEventListener('click', handleClick)
   }, [navPinned])
-
-  const toggleEventLike = useCallback(() => {
-    const action = hasLiked ? 'unlike' : 'like'
-    setHasLiked(!hasLiked)
-    setEventInterest(prev => hasLiked ? Math.max(0, prev - 1) : prev + 1)
-    try { localStorage.setItem('event-june17-liked', hasLiked ? '0' : '1') } catch {}
-    fetch('/api/event-interest', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action }),
-    }).catch(() => {})
-  }, [hasLiked])
 
   // Scroll to hash on load (React Router doesn't handle this)
   useEffect(() => {
@@ -88,10 +130,6 @@ export default function Home() {
     fetch('/api/submissions/approved')
       .then(r => r.json())
       .then(d => setApprovedPosts(d.submissions || []))
-      .catch(() => {})
-    fetch('/api/event-interest')
-      .then(r => r.json())
-      .then(d => setEventInterest(d.count))
       .catch(() => {})
   }, [])
 
@@ -145,6 +183,13 @@ export default function Home() {
               <button className="changelog-close" onClick={(e) => { e.stopPropagation(); setShowChangelog(false) }}>x</button>
             </div>
             <div className="changelog-entries">
+              <div className="changelog-entry">
+                <span className="changelog-version">v1.2.18</span>
+                <span className="changelog-date">October 1, 2026</span>
+                <ul>
+                  <li>Events now archive automatically after their date and stay listed under Past Events</li>
+                </ul>
+              </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v1.2.17</span>
                 <span className="changelog-date">June 10, 2026</span>
@@ -355,40 +400,22 @@ export default function Home() {
         <section id="events" className="section">
           <h2 className="section-title">Events</h2>
           <div className="section-content">
-            <div className="event-card">
-              <h3 className="event-title">Raise a Pint for James /<br className="mobile-break" /> FIFA World Cup: England v Croatia</h3>
-              <p className="event-date">June 17th, 2026 &middot; <a href="https://maps.app.goo.gl/jQvTBCCPYnDG2CG96" target="_blank" rel="noopener noreferrer">The Draft Room, Toronto &#x1F4CD;</a></p>
-              <div className="event-actions">
-                <button
-                  className={`event-interested ${hasLiked ? 'event-interested-liked' : ''}`}
-                  onClick={toggleEventLike}
-                  title={hasLiked ? 'Remove your interest' : 'Show your interest'}
-                >
-                  {hasLiked ? '♥' : '♡'} {eventInterest} interested
-                </button>
-                <a
-                  href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Raise+a+Pint+for+James&dates=20260617T160000/20260617T200000&location=The+Draft+Room%2C+395+Keele+St%2C+Toronto%2C+ON+M6P+2K9&details=Join+us+at+The+Draft+Room+%28395+Keele+St%2C+Toronto%29+to+raise+a+pint+for+James+on+what+would+have+been+his+49th+birthday.+England+v+Croatia+kicks+off+at+4pm+%28FIFA+World+Cup+2026%29.+We+have+a+reservation+from+4pm+and+plan+to+be+there+until+at+least+8pm.+Come+join+us+at+any+point+in+the+evening.+Bring+your+English+spirit.%0A%0Ahttps%3A%2F%2Flistenablemusic.ca%2F%23events"
-                  className="link-button event-calendar-btn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Add to <span className="calendar-text-full">Calendar </span>&#x1F4C5;
-                </a>
-              </div>
-              <p>
-                On what would have been James's 49th birthday, we'll gather at <a href="https://maps.app.goo.gl/jQvTBCCPYnDG2CG96" target="_blank" rel="noopener noreferrer">The Draft Room (395 Keele St, Toronto)</a>{' '}
-                to watch the football and raise a pint in his name. We've got a reservation from 4pm and plan to be
-                there for a few hours, until 8pm at least. Come join us at any point in the evening; if you can't make
-                it until a little later, that's fine.
-              </p>
-              <p className="event-note">
-                England v Croatia kicks off at 4pm (FIFA World Cup 2026). Bring your English spirit.
-              </p>
-              <p>
-                Sign up here for updates.
-              </p>
-              <EventSignup onSignup={() => setEventInterest(prev => (prev || 0) + 1)} />
-            </div>
+            {upcoming.length === 0 && (
+              <p>No upcoming events. Subscribe below to hear about the next one.</p>
+            )}
+            {upcoming.map(e => <UpcomingEvent key={e.id} event={e} />)}
+            {past.length > 0 && (
+              <details className="events-past">
+                <summary>Past Events ({past.length})</summary>
+                {past.map(e => (
+                  <div key={e.id} className="event-card event-past">
+                    <h3 className="event-title">{e.title}</h3>
+                    <p className="event-date">{e.dateLabel} &middot; <a href={e.mapUrl} target="_blank" rel="noopener noreferrer">{e.location} &#x1F4CD;</a></p>
+                    {e.body}
+                  </div>
+                ))}
+              </details>
+            )}
           </div>
         </section>
 
