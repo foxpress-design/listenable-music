@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import AdminLogin from '../admin/AdminLogin'
 import AdminLayout from '../admin/AdminLayout'
@@ -11,6 +11,19 @@ export default function Admin() {
     return stored ? JSON.parse(stored) : null
   })
   const [verifying, setVerifying] = useState(false)
+
+  const logout = useCallback(() => {
+    localStorage.removeItem('admin_token')
+    setAuth(null)
+  }, [])
+
+  // A stored token can outlive its 7-day server session; drop it on 401 so the login form shows.
+  useEffect(() => {
+    if (!auth || searchParams.get('token')) return
+    fetch('/api/admin/session', { headers: { Authorization: `Bearer ${auth.token}` } })
+      .then(r => { if (r.status === 401) logout() })
+      .catch(() => {})
+  }, [auth, searchParams, logout])
 
   useEffect(() => {
     const token = searchParams.get('token')
@@ -51,12 +64,6 @@ export default function Admin() {
   }
 
   return (
-    <AdminLayout
-      auth={auth}
-      onLogout={() => {
-        localStorage.removeItem('admin_token')
-        setAuth(null)
-      }}
-    />
+    <AdminLayout auth={auth} onLogout={logout} />
   )
 }

@@ -87,7 +87,7 @@ export default function Home() {
   const [navPinned, setNavPinned] = useState(false)
   const navRef = useRef(null)
   const [approvedPosts, setApprovedPosts] = useState([])
-  const currentVersion = 'v1.2.18'
+  const currentVersion = 'v1.2.19'
   const [hasNewVersion, setHasNewVersion] = useState(() => {
     try {
       return localStorage.getItem('aia-last-seen-version') !== currentVersion
@@ -183,6 +183,13 @@ export default function Home() {
               <button className="changelog-close" onClick={(e) => { e.stopPropagation(); setShowChangelog(false) }}>x</button>
             </div>
             <div className="changelog-entries">
+              <div className="changelog-entry">
+                <span className="changelog-version">v1.2.19</span>
+                <span className="changelog-date">October 27, 2026</span>
+                <ul>
+                  <li>Admin now returns to the login screen when your session has expired, instead of showing "Failed to load" errors</li>
+                </ul>
+              </div>
               <div className="changelog-entry">
                 <span className="changelog-version">v1.2.18</span>
                 <span className="changelog-date">October 1, 2026</span>
